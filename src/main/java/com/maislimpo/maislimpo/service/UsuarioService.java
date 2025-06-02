@@ -1,11 +1,11 @@
-package com.maislimpo.vidanaagua.service;
+package com.maislimpo.maislimpo.service;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.maislimpo.vidanaagua.entity.Usuario;
-import com.maislimpo.vidanaagua.repository.UsuarioRepository;
+
+import com.maislimpo.maislimpo.entity.Usuario;
+import com.maislimpo.maislimpo.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
@@ -19,6 +19,7 @@ public class UsuarioService {
 		if(usuarioExistente.isPresent()) {
 			throw new IllegalArgumentException("Email já cadastrado");
 		}
+		
 		return usuarioRepository.save(usuario);
 	}
 	
@@ -36,5 +37,14 @@ public class UsuarioService {
 		usuarioRepository.deleteById(id);
 	}
 
-	
+	 public boolean verificarCredenciais(String email, String senha) {
+	        Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
+	        
+	        if (usuarioOpt.isPresent()) {
+	            Usuario usuario = usuarioOpt.get();
+	            return usuario.getSenha().equals(senha);
+	        }
+	        
+	        return false;
+	    }
 }

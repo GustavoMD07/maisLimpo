@@ -1,10 +1,10 @@
-package com.maislimpo.vidanaagua.repository;
+package com.maislimpo.maislimpo.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.maislimpo.vidanaagua.entity.Usuario;
+import com.maislimpo.maislimpo.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	Optional<Usuario> findByEmail(String email);

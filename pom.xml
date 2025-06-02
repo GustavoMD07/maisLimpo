@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.maislimpo</groupId>
-	<artifactId>vidanaagua</artifactId>
+	<artifactId>maislimpo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>vidanaagua</name>
+	<name>maislimpo</name>
 	<description>-</description>
 	<url/>
 	<licenses>

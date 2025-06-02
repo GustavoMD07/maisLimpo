@@ -1,4 +1,4 @@
-package com.maislimpo.vidanaagua.DTO;
+package com.maislimpo.maislimpo.DTO;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
