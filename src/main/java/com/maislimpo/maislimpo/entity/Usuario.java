@@ -28,7 +28,7 @@ public class Usuario {
 	private String senha;
 	
 	@Column(name = "email_confirmado", nullable = false)
-	private boolean emailConfirmado = false; // Novo campo, default false
+	private boolean emailConfirmado = false; 
 
 	@Column(name = "token_confirmacao", unique = true) 
 	private String tokenConfirmacao; 
