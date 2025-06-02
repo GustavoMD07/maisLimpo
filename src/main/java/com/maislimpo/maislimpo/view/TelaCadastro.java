@@ -71,7 +71,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         // Tentativa de carregar a imagem a partir do classpath
         try {
-            java.net.URL imgUrl = getClass().getResource("/images/CadastroNovo80x80.png");
+            java.net.URL imgUrl = getClass().getResource("/imagens/CadastroNovo80x80.png");
             if (imgUrl != null) {
                 LogoCadastro.setIcon(new javax.swing.ImageIcon(imgUrl)); // NOI18N
             } else {
