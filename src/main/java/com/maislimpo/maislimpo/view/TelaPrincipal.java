@@ -77,7 +77,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 		setBackground(new java.awt.Color(255, 255, 255));
 		setResizable(false);
 
-		jLabel2.setFont(new java.awt.Font("Calibri Light", 1, 12)); // NOI18N
+		jLabel2.setFont(new java.awt.Font("Calibri Light", 1, 22)); // NOI18N
 		jLabel2.setForeground(new java.awt.Color(0, 204, 153));
 		jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLabel2.setText("Aperte no botão da respectiva praia que você está e faça a sua denúncia!");
@@ -180,7 +180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		try {
-            java.net.URL imgUrlLogo = getClass().getResource("/imagens/LogoMaisLimpo.png");
+            java.net.URL imgUrlLogo = getClass().getResource("/imagens/Logo+Limpo400-removebg-preview.png");
             if (imgUrlLogo != null) {
                  jLabel1.setIcon(new javax.swing.ImageIcon(imgUrlLogo)); 
             } else {

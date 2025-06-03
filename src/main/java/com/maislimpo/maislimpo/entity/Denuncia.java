@@ -26,21 +26,21 @@ import lombok.Setter;
 public class Denuncia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Id auto-incrementável pelo banco
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
 
-    @Lob // Indica que pode ser um texto longo (CLOB no banco)
-    @Column(name = "texto_denuncia", nullable = false, columnDefinition="TEXT") // Garante que não seja nulo e define como TEXT
+    @Lob    //lob por conta que o VARCHAR tem um tamanho máximo (255), e como vai ser um texto grande, talvez precise ultrapassar.
+    @Column(name = "texto_denuncia", nullable = false, columnDefinition="TEXT")
     private String textoDenuncia;
 
     @Column(name = "data_hora_denuncia", nullable = false)
     private LocalDateTime dataHoraDenuncia;
 
-    @Column(name = "nome_praia", nullable = false, length = 100) // Define um tamanho máximo e não nulo
+    @Column(name = "nome_praia", nullable = false, length = 100) 
     private String nomePraia;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Muitas denúncias podem pertencer a um usuário. LAZY para performance.
-    @JoinColumn(name = "usuario_id", nullable = false) // Nome da coluna da chave estrangeira no banco. Não pode ser nulo.
-    private Usuario usuario; // Referência ao usuário que fez a denúncia
+    @ManyToOne(fetch = FetchType.LAZY) 		//carregamento tarde pra economizar dados
+    @JoinColumn(name = "usuario_id", nullable = false)           //fk
+    private Usuario usuario; 
 
 }

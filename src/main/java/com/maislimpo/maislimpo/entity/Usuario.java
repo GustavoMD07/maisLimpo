@@ -1,7 +1,6 @@
 package com.maislimpo.maislimpo.entity;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +16,8 @@ import lombok.Setter;
 @Setter
 public class Usuario {
 	
+	//mapeando pro JPA
+	
 	@Id //pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,13 +29,13 @@ public class Usuario {
 	private String senha;
 	
 	@Column(name = "email_confirmado", nullable = false)
-	private boolean emailConfirmado = false; 
+	private boolean emailConfirmado = false;  // false = 0, true = 1
 
 	@Column(name = "token_confirmacao", unique = true) 
 	private String tokenConfirmacao; 
 
 	@Column(name = "data_expiracao_token")
-	private LocalDateTime dataExpiracaoToken; // expiração do token 
+	private LocalDateTime dataExpiracaoToken; 
 	
 	@Column(name = "tipo_usuario", length = 20)
 	private String tipoUsuario;

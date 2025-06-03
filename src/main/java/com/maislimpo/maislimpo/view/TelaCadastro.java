@@ -205,7 +205,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_textEmailActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
-        String email = textEmail.getText().trim(); // Adicionado trim() para remover espaços extras             
+        String email = textEmail.getText().trim(); // trim remove espaços extras             
         String senha1 = new String(textSenha1.getPassword()); 
         String senha2 = new String(textSenha2.getPassword());
 
@@ -216,23 +216,23 @@ public class TelaCadastro extends javax.swing.JFrame {
         String tipoUsuarioFinal = tipoSelecionadoOriginal;
         
         if ("gustavomatachun.domingues@gmail.com".equalsIgnoreCase(email)) {
-            tipoUsuarioFinal = "admin";
-            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+            tipoUsuarioFinal = "Admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'Admin'.");
         }
         
         if ("joyce_sfernandes@hotmail.com".equalsIgnoreCase(email)) {
-            tipoUsuarioFinal = "admin";
-            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+            tipoUsuarioFinal = "Admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'Admin'.");
         }
         
         if ("munizdiego12@gmail.com".equalsIgnoreCase(email)) {
-            tipoUsuarioFinal = "admin";
-            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+            tipoUsuarioFinal = "Admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'Admin'.");
         }
         
         if ("claudiohenriqueoliveiralp@gmail.com".equalsIgnoreCase(email)) {
-            tipoUsuarioFinal = "admin";
-            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+            tipoUsuarioFinal = "Admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'Admin'.");
         }
         
         if (email.isEmpty() || senha1.isEmpty() || senha2.isEmpty()) {
@@ -259,9 +259,10 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         Usuario novoUsuario = new Usuario();
         novoUsuario.setEmail(email);
-        novoUsuario.setSenha(senha1); 
-        novoUsuario.setTipoUsuario(tipoSelecionadoOriginal);
-
+        novoUsuario.setSenha(senha1);
+        novoUsuario.setTipoUsuario(tipoUsuarioFinal);
+         // Define o tipo de usuário baseado no email ou seleção
+       
         // Verifica se as dependências Spring foram injetadas
         if (usuarioController == null || applicationContext == null) {
             JOptionPane.showMessageDialog(this, 
@@ -277,7 +278,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             
             // Se chegou aqui, o usuário foi salvo (não confirmado) e o email foi (ou tentou ser) enviado.
             JOptionPane.showMessageDialog(this,
-                    "Um e-mail de confirmação foi enviado para " + email + " (como " + tipoSelecionadoOriginal + ").\n" + // Adicionei o tipo aqui na msg
+                    "Um e-mail de confirmação foi enviado para " + email + " (como " + tipoUsuarioFinal + ").\n" + // Adicionei o tipo aqui na msg
                     "Por favor, verifique sua caixa de entrada (e spam!), copie o token recebido\n" +
                     "e cole-o na próxima janela para ativar sua conta.", 
                     "Confirmação Pendente", 
