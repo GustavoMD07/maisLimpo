@@ -180,7 +180,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
 		jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		try {
-            java.net.URL imgUrlLogo = getClass().getResource("/imagens/LogoMaisLimpo400.png");
+            java.net.URL imgUrlLogo = getClass().getResource("/imagens/LogoMaisLimpo.png");
             if (imgUrlLogo != null) {
                  jLabel1.setIcon(new javax.swing.ImageIcon(imgUrlLogo)); 
             } else {
