@@ -57,45 +57,21 @@ public class DenunciaService {
 
         return denunciaSalva;
     }
+    
+     public List<Denuncia> buscarTodasAsDenuncias() {
+         return denunciaRepository.findAll();
+     }
 
-    // --- Outros métodos que podem ser úteis no futuro ---
-
-    /**
-     * Busca todas as denúncias registradas.
-     * @return Uma lista de todas as denúncias.
-     */
-    // public List<Denuncia> buscarTodasAsDenuncias() {
-    //     return denunciaRepository.findAll();
-    // }
-
-    /**
-     * Busca denúncias por ID do usuário.
-     * @param usuarioId O ID do usuário.
-     * @return Uma lista de denúncias feitas pelo usuário.
-     */
      public List<Denuncia> buscarDenunciasPorUsuario(Long usuarioId) {
-         // Se tivéssemos o método findByUsuarioId no DenunciaRepository:
          // return denunciaRepository.findByUsuarioId(usuarioId);
-         // Senão, teríamos que buscar todas e filtrar, ou criar o método no repo.
-         // Por agora, vamos deixar comentado.
          throw new UnsupportedOperationException("Método ainda não implementado.");
      }
     
-    /**
-     * Busca uma denúncia pelo seu ID.
-     * @param id O ID da denúncia.
-     * @return A denúncia encontrada, ou lança uma exceção se não encontrar.
-     */
      public Denuncia buscarDenunciaPorId(Long id) {
          return denunciaRepository.findById(id)
                  .orElseThrow(() -> new IllegalArgumentException("Denúncia com ID " + id + " não encontrada."));
      }
 
-    /**
-     * Deleta uma denúncia pelo seu ID.
-     * @param id O ID da denúncia a ser deletada.
-     */
-     @Transactional
      public void deletarDenuncia(Long id) {
          if (!denunciaRepository.existsById(id)) {
              throw new IllegalArgumentException("Não é possível deletar: Denúncia com ID " + id + " não encontrada.");

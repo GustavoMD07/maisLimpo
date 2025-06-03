@@ -22,6 +22,9 @@ import com.maislimpo.maislimpo.controller.UsuarioController;
 import com.maislimpo.maislimpo.entity.Usuario;
 import com.maislimpo.maislimpo.exception.EmailNaoConfirmadoException;
 
+// Presumindo que TelaDescricao exista no mesmo pacote ou seja importada corretamente
+// import com.maislimpo.maislimpo.view.TelaDescricao; 
+
 @Component
 public class TelaLogin extends JFrame {
 
@@ -30,6 +33,7 @@ public class TelaLogin extends JFrame {
 	private final UsuarioController usuarioController;
 	private final ApplicationContext applicationContext;
 
+	// Seus campos existentes
 	private JTextField textEmail;
 	private JPasswordField textSenha;
 	private JButton botaoEntrar;
@@ -39,6 +43,8 @@ public class TelaLogin extends JFrame {
 	private JLabel Email;
 	private JLabel Senha;
 	private JLabel textCadastro;
+	private JLabel ConhecaNossoProjeto;
+	private JButton botaoMais;
 
 	@Autowired
 	public TelaLogin(UsuarioController usuarioController, ApplicationContext applicationContext) {
@@ -57,9 +63,10 @@ public class TelaLogin extends JFrame {
 		}
 	}
 
+	// Seu configureFrame (mantido)
 	private void configureFrame() {
 		setTitle("Projeto Mais Limpo - Login");
-		setSize(420, 450); // Aumentei um pouco a altura para dar mais espaço à imagem
+		setSize(422, 480); // Ajustei a altura para acomodar os novos botões, similar ao do seu amigo.
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -68,6 +75,7 @@ public class TelaLogin extends JFrame {
 
 	private void initComponents() {
 
+		// Suas inicializações existentes
 		IconLogin = new JLabel();
 		Titulo = new JLabel();
 		Email = new JLabel();
@@ -78,20 +86,18 @@ public class TelaLogin extends JFrame {
 		botaoCadastro = new JButton();
 		textCadastro = new JLabel();
 
-		// Configurações do Ícone/Imagem
+		// Novas inicializações
+		ConhecaNossoProjeto = new JLabel();
+		botaoMais = new JButton();
+
+		// Configurações do Ícone/Imagem (mantido como no seu original)
 		IconLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		IconLogin.setVerticalAlignment(SwingConstants.CENTER); // Centralizar verticalmente também
+		IconLogin.setVerticalAlignment(SwingConstants.CENTER);
 		try {
 			java.net.URL imgUrl = getClass().getResource("/imagens/CadeadoAzul136.png");
 			if (imgUrl != null) {
 				ImageIcon originalIcon = new ImageIcon(imgUrl);
-				// Redimensionar a imagem para um tamanho maior, mantendo a proporção
-				// Você pode ajustar os valores 100, 100 para o tamanho desejado
-				// Se quiser que ocupe mais altura, aumente o segundo parâmetro de scaleImage
-				Image scaledImage = originalIcon.getImage().getScaledInstance(-1, 100, Image.SCALE_SMOOTH); // Largura
-																											// automática,
-																											// altura
-																											// 100
+				Image scaledImage = originalIcon.getImage().getScaledInstance(-1, 100, Image.SCALE_SMOOTH);
 				IconLogin.setIcon(new ImageIcon(scaledImage));
 			} else {
 				IconLogin.setText("Icon não encontrado");
@@ -102,7 +108,8 @@ public class TelaLogin extends JFrame {
 			e.printStackTrace();
 		}
 
-		Titulo.setFont(new Font("Arial Black", 1, 16)); // Aumentei um pouco a fonte
+		// Configurações do Titulo, Email, Senha, textEmail, textSenha (mantidas)
+		Titulo.setFont(new Font("Arial Black", 1, 16));
 		Titulo.setForeground(new Color(51, 153, 255));
 		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		Titulo.setText("Bem Vindo ao Projeto +Limpo!");
@@ -115,36 +122,54 @@ public class TelaLogin extends JFrame {
 		Senha.setForeground(new Color(51, 153, 255));
 		Senha.setText("Senha");
 
-		textEmail.setBackground(new Color(200, 225, 255)); // Cor de fundo mais suave
+		textEmail.setBackground(new Color(200, 225, 255));
 		textEmail.setForeground(new Color(0, 0, 0));
-		textEmail.setPreferredSize(new Dimension(300, 25)); // Definindo tamanho preferido
+		textEmail.setPreferredSize(new Dimension(300, 25));
 
-		textSenha.setBackground(new Color(200, 225, 255)); // Cor de fundo mais suave
+		textSenha.setBackground(new Color(200, 225, 255));
 		textSenha.setForeground(new Color(0, 0, 0));
-		textSenha.setPreferredSize(new Dimension(300, 25)); // Definindo tamanho preferido
+		textSenha.setPreferredSize(new Dimension(300, 25));
 
-		// Configuração dos botões
-		Dimension buttonSize = new Dimension(145, 30); // Tamanho padrão para os botões
+		// Configuração dos botões (mantida a sua base, ajustando tamanhos se necessário)
+		Dimension buttonSize = new Dimension(145, 30); // Seu tamanho padrão
+        Dimension buttonMaisSize = new Dimension(106, 30); // Tamanho para o botão "MAIS", como no do amigo
 
 		botaoEntrar.setBackground(new Color(102, 204, 255));
 		botaoEntrar.setFont(new Font("Arial Black", 1, 12));
 		botaoEntrar.setForeground(new Color(0, 0, 255));
 		botaoEntrar.setText("ENTRAR");
-		botaoEntrar.setPreferredSize(buttonSize); // Aplicando tamanho padrão
+		botaoEntrar.setPreferredSize(buttonSize);
 		botaoEntrar.addActionListener(evt -> botaoEntrarActionPerformed(evt));
 
 		botaoCadastro.setBackground(new Color(102, 204, 255));
 		botaoCadastro.setFont(new Font("Arial Black", 1, 12));
 		botaoCadastro.setForeground(new Color(0, 0, 255));
 		botaoCadastro.setText("CADASTRO");
-		botaoCadastro.setPreferredSize(buttonSize); // Aplicando tamanho padrão
+		botaoCadastro.setPreferredSize(buttonSize); // Mantendo seu tamanho padrão
 		botaoCadastro.addActionListener(evt -> botaoCadastroActionPerformed(evt));
 
 		textCadastro.setFont(new Font("Arial", 0, 10));
 		textCadastro.setForeground(new Color(51, 153, 255));
-		textCadastro.setText("Não possui um login? Cadastre-se! →");
+		textCadastro.setText("Não possui um login? Cadastre-se! \u2192"); // Usando unicode para a seta pra garantir
 
-		// Usando GroupLayout (como estava antes, mas com ajustes)
+		// Configurações dos novos componentes (baseado no código do seu amigo e no seu)
+		ConhecaNossoProjeto.setFont(new java.awt.Font("Arial", 0, 10));
+		ConhecaNossoProjeto.setForeground(new java.awt.Color(51, 153, 255));
+		ConhecaNossoProjeto.setText("Conheça mais sobre o nosso projeto! \u2192"); // Seta com unicode
+        ConhecaNossoProjeto.setPreferredSize(new Dimension(186, 23)); // Tamanho como no do amigo
+
+		botaoMais.setBackground(new java.awt.Color(102, 204, 255));
+		botaoMais.setFont(new java.awt.Font("Arial Black", 1, 12));
+		botaoMais.setForeground(new java.awt.Color(0, 0, 255));
+		botaoMais.setText("MAIS");
+        botaoMais.setPreferredSize(buttonMaisSize); // Tamanho como no do amigo
+		botaoMais.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				botaoMaisActionPerformed(evt);
+			}
+		});
+
+		// Usando GroupLayout (baseado no seu, com adições)
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 
@@ -152,77 +177,59 @@ public class TelaLogin extends JFrame {
 		layout.setAutoCreateContainerGaps(true);
 
 		// Definição dos grupos horizontais
-		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER) // Centralizar todo o
-																							// conteúdo
-				.addComponent(Titulo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-				.addComponent(IconLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
-						layout.createSequentialGroup().addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) // Adiciona
-																													// espaço
-																													// flexível
-																													// nas
-																													// laterais
-								.addGroup(
-										layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(Email)
-												.addComponent(textEmail, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(Senha)
-												.addComponent(textSenha, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(botaoEntrar, GroupLayout.Alignment.TRAILING,
-														GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.PREFERRED_SIZE)
-												.addGroup(layout.createSequentialGroup().addComponent(textCadastro)
-														.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED) // Espaço
-																													// entre
-																													// o
-																													// texto
-																													// e
-																													// o
-																													// botão
-														.addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)) // Adiciona espaço flexível
-																								// nas laterais
-		);
+        // Mantendo sua estrutura de centralização principal
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+            .addComponent(Titulo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(IconLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup() // Grupo para os campos de login e botões, com margens flexíveis
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING) // Alinhamento à esquerda para os campos internos
+                    .addComponent(Email)
+                    .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Senha)
+                    .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoEntrar, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE) // Botão entrar alinhado à direita dentro deste grupo
+                    .addGroup(layout.createSequentialGroup() // Linha para "textCadastro" e "botaoCadastro"
+                        .addComponent(textCadastro)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup() // <<< NOVA LINHA ADICIONADA AQUI
+                        .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) // Espaço flexível para empurrar o botão MAIS
+                        .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
 		// Definição dos grupos verticais
 		layout.setVerticalGroup(layout.createSequentialGroup()
-				.addComponent(Titulo, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE) // Altura para o
-																									// título
-				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Espaço
-				.addComponent(IconLogin, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE) // Altura definida
-																										// para o ícone
-				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Espaço
-				.addComponent(Email).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-				.addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(Senha)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-				.addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-				.addComponent(
-						botaoEntrar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(textCadastro)
-						.addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) // Espaço flexível no final
-		);
-		pack(); // Ajusta o tamanho da janela aos componentes se GroupLayout não definir tamanho
-				// fixo.
-				// Como definimos setSize em configureFrame, este pack pode ser opcional ou
-				// ajustar ligeiramente.
+            .addComponent(Titulo, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(IconLogin, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(Email)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(Senha)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(botaoEntrar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(textCadastro)
+                .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            // <<< NOVA LINHA ADICIONADA AQUI
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Espaço entre as linhas de botões
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+		pack();
 	}
 
-	// ... (métodos botaoEntrarActionPerformed, botaoCadastroActionPerformed, etc.
-	// permanecem os mesmos)
-	// Cole aqui o restante dos seus métodos de ação e variáveis que eu não incluí
-	// acima para focar no layout.
-	// Certifique-se de que os action listeners dos botões estão corretos:
-	// botaoEntrar.addActionListener(evt -> botaoEntrarActionPerformed(evt));
-	// botaoCadastro.addActionListener(evt -> botaoCadastroActionPerformed(evt));
-
+	// Seu botaoEntrarActionPerformed (mantido)
 	private void botaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {
 		String email = textEmail.getText().trim();
 		String senha = new String(textSenha.getPassword());
@@ -232,8 +239,6 @@ public class TelaLogin extends JFrame {
 					JOptionPane.WARNING_MESSAGE);
 			return;
 		}
-
-		// verificação se as dependências do String foram injetadas
 		if (usuarioController == null || applicationContext == null) {
 			JOptionPane.showMessageDialog(this,
 					"Erro crítico de configuração: Componentes Spring não foram injetados corretamente.\nPor favor, reinicie a aplicação ou contate o suporte.",
@@ -242,53 +247,33 @@ public class TelaLogin extends JFrame {
 					+ ", applicationContext=" + applicationContext);
 			return;
 		}
-
 		try {
-			// Agora o loginUsuario retorna um objeto Usuario ou null
-			Usuario usuarioLogado = usuarioController.loginUsuario(email, senha); // << MUDANÇA AQUI
-
-			if (usuarioLogado != null) { // << MUDANÇA AQUI: checa se o usuário não é null
-				// Login bem-sucedido!
+			Usuario usuarioLogado = usuarioController.loginUsuario(email, senha);
+			if (usuarioLogado != null) {
 				System.out.println("LOG: Usuário logado com sucesso: " + usuarioLogado.getEmail() + " (ID: "
 						+ usuarioLogado.getId() + ", Tipo: " + usuarioLogado.getTipoUsuario() + ")");
-
-				// O próximo passo será passar 'usuarioLogado' para a TelaPrincipal.
-				// Por enquanto, apenas abrimos a TelaPrincipal como antes.
-				// No próximo "tijolinho", vamos criar um método na TelaPrincipal para receber
-				// esse usuário.
-
 				TelaPrincipal telaPrincipal = applicationContext.getBean(TelaPrincipal.class);
-				// Exemplo de como poderíamos passar o usuário (será implementado na
-				// TelaPrincipal depois):
-				// telaPrincipal.setUsuarioLogado(usuarioLogado); // << LINHA A SER ADICIONADA
-				// NO FUTURO PRÓXIMO
-				
-				telaPrincipal.setUsuarioLogado(usuarioLogado); 
-
+				telaPrincipal.setUsuarioLogado(usuarioLogado);
 				telaPrincipal.setVisible(true);
-				this.dispose(); // Fecha a tela de login
+				this.dispose();
 			} else {
-				// Se usuarioLogado for null, significa que o e-mail ou senha estão inválidos (e
-				// não é um caso de email não confirmado)
 				JOptionPane.showMessageDialog(this, "E-mail ou senha inválidos.", "Falha no Login",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (EmailNaoConfirmadoException ex) {
-			// Trata o caso específico de e-mail não confirmado
 			JOptionPane.showMessageDialog(this, ex.getMessage()
 					+ "\nPor favor, verifique seu e-mail (incluindo a caixa de spam) e siga as instruções para confirmar.",
 					"Confirmação de E-mail Pendente", JOptionPane.WARNING_MESSAGE);
 		} catch (IllegalArgumentException ex) {
-			// Outras exceções de argumento que podem vir do controller/service (embora
-			// muitas agora resultem em 'null')
 			JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro no Login", JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e) { // Captura genérica para erros inesperados
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Ocorreu um erro inesperado ao tentar fazer login: " + e.getMessage(),
 					"Erro Desconhecido", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace(); // Importante para debug no console
+			e.printStackTrace();
 		}
 	}
 
+	// Seu botaoCadastroActionPerformed (mantido)
 	private void botaoCadastroActionPerformed(java.awt.event.ActionEvent evt) {
 		if (applicationContext == null) {
 			JOptionPane.showMessageDialog(this,
@@ -296,10 +281,33 @@ public class TelaLogin extends JFrame {
 					"Erro de Configuração Interna", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		// Obtém o bean da TelaCadastro do contexto Spring
 		TelaCadastro telaCadastro = applicationContext.getBean(TelaCadastro.class);
 		telaCadastro.setVisible(true);
 		this.dispose();
+	}
+
+	// Novo método para o botaoMais
+	private void botaoMaisActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO: Certifique-se de que a classe TelaDescricao exista e esteja acessível.
+		// Se TelaDescricao for uma tela simples que não precisa de injeção do Spring,
+		// esta forma de instanciar é aceitável.
+		// Se TelaDescricao também for um @Component gerenciado pelo Spring,
+		// você faria:
+		// TelaDescricao telaDescricao = applicationContext.getBean(TelaDescricao.class);
+		// telaDescricao.setTelaAnterior(this); // Se ela precisar de referência
+		// telaDescricao.setVisible(true);
+
+		System.out.println("Botão MAIS clicado. Tentando abrir TelaDescricao..."); // Log para debug
+		try {
+			// Supondo que TelaDescricao tenha um construtor que aceita JFrame (a tela de login) como parâmetro.
+			// Se não existir, você precisará criar ou ajustar TelaDescricao.
+			TelaDescricao telaDescricao = new TelaDescricao(this); // Como no código do seu amigo
+			telaDescricao.setVisible(true);
+			this.setVisible(false); // Esconde a tela de login
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Erro ao abrir a tela de descrição: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {
