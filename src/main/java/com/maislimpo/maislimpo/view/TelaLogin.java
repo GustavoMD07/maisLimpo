@@ -2,7 +2,6 @@ package com.maislimpo.maislimpo.view;
 
 import java.awt.Color;
 import java.awt.Dimension; // Import para Dimension
-import java.awt.FlowLayout; // Import para FlowLayout
 import java.awt.Font; // Import para Font
 import java.awt.Image; // Import para Image
 import javax.swing.GroupLayout;
@@ -11,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel; // Import para JPanel
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
@@ -66,7 +64,6 @@ public class TelaLogin extends JFrame {
         getContentPane().setBackground(Color.WHITE);
     }
 
-    @SuppressWarnings("unchecked")
     private void initComponents() {
 
         IconLogin = new JLabel();

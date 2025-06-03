@@ -35,5 +35,8 @@ public class Usuario {
 
 	@Column(name = "data_expiracao_token")
 	private LocalDateTime dataExpiracaoToken; // expiração do token 
+	
+	@Column(name = "tipo_usuario", length = 20)
+	private String tipoUsuario;
 
 }

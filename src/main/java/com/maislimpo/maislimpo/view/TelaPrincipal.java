@@ -1,16 +1,22 @@
 package com.maislimpo.maislimpo.view;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+
+@Component
 public class TelaPrincipal extends javax.swing.JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1529676205021341485L;
 	/**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+	
+	private final ApplicationContext applicationContext;
+	
+    public TelaPrincipal(ApplicationContext applicationContext) {
 
-        initComponents();
+        this.applicationContext = applicationContext;
+		initComponents();
         setLocationRelativeTo(null);
       
     }
@@ -125,12 +131,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         botãoJoseMenino.setBounds(100, 30, 100, 23);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\muniz\\OneDrive\\Imagens\\Capturas de tela\\Praia1000.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Praia1000.png")));
         jPanel1.add(jLabel3);
         jLabel3.setBounds(-10, 0, 1020, 450);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\muniz\\Downloads\\Logo+Limpo400-removebg-preview.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/LogoMaisLimpo400.png"))); // Ajuste o nome do arquivo se necessário
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

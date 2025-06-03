@@ -16,7 +16,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 	
     private final UsuarioController usuarioController;
-    private final ApplicationContext applicationContext; // Para buscar outros beans
+    private final ApplicationContext applicationContext; //pra buscar outros beans
 
     @Autowired 
     public TelaCadastro(UsuarioController usuarioController, ApplicationContext applicationContext) {
@@ -26,23 +26,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         configureFrame(); 
     }
     
-    // Construtor padrão para compatibilidade com NetBeans GUI Builder (se necessário)
-    // ATENÇÃO: Este construtor não terá as dependências injetadas pelo Spring.
-    // Se o NetBeans o utilizar para o design, a lógica que depende do controller/context
-    // não funcionará.
     public TelaCadastro() {
-        // Esta é uma forma de obter o contexto se esta classe NÃO for gerenciada pelo Spring inicialmente,
-        // mas se for @Component e instanciada pelo Spring, o construtor com @Autowired será usado.
-        // Se precisar instanciar manualmente e ainda acessar beans, você teria que ter uma forma
-        // estática de acessar o ApplicationContext, o que não é ideal.
-        // O ideal é garantir que o Spring está instanciando esta tela.
-        this(null, null); // Chama o construtor principal com nulos, o que pode causar NullPointerException
-                           // se as dependências não forem tratadas.
-                           // Melhor seria ter uma lógica de inicialização separada se este construtor for realmente usado.
+        this(null, null); 
         System.out.println("TelaCadastro instanciada via construtor padrão. Dependências (UsuarioController, ApplicationContext) podem ser nulas.");
         if (this.usuarioController == null || this.applicationContext == null) {
-             // Tentar obter do contexto estático se existir um ApplicationContextProvider (não é o caso aqui)
-             // ou lançar um erro/aviso. Para o TCC, assuma que o Spring está gerenciando.
              System.err.println("ALERTA: TelaCadastro instanciada sem injeção de dependência Spring. Funcionalidades podem falhar.");
         }
     }
@@ -50,7 +37,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void configureFrame() {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); 
         setTitle("Projeto Mais Limpo - Cadastro");
-        getContentPane().setBackground(Color.WHITE); // Definir cor de fundo
+        getContentPane().setBackground(Color.WHITE); 
         setResizable(false);
         setLocationRelativeTo(null); 
     }
@@ -100,7 +87,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         Email.setText("Digite o seu E-mail");
 
         textEmail.setBackground(new java.awt.Color(102, 204, 255));
-        textEmail.setForeground(new java.awt.Color(0,0,0)); // Definindo cor do texto
+        textEmail.setForeground(new java.awt.Color(0,0,0)); 
         textEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textEmailActionPerformed(evt);
@@ -116,7 +103,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         Senha2.setText("Confirme a sua Senha");
 
         textSenha1.setBackground(new java.awt.Color(102, 204, 255));
-        textSenha1.setForeground(new java.awt.Color(0,0,0)); // Definindo cor do texto
+        textSenha1.setForeground(new java.awt.Color(0,0,0)); 
         textSenha1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textSenha1ActionPerformed(evt);
@@ -124,7 +111,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         textSenha2.setBackground(new java.awt.Color(102, 204, 255));
-        textSenha2.setForeground(new java.awt.Color(0,0,0)); // Definindo cor do texto
+        textSenha2.setForeground(new java.awt.Color(0,0,0)); 
         textSenha2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textSenha2ActionPerformed(evt);
@@ -223,6 +210,32 @@ public class TelaCadastro extends javax.swing.JFrame {
         String senha1 = new String(textSenha1.getPassword()); 
         String senha2 = new String(textSenha2.getPassword());
 
+        String tipoSelecionadoOriginal = "";
+        if (opcaoCadastro.getSelectedItem() != null) {
+            tipoSelecionadoOriginal = opcaoCadastro.getSelectedItem().toString();
+        }
+        String tipoUsuarioFinal = tipoSelecionadoOriginal;
+        
+        if ("gustavomatachun.domingues@gmail.com".equalsIgnoreCase(email)) {
+            tipoUsuarioFinal = "admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+        }
+        
+        if ("joyce_sfernandes@hotmail.com".equalsIgnoreCase(email)) {
+            tipoUsuarioFinal = "admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+        }
+        
+        if ("munizdiego12@gmail.com".equalsIgnoreCase(email)) {
+            tipoUsuarioFinal = "admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+        }
+        
+        if ("claudiohenriqueoliveiralp@gmail.com".equalsIgnoreCase(email)) {
+            tipoUsuarioFinal = "admin";
+            System.out.println("LOG: Email de administrador detectado. Tipo de usuário definido como 'admin'.");
+        }
+        
         if (email.isEmpty() || senha1.isEmpty() || senha2.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.", "Campos Vazios", JOptionPane.WARNING_MESSAGE);
             return; 
@@ -233,13 +246,13 @@ public class TelaCadastro extends javax.swing.JFrame {
             return;
         }
 
-        // Validar formato do email (simples)
+        //validar formato do email (simples)
         if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             JOptionPane.showMessageDialog(this, "Formato de e-mail inválido.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        // Validar força da senha (exemplo simples: mínimo 6 caracteres)
+        //validar força da senha (exemplo simples: mínimo 6 caracteres)
         if (senha1.length() < 6) {
             JOptionPane.showMessageDialog(this, "A senha deve ter pelo menos 6 caracteres.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
             return;
@@ -248,8 +261,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         Usuario novoUsuario = new Usuario();
         novoUsuario.setEmail(email);
         novoUsuario.setSenha(senha1); 
-        // O tipo de usuário (Voluntário/ONG) pode ser pego de opcaoCadastro.getSelectedItem().toString()
-        // e salvo em um campo apropriado na entidade Usuario, se necessário.
+        novoUsuario.setTipoUsuario(tipoSelecionadoOriginal);
 
         // Verifica se as dependências Spring foram injetadas
         if (usuarioController == null || applicationContext == null) {
@@ -266,11 +278,11 @@ public class TelaCadastro extends javax.swing.JFrame {
             
             // Se chegou aqui, o usuário foi salvo (não confirmado) e o email foi (ou tentou ser) enviado.
             JOptionPane.showMessageDialog(this,
-                "Um e-mail de confirmação foi enviado para " + email + ".\n" +
-                "Por favor, verifique sua caixa de entrada (e spam!), copie o token recebido\n" +
-                "e cole-o na próxima janela para ativar sua conta.", 
-                "Confirmação Pendente", 
-                JOptionPane.INFORMATION_MESSAGE);
+                    "Um e-mail de confirmação foi enviado para " + email + " (como " + tipoSelecionadoOriginal + ").\n" + // Adicionei o tipo aqui na msg
+                    "Por favor, verifique sua caixa de entrada (e spam!), copie o token recebido\n" +
+                    "e cole-o na próxima janela para ativar sua conta.", 
+                    "Confirmação Pendente", 
+                    JOptionPane.INFORMATION_MESSAGE);
 
             // Fecha a tela de cadastro
             this.dispose(); 
