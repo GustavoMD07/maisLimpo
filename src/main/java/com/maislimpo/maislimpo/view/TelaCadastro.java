@@ -1,11 +1,10 @@
 package com.maislimpo.maislimpo.view;
 
 import javax.swing.*;
-import java.awt.Color; // Import para Color
+import java.awt.Color; 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext; // Importar ApplicationContext
+import org.springframework.context.ApplicationContext; 
 import org.springframework.stereotype.Component;
-
 import com.maislimpo.maislimpo.controller.UsuarioController;
 import com.maislimpo.maislimpo.entity.Usuario;
 import com.maislimpo.maislimpo.exception.EmailNaoEnviadoException;
