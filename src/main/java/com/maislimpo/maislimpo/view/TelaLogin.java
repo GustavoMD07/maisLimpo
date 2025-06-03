@@ -90,7 +90,6 @@ public class TelaLogin extends JFrame {
 		ConhecaNossoProjeto = new JLabel();
 		botaoMais = new JButton();
 
-		// Configurações do Ícone/Imagem (mantido como no seu original)
 		IconLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		IconLogin.setVerticalAlignment(SwingConstants.CENTER);
 		try {
@@ -108,7 +107,6 @@ public class TelaLogin extends JFrame {
 			e.printStackTrace();
 		}
 
-		// Configurações do Titulo, Email, Senha, textEmail, textSenha (mantidas)
 		Titulo.setFont(new Font("Arial Black", 1, 16));
 		Titulo.setForeground(new Color(51, 153, 255));
 		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -145,24 +143,23 @@ public class TelaLogin extends JFrame {
 		botaoCadastro.setFont(new Font("Arial Black", 1, 12));
 		botaoCadastro.setForeground(new Color(0, 0, 255));
 		botaoCadastro.setText("CADASTRO");
-		botaoCadastro.setPreferredSize(buttonSize); // Mantendo seu tamanho padrão
+		botaoCadastro.setPreferredSize(buttonSize); 
 		botaoCadastro.addActionListener(evt -> botaoCadastroActionPerformed(evt));
 
 		textCadastro.setFont(new Font("Arial", 0, 10));
 		textCadastro.setForeground(new Color(51, 153, 255));
-		textCadastro.setText("Não possui um login? Cadastre-se! \u2192"); // Usando unicode para a seta pra garantir
+		textCadastro.setText("Não possui um login? Cadastre-se! \u2192"); 
 
-		// Configurações dos novos componentes (baseado no código do seu amigo e no seu)
 		ConhecaNossoProjeto.setFont(new java.awt.Font("Arial", 0, 10));
 		ConhecaNossoProjeto.setForeground(new java.awt.Color(51, 153, 255));
-		ConhecaNossoProjeto.setText("Conheça mais sobre o nosso projeto! \u2192"); // Seta com unicode
-        ConhecaNossoProjeto.setPreferredSize(new Dimension(186, 23)); // Tamanho como no do amigo
+		ConhecaNossoProjeto.setText("Conheça mais sobre o nosso projeto! \u2192"); 
+        ConhecaNossoProjeto.setPreferredSize(new Dimension(186, 23)); 
 
 		botaoMais.setBackground(new java.awt.Color(102, 204, 255));
 		botaoMais.setFont(new java.awt.Font("Arial Black", 1, 12));
 		botaoMais.setForeground(new java.awt.Color(0, 0, 255));
 		botaoMais.setText("MAIS");
-        botaoMais.setPreferredSize(buttonMaisSize); // Tamanho como no do amigo
+        botaoMais.setPreferredSize(buttonMaisSize); 
 		botaoMais.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				botaoMaisActionPerformed(evt);
@@ -177,55 +174,54 @@ public class TelaLogin extends JFrame {
 		layout.setAutoCreateContainerGaps(true);
 
 		// Definição dos grupos horizontais
-        // Mantendo sua estrutura de centralização principal
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-            .addComponent(Titulo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(IconLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup() // Grupo para os campos de login e botões, com margens flexíveis
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING) // Alinhamento à esquerda para os campos internos
-                    .addComponent(Email)
-                    .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Senha)
-                    .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoEntrar, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE) // Botão entrar alinhado à direita dentro deste grupo
-                    .addGroup(layout.createSequentialGroup() // Linha para "textCadastro" e "botaoCadastro"
-                        .addComponent(textCadastro)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup() // <<< NOVA LINHA ADICIONADA AQUI
-                        .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) // Espaço flexível para empurrar o botão MAIS
-                        .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+		    .addComponent(Titulo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		    .addComponent(IconLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		    .addGroup(layout.createSequentialGroup()
+		        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) // Margem flexível esquerda
+		        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+		            .addComponent(Email)
+		            .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		            .addComponent(Senha)
+		            .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING) // Agrupa os botões para alinhá-los à direita
+		                .addComponent(botaoEntrar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                .addGroup(layout.createSequentialGroup()
+		                    .addComponent(textCadastro)
+		                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+		                    .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		                .addGroup(layout.createSequentialGroup()
+		                    .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED) // Ajuste aqui para garantir que o botão MAIS fique colado ao texto
+		                    .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+		        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)) // Margem flexível direita
+		);
 
 		// Definição dos grupos verticais
 		layout.setVerticalGroup(layout.createSequentialGroup()
-            .addComponent(Titulo, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(IconLogin, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(Email)
-            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(Senha)
-            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(botaoEntrar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(textCadastro)
-                .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            // <<< NOVA LINHA ADICIONADA AQUI
-            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Espaço entre as linhas de botões
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+		    .addComponent(Titulo, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+		    .addComponent(IconLogin, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+		    .addComponent(Email)
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+		    .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+		    .addComponent(Senha)
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+		    .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+		    .addComponent(botaoEntrar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Mantém o espaçamento
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		        .addComponent(textCadastro)
+		        .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Mantém o espaçamento
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		        .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		        .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		);
 		pack();
 	}
 
@@ -310,10 +306,11 @@ public class TelaLogin extends JFrame {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
-
+	@SuppressWarnings("unused")
 	private void textSenhaActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}

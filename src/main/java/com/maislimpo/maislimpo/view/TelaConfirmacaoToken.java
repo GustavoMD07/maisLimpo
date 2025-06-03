@@ -17,13 +17,13 @@ public class TelaConfirmacaoToken extends JFrame {
     private static final long serialVersionUID = 1L;
 
     private final UsuarioController usuarioController;
-    private final ApplicationContext applicationContext; // Para abrir a TelaLogin depois
+    private final ApplicationContext applicationContext; 
 
     private JTextField txtToken;
     private JButton btnConfirmar;
-    private JButton btnCancelar; // Ou Reenviar Token, ou Voltar para Login
+    private JButton btnCancelar; 
 
-    private String emailUsuario; // Pode ser útil para algumas lógicas ou mensagens
+//    private String emailUsuario;
 
     @Autowired
     public TelaConfirmacaoToken(UsuarioController usuarioController, ApplicationContext applicationContext) {

@@ -8,40 +8,29 @@ import org.springframework.stereotype.Component;
 import com.maislimpo.maislimpo.entity.Usuario; // Para guardar o usuário logado
 import com.maislimpo.maislimpo.service.DenunciaService;
 
-@Component // <<< PASSO 1: Tornando a classe um Bean Spring
+@Component 
 public class TelaDenuncias extends javax.swing.JFrame {
 
-	private static final long serialVersionUID = 1L; // Já existe
-
-	// --- Campos da classe ---
-	private String nomePraia; // Já existe, mas será setado de outra forma
+	private static final long serialVersionUID = 1L; 
+	private String nomePraia; 
 	private Usuario usuarioLogado; // <<< PASSO 3: Para guardar o usuário que está fazendo a denúncia
 	private TelaPrincipal telaOrigem; // <<< PASSO 3: Referência à tela que chamou esta
 	private final ApplicationContext applicationContext; // Para futuras necessidades com beans
 	private final DenunciaService denunciaService;
 
-	// --- Variáveis da UI (geradas pelo NetBeans) ---
+
 	private javax.swing.JButton botaoEnviar;
 	private javax.swing.JToggleButton botaoVoltar;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTextArea jTextAreaDenuncia;
 	private javax.swing.JLabel labelPraia;
-	// --- Fim das variáveis da UI ---
 
-	/**
-	 * Creates new form Denuncias. Este construtor agora será usado pelo Spring. A
-	 * configuração da praia e do usuário será feita pelo método
-	 * abrirJanelaParaDenuncia.
-	 */
 	@Autowired // <<< PASSO 2: Construtor para injeção de dependência
 	public TelaDenuncias(ApplicationContext applicationContext, DenunciaService denunciaService) {
 		this.applicationContext = applicationContext; // Guarda o contexto
 		this.denunciaService = denunciaService;
-		initComponents(); // Inicializa os componentes da UI
-		// setLocationRelativeTo(null); // Movido para abrirJanelaParaDenuncia
-		// labelPraia.setText("Praia selecionada: " + nomePraia); // Movido
-		// this.nomePraia = nomePraia; // Movido
+		initComponents();
 	}
 
 	/**

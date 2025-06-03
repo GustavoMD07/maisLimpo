@@ -46,7 +46,7 @@ public class DenunciaService {
         novaDenuncia.setUsuario(usuarioAutor);
         novaDenuncia.setNomePraia(nomePraia.trim());
         novaDenuncia.setTextoDenuncia(textoDenuncia.trim());
-        novaDenuncia.setDataHoraDenuncia(LocalDateTime.now()); // Define a data e hora atuais
+        novaDenuncia.setDataHoraDenuncia(LocalDateTime.now()); 
 
         // Salva a denúncia usando o repositório
         Denuncia denunciaSalva = denunciaRepository.save(novaDenuncia);
