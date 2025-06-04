@@ -45,8 +45,9 @@ public class UsuarioService {
 		}
 		// email não cadastrado, novo usuário mesmo
 		
-		String senhaOriginal = novoUsuario.getEmail();
+		String senhaOriginal = novoUsuario.getSenha();
 		String senhaHash = BCrypt.hashpw(senhaOriginal, BCrypt.gensalt());
+		//salt pra usuarios com a mesma senha terem hashs diferentes
 		novoUsuario.setSenha(senhaHash);
 		//senha Hash
 		
@@ -99,7 +100,7 @@ public class UsuarioService {
 	        return true;
 	    }
 	    System.err.println("Tentativa de confirmação com token inválido ou não encontrado: " + token);
-	    return false; // Token não encontrado
+	    return false; 
 	}
 
 	public Usuario verificarCredenciais(String email, String senha) throws EmailNaoConfirmadoException {
@@ -116,7 +117,7 @@ public class UsuarioService {
 			throw new EmailNaoConfirmadoException(
 					"Seu e-mail ainda não foi confirmado. Por favor, verifique sua caixa de entrada.");
 		}
-
+		
 		if (BCrypt.checkpw(senha, usuario.getSenha())) { //o hash sempre volta o mesmo se a senha for a mesma
 			System.out.println("LOG: Login bem-sucedido para: " + email);
 			return usuario; 

@@ -31,7 +31,6 @@ public class TelaLogin extends JFrame {
 	private final UsuarioController usuarioController;
 	private final ApplicationContext applicationContext;
 
-	// Seus campos existentes
 	private JTextField textEmail;
 	private JPasswordField textSenha;
 	private JButton botaoEntrar;
@@ -61,10 +60,9 @@ public class TelaLogin extends JFrame {
 		}
 	}
 
-	// Seu configureFrame (mantido)
 	private void configureFrame() {
 		setTitle("Projeto Mais Limpo - Login");
-		setSize(422, 480); // Ajustei a altura para acomodar os novos botões, similar ao do seu amigo.
+		setSize(422, 480); 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -73,7 +71,6 @@ public class TelaLogin extends JFrame {
 
 	private void initComponents() {
 
-		// Suas inicializações existentes
 		IconLogin = new JLabel();
 		Titulo = new JLabel();
 		Email = new JLabel();
@@ -83,8 +80,6 @@ public class TelaLogin extends JFrame {
 		botaoEntrar = new JButton();
 		botaoCadastro = new JButton();
 		textCadastro = new JLabel();
-
-		// Novas inicializações
 		ConhecaNossoProjeto = new JLabel();
 		botaoMais = new JButton();
 
@@ -126,9 +121,9 @@ public class TelaLogin extends JFrame {
 		textSenha.setForeground(new Color(0, 0, 0));
 		textSenha.setPreferredSize(new Dimension(300, 25));
 
-		// Configuração dos botões (mantida a sua base, ajustando tamanhos se necessário)
-		Dimension buttonSize = new Dimension(145, 30); // Seu tamanho padrão
-        Dimension buttonMaisSize = new Dimension(106, 30); // Tamanho para o botão "MAIS", como no do amigo
+		
+		Dimension buttonSize = new Dimension(145, 30); 
+        Dimension buttonMaisSize = new Dimension(106, 30); 
 
 		botaoEntrar.setBackground(new Color(102, 204, 255));
 		botaoEntrar.setFont(new Font("Arial Black", 1, 12));
@@ -164,25 +159,23 @@ public class TelaLogin extends JFrame {
 			}
 		});
 
-		// Usando GroupLayout (baseado no seu, com adições)
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
 
-		// Definição dos grupos horizontais
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 		    .addComponent(Titulo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		    .addComponent(IconLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		    .addGroup(layout.createSequentialGroup()
-		        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) // Margem flexível esquerda
+		        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE) 
 		        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 		            .addComponent(Email)
 		            .addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		            .addComponent(Senha)
 		            .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING) // Agrupa os botões para alinhá-los à direita
+		            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING) 
 		                .addComponent(botaoEntrar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		                .addGroup(layout.createSequentialGroup()
 		                    .addComponent(textCadastro)
@@ -190,12 +183,12 @@ public class TelaLogin extends JFrame {
 		                    .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		                .addGroup(layout.createSequentialGroup()
 		                    .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED) // Ajuste aqui para garantir que o botão MAIS fique colado ao texto
+		                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED) 
 		                    .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-		        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)) // Margem flexível direita
+		        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)) 
 		);
 
-		// Definição dos grupos verticais
+		
 		layout.setVerticalGroup(layout.createSequentialGroup()
 		    .addComponent(Titulo, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -210,11 +203,11 @@ public class TelaLogin extends JFrame {
 		    .addComponent(textSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
 		    .addComponent(botaoEntrar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Mantém o espaçamento
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) 
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 		        .addComponent(textCadastro)
 		        .addComponent(botaoCadastro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) // Mantém o espaçamento
+		    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED) 
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 		        .addComponent(ConhecaNossoProjeto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 		        .addComponent(botaoMais, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -267,7 +260,6 @@ public class TelaLogin extends JFrame {
 		}
 	}
 
-	// Seu botaoCadastroActionPerformed (mantido)
 	private void botaoCadastroActionPerformed(java.awt.event.ActionEvent evt) {
 		if (applicationContext == null) {
 			JOptionPane.showMessageDialog(this,
@@ -279,25 +271,18 @@ public class TelaLogin extends JFrame {
 		telaCadastro.setVisible(true);
 		this.dispose();
 	}
-
-	// Novo método para o botaoMais
+	
 	private void botaoMaisActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO: Certifique-se de que a classe TelaDescricao exista e esteja acessível.
-		// Se TelaDescricao for uma tela simples que não precisa de injeção do Spring,
-		// esta forma de instanciar é aceitável.
-		// Se TelaDescricao também for um @Component gerenciado pelo Spring,
-		// você faria:
+		// se TelaDescricao for um bean futuramente:
 		// TelaDescricao telaDescricao = applicationContext.getBean(TelaDescricao.class);
-		// telaDescricao.setTelaAnterior(this); // Se ela precisar de referência
+		// telaDescricao.setTelaAnterior(this); 
 		// telaDescricao.setVisible(true);
 
-		System.out.println("Botão MAIS clicado. Tentando abrir TelaDescricao..."); // Log para debug
+		System.out.println("Botão MAIS clicado. Tentando abrir TelaDescricao..."); 
 		try {
-			// Supondo que TelaDescricao tenha um construtor que aceita JFrame (a tela de login) como parâmetro.
-			// Se não existir, você precisará criar ou ajustar TelaDescricao.
-			TelaDescricao telaDescricao = new TelaDescricao(this); // Como no código do seu amigo
+			TelaDescricao telaDescricao = new TelaDescricao(this); 
 			telaDescricao.setVisible(true);
-			this.setVisible(false); // Esconde a tela de login
+			this.setVisible(false); 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Erro ao abrir a tela de descrição: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
