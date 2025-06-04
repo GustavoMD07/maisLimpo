@@ -1,4 +1,4 @@
-package com.maislimpo.maislimpo.view;
+package com.maislimpo.view;
 
 import java.awt.Color;
 import java.net.URL; 

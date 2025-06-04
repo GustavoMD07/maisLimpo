@@ -1,4 +1,4 @@
-package com.maislimpo.maislimpo.entity;
+package com.maislimpo.entity;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.Column;

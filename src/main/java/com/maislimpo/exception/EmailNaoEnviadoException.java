@@ -1,4 +1,4 @@
-package com.maislimpo.maislimpo.exception;
+package com.maislimpo.exception;
 
 public class EmailNaoEnviadoException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

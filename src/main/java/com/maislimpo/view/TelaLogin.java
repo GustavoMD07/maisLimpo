@@ -1,4 +1,4 @@
-package com.maislimpo.maislimpo.view;
+package com.maislimpo.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,9 +18,9 @@ import javax.swing.WindowConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import com.maislimpo.maislimpo.controller.UsuarioController;
-import com.maislimpo.maislimpo.entity.Usuario;
-import com.maislimpo.maislimpo.exception.EmailNaoConfirmadoException;
+import com.maislimpo.controller.UsuarioController;
+import com.maislimpo.entity.Usuario;
+import com.maislimpo.exception.EmailNaoConfirmadoException;
 
 
 @Component

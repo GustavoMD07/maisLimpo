@@ -1,9 +1,9 @@
-package com.maislimpo.maislimpo.controller;
+package com.maislimpo.controller;
 
 import org.springframework.stereotype.Controller; 
-import com.maislimpo.maislimpo.entity.Usuario;
-import com.maislimpo.maislimpo.exception.EmailNaoConfirmadoException;
-import com.maislimpo.maislimpo.service.UsuarioService;
+import com.maislimpo.entity.Usuario;
+import com.maislimpo.exception.EmailNaoConfirmadoException;
+import com.maislimpo.service.UsuarioService;
 
 import lombok.AllArgsConstructor;
 

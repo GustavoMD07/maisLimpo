@@ -1,4 +1,4 @@
-package com.maislimpo.maislimpo.exception;
+package com.maislimpo.exception;
 
 public class TokenExpiradoException extends RuntimeException {
 	

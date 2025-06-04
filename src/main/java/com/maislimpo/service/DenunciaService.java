@@ -1,13 +1,13 @@
-package com.maislimpo.maislimpo.service;
+package com.maislimpo.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; 
-import com.maislimpo.maislimpo.entity.Denuncia;
-import com.maislimpo.maislimpo.entity.Usuario;
-import com.maislimpo.maislimpo.repository.DenunciaRepository;
+import com.maislimpo.entity.Denuncia;
+import com.maislimpo.entity.Usuario;
+import com.maislimpo.repository.DenunciaRepository;
 import lombok.AllArgsConstructor;
 
 @Service

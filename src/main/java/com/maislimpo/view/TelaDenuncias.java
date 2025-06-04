@@ -1,12 +1,12 @@
-package com.maislimpo.maislimpo.view;
+package com.maislimpo.view;
 
 
 import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import com.maislimpo.maislimpo.entity.Usuario; // Para guardar o usuário logado
-import com.maislimpo.maislimpo.service.DenunciaService;
+import com.maislimpo.entity.Usuario; // Para guardar o usuário logado
+import com.maislimpo.service.DenunciaService;
 
 @Component 
 public class TelaDenuncias extends javax.swing.JFrame {

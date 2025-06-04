@@ -1,10 +1,10 @@
-package com.maislimpo.maislimpo;
+package com.maislimpo;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.swing.SwingUtilities;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import com.maislimpo.maislimpo.view.TelaLogin;
+import com.maislimpo.view.TelaLogin;
 
 @SpringBootApplication
 public class MaislimpoApplication {

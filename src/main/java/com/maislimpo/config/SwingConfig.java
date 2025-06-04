@@ -1,4 +1,4 @@
-package com.maislimpo.maislimpo.config;
+package com.maislimpo.config;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContextInitializer;
@@ -6,7 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.maislimpo.maislimpo.MaislimpoApplication;
+import com.maislimpo.MaislimpoApplication;
 
 @Configuration
 public class SwingConfig {

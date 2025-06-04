@@ -1,8 +1,8 @@
-package com.maislimpo.maislimpo.repository;
+package com.maislimpo.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.maislimpo.maislimpo.entity.Denuncia;
+import com.maislimpo.entity.Denuncia;
 
 public interface DenunciaRepository extends JpaRepository<Denuncia, Long> {
 

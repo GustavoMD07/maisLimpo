@@ -1,14 +1,14 @@
-package com.maislimpo.maislimpo.service;
+package com.maislimpo.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.maislimpo.maislimpo.entity.Usuario;
-import com.maislimpo.maislimpo.exception.EmailNaoConfirmadoException;
-import com.maislimpo.maislimpo.exception.TokenExpiradoException;
-import com.maislimpo.maislimpo.repository.UsuarioRepository;
+import com.maislimpo.entity.Usuario;
+import com.maislimpo.exception.EmailNaoConfirmadoException;
+import com.maislimpo.exception.TokenExpiradoException;
+import com.maislimpo.repository.UsuarioRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import lombok.AllArgsConstructor;
 

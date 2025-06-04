@@ -1,11 +1,11 @@
-package com.maislimpo.maislimpo.view;
+package com.maislimpo.view;
 
 import javax.swing.JOptionPane;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.maislimpo.maislimpo.entity.Usuario;
+import com.maislimpo.entity.Usuario;
 
 @Component
 public class TelaPrincipal extends javax.swing.JFrame {

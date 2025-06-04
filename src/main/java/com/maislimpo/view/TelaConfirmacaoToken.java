@@ -1,4 +1,4 @@
-package com.maislimpo.maislimpo.view;
+package com.maislimpo.view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.maislimpo.maislimpo.controller.UsuarioController;
+import com.maislimpo.controller.UsuarioController;
 
 @Component
 public class TelaConfirmacaoToken extends JFrame {
