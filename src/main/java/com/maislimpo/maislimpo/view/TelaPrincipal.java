@@ -22,28 +22,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
 	}
 
-	/**
-	 * Método para configurar o usuário que fez login nesta tela. Este método será
-	 * chamado pela TelaLogin após a autenticação bem-sucedida.
-	 * 
-	 * @param usuario O objeto Usuario que representa o usuário logado.
-	 */
-	public void setUsuarioLogado(Usuario usuario) { // <<< NOVO MÉTODO
+	public void setUsuarioLogado(Usuario usuario) { 
 		this.usuarioLogado = usuario;
 		if (this.usuarioLogado != null) {
 			System.out.println("LOG TelaPrincipal: Usuário " + this.usuarioLogado.getEmail() + " (Tipo: "
 					+ this.usuarioLogado.getTipoUsuario() + ") está agora na tela principal.");
-			// Aqui você poderia, por exemplo, atualizar um JLabel para mostrar "Bem-vindo,
-			// [email do usuário]"
-			// jLabelMensagemBoasVindas.setText("Olá, " + this.usuarioLogado.getEmail() +
-			// "!");
-			// Ou customizar a tela baseado no this.usuarioLogado.getTipoUsuario()
+			JOptionPane.showMessageDialog(this, "Bem vindo ao sistema usuário " + usuario.getEmail());
+			
+
 		} else {
 			System.out.println("LOG TelaPrincipal: Nenhum usuário logado foi definido.");
-			// Tratar caso onde nenhum usuário é passado, talvez redirecionar para login ou
-			// mostrar mensagem de erro.
-			// Por segurança, se a tela principal for aberta sem usuário, idealmente deveria
-			// fechar ou ir para login.
+			JOptionPane.showMessageDialog(this, "Usuário não está logado. Por favor, faça o login novamente.",
+					"Erro de Sessão", JOptionPane.ERROR_MESSAGE);
+			
+			if (applicationContext != null) {
+	            TelaLogin telaLogin = applicationContext.getBean(TelaLogin.class);
+	            telaLogin.setVisible(true);
+	            
+	        } else {
+	            System.err.println("ERRO CRÍTICO: ApplicationContext é null na TelaPrincipal. Não é possível abrir TelaLogin.");
+	        }
+	        this.dispose(); 
 		}
 	}
 
@@ -138,7 +137,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 		});
 		jPanel1.add(botaoPompeia);
 		botaoPompeia.setBounds(220, 45, 90, 23);
-		//x altura, tamanho, transparência
+		//x ,altura, tamanho, transparência
 
 		botãoJoseMenino.setBackground(new java.awt.Color(181, 165, 153));
 		botãoJoseMenino.setForeground(new java.awt.Color(0, 0, 0));
@@ -216,10 +215,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 "Erro: Usuário não está logado. Por favor, faça o login novamente.", 
                 "Erro de Sessão", JOptionPane.ERROR_MESSAGE);
             
-            // Tenta retornar à tela de login
             TelaLogin telaLogin = applicationContext.getBean(TelaLogin.class);
             telaLogin.setVisible(true);
-            this.dispose(); // Fecha a tela principal
+            this.dispose();
             return;
         }
 
@@ -232,8 +230,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         try {
             TelaDenuncias telaDenuncias = applicationContext.getBean(TelaDenuncias.class);
-            telaDenuncias.abrirJanelaParaDenuncia(nomePraia, this.usuarioLogado, this); // Passa o nome da praia, o usuário e a referência desta tela
-            this.setVisible(false); // Esconde a TelaPrincipal
+            telaDenuncias.abrirJanelaParaDenuncia(nomePraia, this.usuarioLogado, this);
+            this.setVisible(false); 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, 
                 "Erro ao tentar abrir a tela de denúncias: " + e.getMessage(),
@@ -242,8 +240,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
-	// Métodos ActionPerformed dos botões de praia
-    // No futuro, eles precisarão passar o this.usuarioLogado para a TelaDenuncias
     private void botaoPompeiaActionPerformed(java.awt.event.ActionEvent evt) {
     	 abrirTelaDenunciaParaPraia("Pompéia");
     }
@@ -272,10 +268,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 	private void botãoJoseMeninoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_botãoJoseMeninoActionPerformed
 		 abrirTelaDenunciaParaPraia("José Menino");
 	}// GEN-LAST:event_botãoJoseMeninoActionPerformed
-
-	/**
-	 * @param args the command line arguments
-	 */
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton botaoAparecida;

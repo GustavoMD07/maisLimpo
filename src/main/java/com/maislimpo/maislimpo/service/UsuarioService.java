@@ -9,7 +9,7 @@ import com.maislimpo.maislimpo.entity.Usuario;
 import com.maislimpo.maislimpo.exception.EmailNaoConfirmadoException;
 import com.maislimpo.maislimpo.exception.TokenExpiradoException;
 import com.maislimpo.maislimpo.repository.UsuarioRepository;
-
+import org.mindrot.jbcrypt.BCrypt;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -43,7 +43,13 @@ public class UsuarioService {
 				return usuarioAtualizado; 
 			}
 		}
-		// email não cadastrado
+		// email não cadastrado, novo usuário mesmo
+		
+		String senhaOriginal = novoUsuario.getEmail();
+		String senhaHash = BCrypt.hashpw(senhaOriginal, BCrypt.gensalt());
+		novoUsuario.setSenha(senhaHash);
+		//senha Hash
+		
 		String token = UUID.randomUUID().toString();
 		novoUsuario.setTokenConfirmacao(token);
 		novoUsuario.setEmailConfirmado(false);
@@ -111,7 +117,7 @@ public class UsuarioService {
 					"Seu e-mail ainda não foi confirmado. Por favor, verifique sua caixa de entrada.");
 		}
 
-		if (usuario.getSenha().equals(senha)) { 
+		if (BCrypt.checkpw(senha, usuario.getSenha())) { //o hash sempre volta o mesmo se a senha for a mesma
 			System.out.println("LOG: Login bem-sucedido para: " + email);
 			return usuario; 
 		} else {

@@ -22,8 +22,6 @@ import com.maislimpo.maislimpo.controller.UsuarioController;
 import com.maislimpo.maislimpo.entity.Usuario;
 import com.maislimpo.maislimpo.exception.EmailNaoConfirmadoException;
 
-// Presumindo que TelaDescricao exista no mesmo pacote ou seja importada corretamente
-// import com.maislimpo.maislimpo.view.TelaDescricao; 
 
 @Component
 public class TelaLogin extends JFrame {
@@ -225,7 +223,6 @@ public class TelaLogin extends JFrame {
 		pack();
 	}
 
-	// Seu botaoEntrarActionPerformed (mantido)
 	private void botaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {
 		String email = textEmail.getText().trim();
 		String senha = new String(textSenha.getPassword());
@@ -235,6 +232,7 @@ public class TelaLogin extends JFrame {
 					JOptionPane.WARNING_MESSAGE);
 			return;
 		}
+		
 		if (usuarioController == null || applicationContext == null) {
 			JOptionPane.showMessageDialog(this,
 					"Erro crítico de configuração: Componentes Spring não foram injetados corretamente.\nPor favor, reinicie a aplicação ou contate o suporte.",
@@ -253,7 +251,7 @@ public class TelaLogin extends JFrame {
 				telaPrincipal.setVisible(true);
 				this.dispose();
 			} else {
-				JOptionPane.showMessageDialog(this, "E-mail ou senha inválidos.", "Falha no Login",
+				JOptionPane.showMessageDialog(this, "E-mail ou senha inválidos. Cadastre-se no sistema ou verifique as credenciais", "Falha no Login",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (EmailNaoConfirmadoException ex) {

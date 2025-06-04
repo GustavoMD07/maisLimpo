@@ -91,7 +91,7 @@ public class TelaDescricao extends javax.swing.JFrame {
         Linha4.setForeground(new java.awt.Color(0, 204, 204));
         Linha4.setText("aos resíduos e às mudanças climáticas.");
 
-        NossaIdeia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        NossaIdeia.setFont(new java.awt.Font("Arial", 1, 14)); 
         NossaIdeia.setForeground(new java.awt.Color(0, 102, 102));
         NossaIdeia.setText("Nossa ideia");
 
@@ -107,12 +107,12 @@ public class TelaDescricao extends javax.swing.JFrame {
         Linha8.setForeground(new java.awt.Color(0, 204, 204));
         Linha8.setText("que ONGs e voluntários direcionem seus esforços de forma mais estratégica e eficaz.");
 
-        ComoFunciona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        ComoFunciona.setFont(new java.awt.Font("Arial", 1, 14)); 
         ComoFunciona.setForeground(new java.awt.Color(0, 102, 102));
         ComoFunciona.setText("Como Funciona");
 
         botaoVoltar.setBackground(new java.awt.Color(0, 102, 102));
-        botaoVoltar.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        botaoVoltar.setFont(new java.awt.Font("Arial Black", 1, 12)); 
         botaoVoltar.setForeground(new java.awt.Color(0, 204, 204));
         botaoVoltar.setText("VOLTAR");
         botaoVoltar.addActionListener(new java.awt.event.ActionListener() {

@@ -15,22 +15,9 @@ import lombok.AllArgsConstructor;
 public class DenunciaService {
 
     private final DenunciaRepository denunciaRepository;
-    // Poderíamos injetar o UsuarioRepository se precisássemos validar o usuário aqui,
-    // mas como o objeto Usuario já virá da tela (e foi autenticado),
-    // podemos confiar nele por enquanto para o ato de registrar a denúncia.
 
-    /**
-     * Registra uma nova denúncia no sistema.
-     *
-     * @param usuarioAutor O usuário que está fazendo a denúncia.
-     * @param nomePraia O nome da praia referente à denúncia.
-     * @param textoDenuncia O conteúdo da denúncia.
-     * @return A entidade Denuncia que foi salva no banco de dados.
-     * @throws IllegalArgumentException Se algum dos parâmetros obrigatórios for nulo ou inválido.
-     */
-    @Transactional // Garante que a operação de salvar seja atômica
+    @Transactional 
     public Denuncia registrarNovaDenuncia(Usuario usuarioAutor, String nomePraia, String textoDenuncia) {
-        // Validações básicas dos parâmetros
         if (usuarioAutor == null) {
             throw new IllegalArgumentException("Usuário autor não pode ser nulo para registrar a denúncia.");
         }
@@ -41,14 +28,12 @@ public class DenunciaService {
             throw new IllegalArgumentException("Texto da denúncia não pode ser vazio.");
         }
 
-        // Cria a nova entidade Denuncia
         Denuncia novaDenuncia = new Denuncia();
         novaDenuncia.setUsuario(usuarioAutor);
         novaDenuncia.setNomePraia(nomePraia.trim());
         novaDenuncia.setTextoDenuncia(textoDenuncia.trim());
         novaDenuncia.setDataHoraDenuncia(LocalDateTime.now()); 
 
-        // Salva a denúncia usando o repositório
         Denuncia denunciaSalva = denunciaRepository.save(novaDenuncia);
         
         System.out.println("LOG DenunciaService: Nova denúncia registrada com ID: " + denunciaSalva.getId() +
@@ -63,8 +48,7 @@ public class DenunciaService {
      }
 
      public List<Denuncia> buscarDenunciasPorUsuario(Long usuarioId) {
-         // return denunciaRepository.findByUsuarioId(usuarioId);
-         throw new UnsupportedOperationException("Método ainda não implementado.");
+          return denunciaRepository.findByUsuarioId(usuarioId);
      }
     
      public Denuncia buscarDenunciaPorId(Long id) {

@@ -13,9 +13,9 @@ public class TelaDenuncias extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L; 
 	private String nomePraia; 
-	private Usuario usuarioLogado; // <<< PASSO 3: Para guardar o usuário que está fazendo a denúncia
-	private TelaPrincipal telaOrigem; // <<< PASSO 3: Referência à tela que chamou esta
-	private final ApplicationContext applicationContext; // Para futuras necessidades com beans
+	private Usuario usuarioLogado; 
+	private TelaPrincipal telaOrigem; 
+	private final ApplicationContext applicationContext; 
 	private final DenunciaService denunciaService;
 
 
@@ -26,9 +26,9 @@ public class TelaDenuncias extends javax.swing.JFrame {
 	private javax.swing.JTextArea jTextAreaDenuncia;
 	private javax.swing.JLabel labelPraia;
 
-	@Autowired // <<< PASSO 2: Construtor para injeção de dependência
+	@Autowired 
 	public TelaDenuncias(ApplicationContext applicationContext, DenunciaService denunciaService) {
-		this.applicationContext = applicationContext; // Guarda o contexto
+		this.applicationContext = applicationContext; 
 		this.denunciaService = denunciaService;
 		initComponents();
 	}
@@ -257,12 +257,11 @@ public class TelaDenuncias extends javax.swing.JFrame {
 				// Este é um cenário de fallback.
 				novaTelaPrincipal.setVisible(true);
 			} else {
-				// Se nem o contexto existir, é um problema maior.
 				JOptionPane.showMessageDialog(this, "Erro ao tentar voltar. Feche e abra o aplicativo.", "Erro",
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		this.dispose(); // Fecha a tela de denúncias atual
+		this.dispose(); 
 	}
 
 }
