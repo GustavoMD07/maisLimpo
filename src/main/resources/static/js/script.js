@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const loginForm = document.getElementById("loginForm");
 
+
     //aqui é o botão de eventos, quando o usuário clicar no "login", o formulário é enviado e todas as ações
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -27,13 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) { 
                 messageDiv.textContent = responseBody;
                 messageDiv.style.color = 'lightgreen';
-                window.location.href = "/principal.html"; 
+                window.location.href = "/principal.html"; //se estiver ok ele manda pra tela preincipal
             } else {
                 messageDiv.textContent = 'Erro: ' + responseBody;
                 messageDiv.style.color = 'coral';
             }
         } catch (error) {
-            //erros que não deveriam acontecer na teoria, mas caso aconteça
+            //erro que não deveria acontecer na teoria, mas caso aconteça...
             console.error("Erro ao conectar com o servidor:", error);
             messageDiv.textContent = "Não foi possível conectar ao servidor. Tente novamente mais tarde.";
             messageDiv.style.color = 'red';

@@ -3,7 +3,7 @@ package com.maislimpo.controller;
 import com.maislimpo.entity.Usuario;
 import com.maislimpo.exception.EmailNaoConfirmadoException;
 import com.maislimpo.service.UsuarioService;
-import com.maislimpo.exception.EmailNaoConfirmadoException;
+import com.maislimpo.DTO.UsuarioDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
