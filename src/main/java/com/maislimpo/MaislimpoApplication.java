@@ -1,5 +1,6 @@
 package com.maislimpo;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.swing.SwingUtilities;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -10,7 +11,10 @@ import com.maislimpo.view.TelaLogin;
 public class MaislimpoApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = new SpringApplicationBuilder(MaislimpoApplication.class)
+		
+		SpringApplication.run(MaislimpoApplication.class, args);
+		/*
+		 * ConfigurableApplicationContext context = new SpringApplicationBuilder(MaislimpoApplication.class)
 				.headless(false)
 				.run(args);
 
@@ -19,5 +23,7 @@ public class MaislimpoApplication {
 			TelaLogin telaLogin = context.getBean(TelaLogin.class); 
 			telaLogin.setVisible(true);
 		});
+		 */
+		
 	}
 }

@@ -11,15 +11,16 @@
 
 <body>
     <main class="container">
-        <form>
+        <form id ="loginForm">
             <h1>Login</h1>
+            <div id="message" style = "text-align: center; margin-top: 10px; font-weight: 600;" ></div>
             <div class="input-box">
                 <i class="bx bxs-user"></i>
-                <input placeholder="Usuário" type="email">
+                <input id = "emailInput" placeholder="Email" type="email" required>
             </div>
             <div class="input-box">
                 <i class="bx bxs-lock-alt"></i>
-                <input placeholder="Senha" type="password">
+                <input id = "passwordInput" placeholder="Senha" type="password" required>
             </div>
 
             <div class="remember-forgot">
@@ -36,9 +37,7 @@
                 <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
             </div>
         </form>
-
-
     </main>
-    
+    <script src = "/js/script.js" defer></script>>
 </body>
 </html>
