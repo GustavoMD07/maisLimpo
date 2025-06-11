@@ -120,3 +120,59 @@ body {
 .register-link a:hover {
     text-decoration: underline;
 }
+
+select {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    padding: 10px 20px;
+    font-size: 16px;
+    appearance: none;
+}
+
+/* Estilo das opções */
+select option {
+    background-color: #fff;  /* fundo da lista suspensa */
+    color: #333;             /* cor do texto das opções */
+}
+
+.texto-topo {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    color: #000;
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-size: 36px; /* Aumenta o tamanho */
+    font-weight: bold; /* Coloca em negrito */
+    white-space: nowrap; /* Impede quebra de linha */
+    z-index: 2;
+}
+
+/* Centraliza o conteúdo da div e dá um espaço acima */
+.voltar-login {
+  text-align: center; /* Centraliza o botão horizontalmente */
+  margin-top: 30px;   /* Espaço acima do botão */
+}
+
+/* Estilização do link que funciona como botão */
+.voltar-login a {
+  display: inline-block; /* Permite definir padding e outros estilos como botão */
+  padding: 12px 24px;     /* Espaço interno: 12px em cima/baixo, 24px nas laterais */
+  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+  color: #00695c;         /* Cor do texto (verde marinho) */
+  font-weight: bold;      /* Deixa o texto em negrito */
+  text-decoration: none;  /* Remove o sublinhado do link */
+  border-radius: 30px;    /* Deixa o botão arredondado */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adiciona sombra para dar profundidade */
+  transition: all 0.3s ease; /* Suaviza qualquer transição (hover, por exemplo) */
+}
+
+/* Estilo quando o mouse passa por cima do botão */
+.voltar-login a:hover {
+  background-color: #00695c; /* Muda a cor de fundo para verde */
+  color: white;              /* Muda a cor do texto para branco */
+}

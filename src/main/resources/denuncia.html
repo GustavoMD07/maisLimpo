@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Denúncia</title>
+  <link rel="stylesheet" href="denuncia.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Denúncia - <span id="praia-nome">Praia</span></h1>
+
+    <form>
+      <label for="descricao">Descrição da denúncia:</label>
+      <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva o problema encontrado na praia..."></textarea>
+
+        <label for="imagem">Anexar imagem (opcional):</label>
+        <div class="file-input-wrapper">
+         <label for="imagem" class="file-label">Escolher imagem</label>
+         <input type="file" id="imagem" name="imagem" accept="image/*">
+         <span id="nome-arquivo">Nenhum arquivo selecionado</span>
+        </div>
+
+        <button type="submit" id="btn-enviar">Enviar Denúncia</button>
+        <div id="mensagem-enviada" style="display:none; color: green; font-weight: bold; margin-top: 10px;">
+         Denúncia enviada com sucesso!
+        </div>
+    </form>
+<div class="voltar">
+  <!-- Link que leva para a página de login (index.html) -->
+    <a href="principal.html" class="voltar">⟵ Voltar</a>
+  </div>
+
+  <script>
+    // Recebe o nome da praia via query string e insere na tela
+    const params = new URLSearchParams(window.location.search);
+    const praia = params.get("praia");
+    if (praia) {
+      document.getElementById("praia-nome").textContent = praia;
+    }
+  </script>
+</body>
+</html>
