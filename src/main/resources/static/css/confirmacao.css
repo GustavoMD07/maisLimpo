@@ -1,0 +1,52 @@
+.confirmacao-container {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+    padding: 40px 50px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: rgb(22, 19, 19);
+}
+
+.logo-confirmacao img {
+    max-width: 200px;
+    margin-bottom: 20px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.confirmacao-container h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.confirmacao-container p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.confirmacao-container .instrucao {
+    font-weight: 600;
+    margin-top: 20px;
+    color: rgba(22, 22, 22, 0.979); /* Um verde bem clarinho pra destacar */
+}
+
+.botao-voltar-login {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 30px;
+    background-color: #fff;
+    color: #111111;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+}
+
+.botao-voltar-login:hover {
+    background-color: #00695c;
+    color: white;
+    transform: scale(1.05);
+}

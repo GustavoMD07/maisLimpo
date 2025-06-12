@@ -1,20 +1,20 @@
-<!DOCTYPE html> <!-- Define o documento como HTML5 -->
-<html lang="pt-br"> <!-- Início do HTML com idioma português do Brasil -->
+<!DOCTYPE html> 
+<html lang="pt-br"> 
 <head>
-  <meta charset="UTF-8" /> <!-- Define codificação UTF-8 para caracteres especiais -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura viewport para responsividade -->
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
   
-  <!-- Importa biblioteca de ícones Boxicons -->
+
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   
-  <!-- Link para arquivo CSS externo para estilos -->
+
   <link rel="stylesheet" href="css/style.css" />
 
-  <title>Cadastro Projeto +Limpo</title> <!-- Título da página -->
+  <title>Cadastro Projeto +Limpo</title> 
 </head>
 
 <body>
-  <main class="cadastro-container"> <!-- Container principal da página -->
+  <main class="cadastro-container"> 
 
     <!-- Seção de abas informativas em estilo acordeão -->
     <div class="info-accordion">
@@ -23,16 +23,16 @@
       <div class="accordion-item">
         <!-- Cabeçalho clicável que chama a função toggleAccordion ao ser clicado -->
         <div class="accordion-header" onclick="toggleAccordion(this)">
-          Quem somos? <!-- Texto da aba -->
-          <i class="bx bx-chevron-down"></i> <!-- Ícone de seta para baixo -->
+          Quem somos? 
+          <i class="bx bx-chevron-down"></i> 
         </div>
-        <!-- Conteúdo que aparece/oculta ao abrir/fechar a aba -->
+
         <div class="accordion-content">
           <p>Somos a +Limpo, um projeto dedicado a preservar as praias de Santos, litoral paulista. Através de uma página, monitoramos a presença de resíduos sólidos nas praias, facilitando a comunicação entre voluntários, comunidade e ONGs. Nosso objetivo é fortalecer o combate aos resíduos e às mudanças climáticas.</p>
         </div>
       </div>
 
-      <!-- Segundo item do acordeão -->
+
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
           Nossa ideia
@@ -84,7 +84,7 @@
 <div class="input-box select-box">
   <i class="bx bxs-group"></i> <!-- Ícone à direita -->
   <select id="tipoUsuario" name="tipoUsuario" required>
-    <option value="" disabled selected hidden></option> <!-- Placeholder invisível -->
+    <option value="" disabled selected hidden></option> 
     <option value="voluntario">Voluntário</option>
     <option value="ong">ONG</option>
   </select>
@@ -115,5 +115,6 @@
       clickedHeader.parentElement.classList.toggle('active');
     }
   </script>
+  <script src="js/cadastro.js"></script> 
 </body>
 </html>
