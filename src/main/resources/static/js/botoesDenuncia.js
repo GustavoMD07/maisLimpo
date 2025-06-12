@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             // Faz a chamada para a nossa API REST
-            const response = await fetch('/api/denuncias', {
+            const response = await fetch('http://localhost:8080/denuncias', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

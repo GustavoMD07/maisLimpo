@@ -9,7 +9,7 @@ document.getElementById('form-esqueci-senha').addEventListener('submit', async f
     botao.textContent = 'Enviando...';
 
     try {
-        const response = await fetch('/usuarios/esqueci-senha', {
+        const response = await fetch('http://localhost:8080/usuario/esqueci-senha', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email })

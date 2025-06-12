@@ -17,8 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/usuarios") // Agora temos um prefixo padrão para todos os endpoints de usuário!
+@RequestMapping("/usuario") 
 @AllArgsConstructor
+@CrossOrigin(origins = "http://127.0.0.1:3000") // Permite requisições de qualquer origem (CORS)
 public class UsuarioController {
 
     private final UsuarioService usuarioService;

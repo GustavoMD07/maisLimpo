@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         botao.textContent = 'Salvando...';
 
         try {
-            const response = await fetch(`/usuarios/redefinir-senha?token=${token}`, {
+            const response = await fetch(`http://localhost:8080/usuario/redefinir-senha?token=${token}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ novaSenha: novaSenha })

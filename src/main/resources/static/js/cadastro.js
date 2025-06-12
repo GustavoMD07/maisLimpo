@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tipoUsuario: tipoUsuarioSelect.value
             };
 
-            const response = await fetch('/api/usuarios/cadastro', {
+            const response = await fetch('http://localhost:8080/usuario/cadastro', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

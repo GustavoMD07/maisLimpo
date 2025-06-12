@@ -1,6 +1,6 @@
 (async function() {
     try {
-        const response = await fetch('/usuarios/login-com-token', {
+        const response = await fetch('http://localhost:8080/usuario/login-com-token', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

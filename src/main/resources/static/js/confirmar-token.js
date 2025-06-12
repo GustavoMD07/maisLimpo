@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageDiv.textContent = '';
 
         try {
-            const response = await fetch('/api/usuarios/confirmar-token', {
+            const response = await fetch('http://localhost:8080/usuario/confirmar-token', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

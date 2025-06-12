@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/usuario/denuncias") 
+@RequestMapping("/denuncias") 
 @AllArgsConstructor
+@CrossOrigin(origins = "http://127.0.0.1:3000") // Permite requisições de qualquer origem (CORS)
 public class DenunciaController {
 
     private final DenunciaService denunciaService;

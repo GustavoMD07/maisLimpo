@@ -88,10 +88,43 @@ body {
     top: -10px;
     left: 15px;
     font-size: 12px;
-    background-color: #3b3a3a; /* Fundo pra cobrir a linha do input */
+    background-color: #3b3a3a; 
     padding: 0 5px;
-    color: white; /* Cor do label quando sobe */
+    color: white; 
     z-index: 1;
+}
+/* O container do input continua o mesmo, só pra organizar */
+.input-box {
+    width: 100%;
+    margin-top: 20px; /* Aumenta o espaço entre os campos */
+    text-align: left; /* Alinha o texto do label à esquerda */
+}
+
+/* O NOVO LABEL: simples, fixo e acima do campo */
+.input-box label {
+    display: block; /* Faz o label ocupar sua própria linha */
+    color: rgb(94, 93, 93);   /* Cor branca pra contrastar com o fundo */
+    font-weight: 600; /* Um pesinho pra dar destaque */
+    margin-bottom: 8px; /* Espaço entre o label e a caixa de input */
+    font-size: 16px;
+}
+
+/* O INPUT continua com o estilo que já funcionava */
+.input-box input {
+    width: 100%;
+    height: 50px;
+    background-color: #ffffff;
+    color: #333333;
+    border: 2px solid rgba(100, 100, 100, 0.4);
+    border-radius: 40px;
+    outline: none;
+    font-size: 16px;
+    padding: 20px 45px 20px 20px;
+}
+
+/* Estilo do texto do placeholder, pra garantir que fique legível */
+.input-box input::placeholder {
+    color: #888888;
 }
 
 .input-box input {
@@ -389,3 +422,4 @@ body {
     background-color: #00695c;
     color: white;
 }
+

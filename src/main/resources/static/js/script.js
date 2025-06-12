@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             // aqui realmente chama o backend
-            const response = await fetch("/usuario/login", {
+            const response = await fetch("http://localhost:8080/usuario/login", {
                 method: "POST", 
                 headers: {
                     "Content-Type": "application/json", //json padrão
