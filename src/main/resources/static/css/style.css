@@ -83,14 +83,15 @@ body {
   z-index: 1;
 }
 
-.input-box input:focus + label,
-.input-box input:valid + label {
-  top: -10px;
-  left: 15px;
-  font-size: 12px;
-  background-color: transparent;
-  padding: 0 5px;
-  color: #333;
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown) ~ label {
+    top: -10px;
+    left: 15px;
+    font-size: 12px;
+    background-color: #3b3a3a; /* Fundo pra cobrir a linha do input */
+    padding: 0 5px;
+    color: white; /* Cor do label quando sobe */
+    z-index: 1;
 }
 
 .input-box input {

@@ -213,7 +213,7 @@ public Usuario loginComTokenLembrarMe(String token) {
 
     if (tokenOpt.isPresent()) {
         LembrarToken lembrarToken = tokenOpt.get();
-        if (lembrarToken.getDataExpiracao().isAfter(LocalDateTime.now())) {
+        if (((LocalDateTime) lembrarToken.getDataExpiracao()).isAfter(LocalDateTime.now())) {
             // Token válido e não expirado! Retorna o usuário.
             return lembrarToken.getUsuario();
         } else {
