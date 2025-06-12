@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 public class UsuarioService {
 
 	private final UsuarioRepository usuarioRepository;
-
 	private final EmailService emailService;
 
 	@Transactional

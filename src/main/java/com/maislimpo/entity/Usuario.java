@@ -38,6 +38,14 @@ public class Usuario {
 	private LocalDateTime dataExpiracaoToken; 
 	
 	@Column(name = "tipo_usuario", length = 20)
-	private String tipoUsuario;
+	private String tipoUsuario; 
+
+	@Column(name = "reset_senha_token")
+	private String resetSenhaToken;
+
+	@Column(name = "reset_token_expiry_date")
+	private LocalDateTime resetTokenExpiryDate;
+
+
 
 }

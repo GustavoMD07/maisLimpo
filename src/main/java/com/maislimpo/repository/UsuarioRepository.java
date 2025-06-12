@@ -8,6 +8,6 @@ import com.maislimpo.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	Optional<Usuario> findByEmail(String email);
-	
+	Optional<Usuario> findByResetPasswordToken(String token);
 	Optional<Usuario> findByTokenConfirmacao(String tokenConfirmacao);
 }
