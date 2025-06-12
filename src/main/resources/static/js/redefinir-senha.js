@@ -3,12 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensagemDiv = document.getElementById('mensagem');
     const botao = form.querySelector('button');
 
-    // Pega o token da URL, que a gente mandou no e-mail
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
+    const token = sessionStorage.getItem('resetToken');
 
     if (!token) {
-        mensagemDiv.textContent = "ERRO: Token não encontrado. O link que você usou pode estar quebrado.";
+        mensagemDiv.textContent = "ERRO: Token não encontrado. Por favor, valide seu token novamente";
         mensagemDiv.style.color = 'red';
         form.style.display = 'none';
         return;

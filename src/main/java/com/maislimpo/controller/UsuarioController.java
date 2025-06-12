@@ -9,6 +9,8 @@ import com.maislimpo.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import java.time.Duration;
+import java.util.Map;
+
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.HttpHeaders;
 import java.time.Duration;
@@ -31,7 +33,6 @@ public ResponseEntity<?> login(@RequestBody UsuarioDTO usuario) {
     return ResponseEntity.ok(usuarioLogado);
 }
 
-    // --- ENDPOINT DE CADASTRO (O novo, no lugar certo!) ---
     @PostMapping("/cadastro")
     public ResponseEntity<?> cadastrar(@Valid @RequestBody UsuarioDTO novoUsuario) {
         // Graças ao @Valid, as validações do DTO (email, senha, etc.) rodam antes!
@@ -114,4 +115,16 @@ public ResponseEntity<?> loginComToken(@CookieValue(name = "lembrar-me-token", r
     // Se não tem token ou o token é inválido
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nenhuma sessão ativa.");
 }
+
+    @PostMapping("/validar-token-senha")
+    public ResponseEntity<String> validarTokenSenha(@RequestBody Map<String, String> payload) {
+        String token = payload.get("token");
+        boolean isTokenValid = usuarioService.isResetTokenValid(token);
+
+        if (isTokenValid) {
+            return ResponseEntity.ok("Token validado com sucesso.");
+        } else {
+            return ResponseEntity.badRequest().body("Token inválido ou expirado.");
+        }
+    }
 }

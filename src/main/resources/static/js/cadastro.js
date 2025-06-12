@@ -58,14 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(dadosParaEnviar)
             });
 
-            const responseBody = await response.text();
+            const responseBody = await response.json();
 
             if (response.ok) {
                 // SUCESSO! A MÁGICA DO REDIRECIONAMENTO ACONTECE AQUI!
                 window.location.href = 'confirmacao-pendente.html';
             } else {
                 // Mostra o erro que veio do backend (ex: email já existe)
-                messageDiv.textContent = `Erro: ${responseBody}`;
+                const errorMessages = Object.values(errorData).join(" ");
+                messageDiv.textContent = errorMessages;
             }
 
         } catch (error) {

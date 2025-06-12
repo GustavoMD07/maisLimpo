@@ -27,8 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify({ email: email, senha: senha, lembrar: lembrar }),
             });
 
-            const responseBody = await response.text();
-
             if (response.ok) { 
                 messageDiv.textContent = "Login bem-sucedido! Redirecionando...";
                 messageDiv.className = 'mensagem-sucesso'; 
@@ -37,7 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1000); // espera 1 segundo antes de redirecionar
             } else {
                 const errorData = await response.json();
-                messageDiv.textContent = errorData.erro;
+                const mensagem = Object.values(errorData)[0];
+                messageDiv.textContent = mensagem;
                 messageDiv.className = 'mensagem-erro';
             }
         } catch (error) {

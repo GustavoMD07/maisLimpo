@@ -222,4 +222,17 @@ public Usuario loginComTokenLembrarMe(String token) {
     return null; // Token não encontrado ou expirado
 }
 
+public boolean isResetTokenValid(String token) {
+        // Busca o usuário pelo token de redefinição
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByResetSenhaToken(token);
+        
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+            // Retorna true APENAS se o token existe E a data de expiração ainda não passou
+            return usuario.getResetTokenExpiryDate().isAfter(LocalDateTime.now());
+        }
+        // Se não encontrou usuário com esse token, retorna falso
+        return false;
+    }
+
 }
