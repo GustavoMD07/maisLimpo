@@ -1,23 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:...'); 
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: "Poppins", sans-serif; 
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: url("images/PraiaColorida1366.png");
-    background-size: cover;
-    background-position: center;
+body { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    background: url(./images/PraiaColorida1366.png); 
+    background-size: cover; 
+    background-position: center; 
 }
 
-.container {
+.input-box { 
+    position: relative; 
+    width: 100%; 
+    height: 50px; 
+    margin: 30px 0; 
+}
+
+.input-box input { /* Estiliza os campos de entrada */
+    width: 100%; 
+    height: 100%; 
+    background-color: transparent; 
+    border: 2px solid rgba(30, 29, 90, 0.404); 
+    border-radius: 40px; 
+    outline: none; 
+    font-size: 16px; 
+    color: #fff; 
+    padding: 20px 45px 20px 20px; 
+}
+
+.input-box input::placeholder { /* estilo do texto placeholder */
+    color: #5b5e4b; /* Cinza claro */
+}
+
+.input-box i { /* Ícone dentro do campo input */
+    position: absolute; 
+    right: 20px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    font-size: 20px; 
+}
+
+.login { 
+    width: 100%; 
+    height: 50px; 
+    background-color: #fff; 
+    border: none; 
+    border-radius: 40px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de clique */
+    font-size: 16px; /* Fonte média */
+    color: #333; /* Texto escuro */
+    font-weight: 600; /* Negrito */
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1); /* Sombra leve */
+    margin-top: 20px; /* Espaçamento superior */
+}
+
+.login:hover { /* Efeito hover no botão */
+    background-color: transparent; /* Fundo transparente */
+    border: 2px solid rgba(255, 255, 255, 0.2); /* Borda branca clara */
+    color: #fff; /* Texto branco */
+    transition: 0.5s; /* Animação suave */
+}
+
+.input-box label {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  color: #333;
+  pointer-events: none;
+  transition: 0.3s ease all;
+  font-size: 16px;
+  z-index: 1;
+}
+
+.input-box input:focus + label,
+.input-box input:valid + label {
+  top: -10px;
+  left: 15px;
+  font-size: 12px;
+  background-color: transparent;
+  padding: 0 5px;
+  color: #333;
+}
+
+.input-box input {
+  background-color: transparent;
+  color: #333;
+}
+
+/* ======= USADO SOMENTE EM index.html ======= */
+.container { /* Container principal do formulário de login */
     width: 420px;
     background-color: transparent;
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -26,56 +105,39 @@ body {
     padding: 30px 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     backdrop-filter: blur(15px);
+    margin-top: 80px;
 }
 
-.container h1 {
+.container h1 { /* Título do formulário */
     font-size: 36px;
     text-align: center;
 }
 
-.input-box {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    margin: 30px 0;
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 
-.input-box input {
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    outline: none;
-    font-size: 16px;
-    color: #272727;
-    padding: 20px 45px 20px 20px;
+.logo-site {
+  max-width: 180px;
+  height: auto;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
 }
 
-.input-box input::placeholder {
-    color: #5b5e4b;
-}
-
-.input-box i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-}
-
-.remember-forgot {
+.remember-forgot { /* Linha com checkbox e link */
     display: flex;
     justify-content: space-between;
     margin: -15px 0 15px;
 }
 
-.remember-forgot label input {
+.remember-forgot label input { /* Checkbox */
     accent-color: #fff;
     margin-right: 5px;
 }
 
-.remember-forgot a {
+.remember-forgot a { /* Link "esqueci minha senha" */
     text-decoration: none;
     color: #fff;
 }
@@ -84,28 +146,7 @@ body {
     text-decoration: underline;
 }
 
-.login {
-    width: 100%;
-    height: 50px;
-    background-color: #fff;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    margin-top: 20px;
-}
-
-.login:hover {
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    transition: 0.5s;
-}
-
-.register-link {
+.register-link { /* Link para página de cadastro */
     font-size: 14px;
     text-align: center;
     margin: 20px 0 15px;
@@ -113,7 +154,7 @@ body {
 
 .register-link a {
     text-decoration: none;
-    color: #fff;
+    color: #00695c;
     font-weight: 600;
 }
 
@@ -121,23 +162,194 @@ body {
     text-decoration: underline;
 }
 
-select {
-    background-color: transparent;
-    color: #333;
+/* === Estilo exclusivo para index.html (login) === */
+.pagina-login .logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: -30px; /* aproxima da div de login */
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 100%;
+}
+
+.pagina-login .logo-site {
+  max-width: 180px;
+  height: auto;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* ======= USADO SOMENTE EM cadastro.html ======= */
+
+/* Estilo do dropdown de tipo de usuário */
+
+
+/* Container principal da tela de cadastro */
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+/* Painel de abas informativas */
+.info-accordion {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+  color: rgb(21, 82, 46);
+  z-index: 10;
+}
+
+/* Item do acordeão */
+.accordion-item {
+  background-color: rgb(236, 246, 181);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* Cabeçalho do acordeão */
+.accordion-header {
+  padding: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-header:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.accordion-header i {
+  transition: transform 0.3s ease;
+}
+
+/* Conteúdo do acordeão */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 15px;
+  text-align: justify;
+  text-align-last: left;
+  word-spacing: -0.1em;
+  hyphens: auto;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+/* Quando o item está ativo */
+.accordion-item.active .accordion-content {
+  padding: 15px;
+  max-height: 1000px;
+}
+
+.accordion-item.active .accordion-header i {
+  transform: rotate(180deg);
+}
+
+/* Estilo do formulário */
+.form-cadastro {
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  backdrop-filter: blur(15px);
+}
+
+/* Título do formulário */
+.form-cadastro h1 {
+  text-align: center;
+  color: white;
+  font-size: 36px;
+}
+
+/* Link de voltar ao login */
+.register-link p {
+  color: white;
+}
+
+/* Ícones brancos dentro dos inputs */
+.input-box i {
+  color: white;
+}
+
+/* Estilo do container com label flutuante */
+.select-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.select-box select {
+    width: 100%;
+    height: 100%;
+    padding: 14px 45px 14px 20px;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 40px;
-    padding: 10px 20px;
+    background-color: transparent;
+    color: #333;
     font-size: 16px;
     appearance: none;
+    z-index: 2;
+    position: relative;
 }
 
-/* Estilo das opções */
-select option {
-    background-color: #fff;  /* fundo da lista suspensa */
-    color: #333;             /* cor do texto das opções */
+.select-box select option {
+    background-color: #fff;
+    color: #333;
 }
 
-.texto-topo {
+/* Ícone do select */
+.select-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: white;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.select-box label {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    color: #333;
+    pointer-events: none;
+    font-size: 16px;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+.select-box select:focus + label,
+.select-box select:valid + label {
+    top: -16px;
+    left: 15px;
+    font-size: 12px;
+    background-color: transparent;
+    padding: 0 5px;
+    color: #333;
+}
+
+/* ======= USADO SOMENTE EM principal.html ======= */
+.texto-topo { /* Texto acima do mapa */
     position: absolute;
     top: -70px;
     left: 50%;
@@ -146,33 +358,30 @@ select option {
     color: #000;
     padding: 10px 30px;
     border-radius: 10px;
-    font-size: 36px; /* Aumenta o tamanho */
-    font-weight: bold; /* Coloca em negrito */
-    white-space: nowrap; /* Impede quebra de linha */
+    font-size: 36px;
+    font-weight: bold;
+    white-space: nowrap;
     z-index: 2;
 }
 
-/* Centraliza o conteúdo da div e dá um espaço acima */
-.voltar-login {
-  text-align: center; /* Centraliza o botão horizontalmente */
-  margin-top: 30px;   /* Espaço acima do botão */
+.voltar-login { /* Container do botão de voltar */
+    text-align: center;
+    margin-top: 30px;
 }
 
-/* Estilização do link que funciona como botão */
-.voltar-login a {
-  display: inline-block; /* Permite definir padding e outros estilos como botão */
-  padding: 12px 24px;     /* Espaço interno: 12px em cima/baixo, 24px nas laterais */
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
-  color: #00695c;         /* Cor do texto (verde marinho) */
-  font-weight: bold;      /* Deixa o texto em negrito */
-  text-decoration: none;  /* Remove o sublinhado do link */
-  border-radius: 30px;    /* Deixa o botão arredondado */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adiciona sombra para dar profundidade */
-  transition: all 0.3s ease; /* Suaviza qualquer transição (hover, por exemplo) */
+.voltar-login a { /* Botão de voltar para o login */
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #00695c;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
-/* Estilo quando o mouse passa por cima do botão */
 .voltar-login a:hover {
-  background-color: #00695c; /* Muda a cor de fundo para verde */
-  color: white;              /* Muda a cor do texto para branco */
+    background-color: #00695c;
+    color: white;
 }

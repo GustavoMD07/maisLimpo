@@ -1,29 +1,74 @@
-/* Esse js serve pros botões de denúncia, mas n funciona sem um back-end Java, ent se precisar apagar pode apagar */
+/* Esse js serve de verdade pros botões de denúncia */
 
-const inputArquivo = document.getElementById("imagem");
-const nomeArquivo = document.getElementById("nome-arquivo");
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    const mensagemSucesso = document.getElementById("mensagem-enviada");
+    const nomeArquivoSpan = document.getElementById("nome-arquivo");
 
-inputArquivo.addEventListener("change", function () {
-  if (inputArquivo.files.length > 0) {
-    nomeArquivo.textContent = inputArquivo.files[0].name;
-  } else {
-    nomeArquivo.textContent = "Nenhum arquivo selecionado";
-  }
-});
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault(); // Impede o envio padrão do formulário, que recarrega a página
 
-const form = document.querySelector("form");
-const mensagem = document.getElementById("mensagem-enviada");
+        // Pega os dados da tela
+        const descricao = document.getElementById("descricao").value;
+        const nomePraia = document.getElementById("praia-nome").textContent;
+        const btnEnviar = document.getElementById("btn-enviar");
+        
+        // Desabilita o botão para evitar cliques duplos
+        btnEnviar.disabled = true;
+        btnEnviar.textContent = 'Enviando...';
 
-form.addEventListener("submit", function (event) {
-  event.preventDefault(); // impede envio real
+        try {
+            // Monta o objeto para enviar ao backend
+            const dadosParaEnviar = {
+                textoDenuncia: descricao,
+                nomePraia: nomePraia
+            };
 
-  // Aqui você pode depois substituir por lógica Java com back-end
-  mensagem.style.display = "block"; // exibe a mensagem
-  form.reset(); // limpa os campos
-  nomeArquivo.textContent = "Nenhum arquivo selecionado";
+            // Faz a chamada para a nossa API REST
+            const response = await fetch('/api/denuncias', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dadosParaEnviar),
+            });
 
-  // Oculta a mensagem após 3 segundos (opcional)
-  setTimeout(() => {
-    mensagem.style.display = "none";
-  }, 3000);
+            const textoResposta = await response.text();
+
+            if (response.ok) {
+                // Deu tudo certo!
+                mensagemSucesso.textContent = textoResposta;
+                mensagemSucesso.style.color = 'green';
+                mensagemSucesso.style.display = 'block';
+                form.reset(); // Limpa o formulário
+                nomeArquivoSpan.textContent = "Nenhum arquivo selecionado";
+            } else {
+                // Ocorreu algum erro no backend
+                mensagemSucesso.textContent = 'Erro: ' + textoResposta;
+                mensagemSucesso.style.color = 'red';
+                mensagemSucesso.style.display = 'block';
+            }
+
+        } catch (error) {
+            // Erro de conexão, etc.
+            console.error("Erro ao conectar com o servidor:", error);
+            mensagemSucesso.textContent = 'Não foi possível conectar ao servidor. Tente mais tarde.';
+            mensagemSucesso.style.color = 'red';
+            mensagemSucesso.style.display = 'block';
+        } finally {
+            // Reabilita o botão depois que tudo acabou
+            btnEnviar.disabled = false;
+            btnEnviar.textContent = 'Enviar Denúncia';
+        }
+    });
+
+    // Bônus: Lógica do input de arquivo que você já tinha
+    const inputArquivo = document.getElementById("imagem");
+    inputArquivo.addEventListener("change", function () {
+        if (inputArquivo.files.length > 0) {
+            nomeArquivoSpan.textContent = inputArquivo.files[0].name;
+        } else {
+            nomeArquivoSpan.textContent = "Nenhum arquivo selecionado";
+        }
+    });
 });

@@ -1,48 +1,119 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html> <!-- Define o documento como HTML5 -->
+<html lang="pt-br"> <!-- Início do HTML com idioma português do Brasil -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="styles.css">
-    <title>Cadastro Projeto +Limpo</title>
+  <meta charset="UTF-8" /> <!-- Define codificação UTF-8 para caracteres especiais -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura viewport para responsividade -->
+  
+  <!-- Importa biblioteca de ícones Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  
+  <!-- Link para arquivo CSS externo para estilos -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <title>Cadastro Projeto +Limpo</title> <!-- Título da página -->
 </head>
 
 <body>
-    <main class="container">
-        <form action="index.html" method="POST"> <!-- Substituir depois pela ação do back-end -->
-            <h1>Cadastro</h1>
+  <main class="cadastro-container"> <!-- Container principal da página -->
 
-            <div class="input-box">
-                <i class="bx bxs-user"></i>
-                <input type="email" placeholder="E-mail" required>
-            </div>
+    <!-- Seção de abas informativas em estilo acordeão -->
+    <div class="info-accordion">
 
-            <div class="input-box">
-                <i class="bx bxs-lock-alt"></i>
-                <input type="password" placeholder="Senha" required>
-            </div>
+      <!-- Primeiro item do acordeão -->
+      <div class="accordion-item">
+        <!-- Cabeçalho clicável que chama a função toggleAccordion ao ser clicado -->
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Quem somos? <!-- Texto da aba -->
+          <i class="bx bx-chevron-down"></i> <!-- Ícone de seta para baixo -->
+        </div>
+        <!-- Conteúdo que aparece/oculta ao abrir/fechar a aba -->
+        <div class="accordion-content">
+          <p>Somos a +Limpo, um projeto dedicado a preservar as praias de Santos, litoral paulista. Através de uma página, monitoramos a presença de resíduos sólidos nas praias, facilitando a comunicação entre voluntários, comunidade e ONGs. Nosso objetivo é fortalecer o combate aos resíduos e às mudanças climáticas.</p>
+        </div>
+      </div>
 
-            <div class="input-box">
-                <i class="bx bxs-lock-alt"></i>
-                <input type="password" placeholder="Confirmar Senha" required>
-            </div>
+      <!-- Segundo item do acordeão -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Nossa ideia
+          <i class="bx bx-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <p>Pensando na importância da educação ambiental e na necessidade de ações mais eficientes, criamos uma API que funciona como uma rede de dados alimentada por voluntários. Essas informações ajudam a identificar áreas com maior quantidade de resíduos, permitindo que ONGs e voluntários direcionem seus esforços de forma mais estratégica e eficaz.</p>
+        </div>
+      </div>
 
-            <div class="input-box">
-                <i class="bx bxs-group"></i>
-                <select required style="width: 100%; height: 100%; background-color: transparent; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 40px; color: #fff; padding: 0 20px; appearance: none; font-size: 16px;">
-                    <option value="" disabled selected>Tipo de usuário</option>
-                    <option value="voluntario">Voluntário</option>
-                    <option value="ong">ONG</option>
-                </select>
-            </div>
+      <!-- Terceiro item do acordeão -->
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          Como funciona
+          <i class="bx bx-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <p>Nosso sistema oferece cadastro de voluntários e ONGs, além de mapas interativos onde é possível registrar e detalhar avistamentos de resíduos. Com esses registros, elaboramos relatórios estatísticos que são disponibilizados a todos na plataforma, promovendo maior transparência e engajamento na preservação das nossas praias.</p>
+        </div>
+      </div>
+    </div>
 
-            <button type="submit" class="login">Cadastrar</button>
+    <!-- Formulário de cadastro -->
+    <form action="index.html" method="POST" class="form-cadastro">
+      <h1>Cadastro</h1> <!-- Título do formulário -->
 
-            <div class="register-link">
-                <p>Já tem uma conta? <a href="index.html">Voltar ao Login</a></p>
-            </div>
-        </form>
-    </main>
+<!-- Campo de e-mail com label flutuante -->
+<div class="input-box">
+  <i class="bx bxs-user"></i>
+  <input type="email" id="email" name="email" required />
+  <label for="email">E-mail</label>
+</div>
+
+<!-- Campo de senha com label flutuante -->
+<div class="input-box">
+  <i class="bx bxs-lock-alt"></i>
+  <input type="password" id="senha" name="senha" required />
+  <label for="senha">Senha</label>
+</div>
+
+<!-- Campo para confirmar senha com label flutuante -->
+<div class="input-box">
+  <i class="bx bxs-lock-alt"></i>
+  <input type="password" id="confirmaSenha" name="confirmaSenha" required />
+  <label for="confirmaSenha">Confirmar senha</label>
+</div>
+
+<!-- Campo select com rótulo flutuante -->
+<div class="input-box select-box">
+  <i class="bx bxs-group"></i> <!-- Ícone à direita -->
+  <select id="tipoUsuario" name="tipoUsuario" required>
+    <option value="" disabled selected hidden></option> <!-- Placeholder invisível -->
+    <option value="voluntario">Voluntário</option>
+    <option value="ong">ONG</option>
+  </select>
+  <label for="tipoUsuario">Tipo de usuário</label>
+</div>
+
+      <!-- Botão para enviar o formulário -->
+      <button type="submit" class="login">Cadastrar</button>
+
+      <!-- Link para voltar ao login -->
+      <div class="register-link">
+        <p>Já tem uma conta? <a href="index.html">Voltar ao Login</a></p>
+      </div>
+    </form>
+  </main>
+
+  <!-- Script para controle do acordeão -->
+  <script>
+    function toggleAccordion(clickedHeader) {
+      // Para cada item do acordeão
+      document.querySelectorAll('.accordion-item').forEach(item => {
+        // Se o cabeçalho desse item não for o clicado, remove a classe 'active' para fechar
+        if (item.querySelector('.accordion-header') !== clickedHeader) {
+          item.classList.remove('active');
+        }
+      });
+      // Alterna a classe 'active' do item clicado para abrir/fechar o conteúdo
+      clickedHeader.parentElement.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
