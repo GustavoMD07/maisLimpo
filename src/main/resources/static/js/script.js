@@ -14,31 +14,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const lembrar = document.querySelector(".remember-forgot input[type='checkbox']").checked; 
         const messageDiv = document.getElementById("message");
 
+            messageDiv.textContent = "";
+            messageDiv.className = ""; // limpa a mensagem anterior 
+
         try {
             // aqui realmente chama o backend
             const response = await fetch("http://localhost:8080/usuario/login", {
                 method: "POST", 
                 headers: {
-                    "Content-Type": "application/json", //json padrão
+                    "Content-Type": "application/json", 
                 },
-                body: JSON.stringify({ email: email, senha: senha, lembrar: lembrar }), //dados em texto
+                body: JSON.stringify({ email: email, senha: senha, lembrar: lembrar }),
             });
 
             const responseBody = await response.text();
 
             if (response.ok) { 
-                messageDiv.textContent = responseBody;
-                messageDiv.style.color = 'lightgreen';
-                window.location.href = "/principal.html"; //se estiver ok ele manda pra tela preincipal
+                messageDiv.textContent = "Login bem-sucedido! Redirecionando...";
+                messageDiv.className = 'mensagem-sucesso'; 
+                setTimeout(() => {
+                window.location.href = "/principal.html";
+            }, 1000); // espera 1 segundo antes de redirecionar
             } else {
-                messageDiv.textContent = 'Erro: ' + responseBody;
-                messageDiv.style.color = 'coral';
+                const errorData = await response.json();
+                messageDiv.textContent = errorData.erro;
+                messageDiv.className = 'mensagem-erro';
             }
         } catch (error) {
             //erro que não deveria acontecer na teoria, mas caso aconteça...
             console.error("Erro ao conectar com o servidor:", error);
             messageDiv.textContent = "Não foi possível conectar ao servidor. Tente novamente mais tarde.";
-            messageDiv.style.color = 'red';
+            messageDiv.className = 'mensagem-erro';
         }
     });
 });

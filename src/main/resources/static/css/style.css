@@ -220,9 +220,6 @@ body {
 
 /* ======= USADO SOMENTE EM cadastro.html ======= */
 
-/* Estilo do dropdown de tipo de usuário */
-
-
 /* Container principal da tela de cadastro */
 .cadastro-container {
   display: flex;
@@ -236,7 +233,7 @@ body {
 /* Painel de abas informativas */
 .info-accordion {
   position: absolute;
-  left: 40px;
+  left: 50px;
   top: 50%;
   transform: translateY(-50%); 
   display: flex;
@@ -421,5 +418,19 @@ body {
 .voltar-login a:hover {
     background-color: #00695c;
     color: white;
+}
+
+/* ===== ESTILO PARA MENSAGENS DE ERRO ===== */
+.mensagem-erro {
+    color: #D32F2F; 
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600; 
+    transition: all 0.3s ease; 
+}
+
+.mensagem-sucesso {
+   color: lightgreen; 
+   font-weight: 600; 
 }
 

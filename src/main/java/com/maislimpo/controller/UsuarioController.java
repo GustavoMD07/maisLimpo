@@ -19,46 +19,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/usuario") 
 @AllArgsConstructor
-@CrossOrigin(origins = "http://127.0.0.1:3000") // Permite requisições de qualquer origem (CORS)
+@CrossOrigin(origins = "http://127.0.0.1:3000") 
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    // --- ENDPOINT DE LOGIN (O que já existia) ---
-   @PostMapping("/login")
-public ResponseEntity<?> login(@RequestBody UsuarioDTO usuarioDTO) { // Mudei o nome do parâmetro pra clareza
-    try {
-        Usuario usuarioLogado = usuarioService.verificarCredenciais(usuarioDTO.getEmail(), usuarioDTO.getSenha());
+@PostMapping("/login")
+public ResponseEntity<?> login(@RequestBody UsuarioDTO usuario) {
 
-        if (usuarioLogado != null) {
-            // LOGIN DEU CERTO!
-            if (usuarioDTO.isLembrar()) {
-                // O usuário marcou "Lembrar de mim"!
-                String token = usuarioService.gerarTokenLembrarMe(usuarioLogado);
-
-                // Criando o cookie seguro!
-                ResponseCookie cookie = ResponseCookie.from("lembrar-me-token", token)
-                    .httpOnly(true)       // Essencial! Impede acesso via JS.
-                    .secure(false)        // Em produção, mude para 'true' se usar HTTPS
-                    .path("/")            // O cookie estará disponível em todo o site
-                    .maxAge(Duration.ofDays(30)) // Duração do cookie
-                    .build();
-
-                // Retorna uma resposta OK, e no header vai o comando pra setar o cookie
-                return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("Login bem-sucedido!");
-            }
-
-            // Login normal sem "Lembrar de mim"
-            return ResponseEntity.ok("Login bem-sucedido!");
-
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
-        }
-    } catch (EmailNaoConfirmadoException e) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar login.");
-    }
+    Usuario usuarioLogado = usuarioService.verificarCredenciais(usuario.getEmail(), usuario.getSenha());
+    return ResponseEntity.ok(usuarioLogado);
 }
 
     // --- ENDPOINT DE CADASTRO (O novo, no lugar certo!) ---

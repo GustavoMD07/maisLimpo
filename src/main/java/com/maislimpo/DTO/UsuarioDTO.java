@@ -16,11 +16,10 @@ public class UsuarioDTO {
     private String email;
 
     @NotBlank(message = "A senha não pode estar em branco.")
-    @Size(min = 6, message = "A senha deve ter no mínimo 6 caracteres.")
-    @Pattern.List({
-        @Pattern(regexp = ".*[a-z].*", message = "A senha deve conter pelo menos uma letra minúscula."),
-        @Pattern(regexp = ".*[A-Z].*", message = "A senha deve conter pelo menos uma letra maiúscula.")
-    })
+    @Pattern(
+    regexp = "^(?=.*[a-z])(?=.*[A-Z]).{6,}$",
+    message = "A senha deve ter no mínimo 6 caracteres, com pelo menos uma letra maiúscula e uma minúscula."
+)
     private String senha;
 
     private boolean lembrar;

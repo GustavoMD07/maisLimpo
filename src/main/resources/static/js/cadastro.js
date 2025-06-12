@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cria um lugar para mostrar mensagens de erro
     const messageDiv = document.createElement('div');
     messageDiv.id = 'error-message';
-    messageDiv.style.color = 'coral';
-    messageDiv.style.textAlign = 'center';
-    messageDiv.style.marginTop = '15px';
+    messageDiv.className = 'mensagem-erro';
     form.insertBefore(messageDiv, form.querySelector('.login')); // Insere a div de erro antes do botão
 
     form.addEventListener('submit', async (event) => {

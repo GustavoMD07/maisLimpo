@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.maislimpo.entity.LembrarToken;
 import com.maislimpo.entity.Usuario;
 import com.maislimpo.exception.EmailNaoConfirmadoException;
+import com.maislimpo.exception.SenhaInvalidaException;
 import com.maislimpo.exception.TokenExpiradoException;
+import com.maislimpo.exception.UsuarioNaoEncontradoException;
 import com.maislimpo.repository.UsuarioRepository;
 import com.maislimpo.repository.LembrarTokenRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -107,28 +109,24 @@ public class UsuarioService {
 	}
 
 	public Usuario verificarCredenciais(String email, String senha) throws EmailNaoConfirmadoException {
-		Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
+    Usuario usuario = usuarioRepository.findByEmail(email)
+        .orElseThrow(() -> new UsuarioNaoEncontradoException("E-mail não cadastrado no sistema."));
 
-		if (usuarioOpt.isEmpty()) {
-			System.out.println("LOG: Tentativa de login com email não cadastrado: " + email);
-			return null;
-		}
+    if (!usuario.isEmailConfirmado()) {
+        throw new EmailNaoConfirmadoException(
+            "Seu e-mail ainda não foi confirmado. Por favor, verifique sua caixa de entrada."
+        );
+    }
 
-		Usuario usuario = usuarioOpt.get();
-
-		if (!usuario.isEmailConfirmado()) {
-			throw new EmailNaoConfirmadoException(
-					"Seu e-mail ainda não foi confirmado. Por favor, verifique sua caixa de entrada.");
-		}
-		
-		if (BCrypt.checkpw(senha, usuario.getSenha())) { //o hash sempre volta o mesmo se a senha for a mesma
-			System.out.println("LOG: Login bem-sucedido para: " + email);
-			return usuario; 
-		} else {
-			System.out.println("LOG: Tentativa de login com senha incorreta para: " + email);
-			return null; 
-		}
-	}
+    if (BCrypt.checkpw(senha, usuario.getSenha())) {
+        System.out.println("LOG: Login bem-sucedido para: " + email);
+        return usuario; 
+    } else {
+        // Se a senha estiver errada, lança a exceção de senha inválida
+        System.out.println("LOG: Tentativa de login com senha incorreta para: " + email);
+        throw new SenhaInvalidaException("Senha incorreta.");
+    }
+}
 
 	public Usuario buscarUsuarioPorId(Long id) {
 		return usuarioRepository.findById(id)
@@ -169,7 +167,7 @@ public void processarPedidoRedefinicao(String email) {
 @Transactional
 public void redefinirSenhaComToken(String token, String novaSenha) {
     // Usando o método que você já criou no repositório!
-    Optional<Usuario> usuarioOpt = usuarioRepository.findByResetPasswordToken(token);
+    Optional<Usuario> usuarioOpt = usuarioRepository.findByResetSenhaToken(token);
 
     if (usuarioOpt.isEmpty()) {
         throw new RuntimeException("Token de redefinição inválido ou não encontrado!");
