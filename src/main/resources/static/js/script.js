@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const email = document.getElementById("emailInput").value;
         const senha = document.getElementById("passwordInput").value;
+        const lembrar = document.querySelector(".remember-forgot input[type='checkbox']").checked; 
         const messageDiv = document.getElementById("message");
 
         try {
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-Type": "application/json", //json padrão
                 },
-                body: JSON.stringify({ email: email, senha: senha }), //dados em texto
+                body: JSON.stringify({ email: email, senha: senha, lembrar: lembrar }), //dados em texto
             });
 
             const responseBody = await response.text();

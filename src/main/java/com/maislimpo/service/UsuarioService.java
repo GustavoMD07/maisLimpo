@@ -5,10 +5,13 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.maislimpo.entity.LembrarToken;
 import com.maislimpo.entity.Usuario;
 import com.maislimpo.exception.EmailNaoConfirmadoException;
 import com.maislimpo.exception.TokenExpiradoException;
 import com.maislimpo.repository.UsuarioRepository;
+import com.maislimpo.repository.LembrarTokenRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import lombok.AllArgsConstructor;
 
@@ -18,6 +21,7 @@ public class UsuarioService {
 
 	private final UsuarioRepository usuarioRepository;
 	private final EmailService emailService;
+	private final LembrarTokenRepository lembrarTokenRepository; 
 
 	@Transactional
 	public Usuario registrarNovoUsuario(Usuario novoUsuario) {
@@ -139,5 +143,85 @@ public class UsuarioService {
 		usuarioRepository.deleteById(id);
 		System.out.println("LOG: Usuário com ID " + id + " deletado.");
 	}
+
+	@Transactional
+public void processarPedidoRedefinicao(String email) {
+    Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
+
+    // Medida de segurança: não informamos se o e-mail existe ou não.
+    if (usuarioOpt.isPresent()) {
+        Usuario usuario = usuarioOpt.get();
+
+        String token = UUID.randomUUID().toString();
+        usuario.setResetSenhaToken(token); // Usando o campo que você já criou!
+        usuario.setResetTokenExpiryDate(LocalDateTime.now().plusHours(1)); // Expira em 1 hora
+
+        usuarioRepository.save(usuario);
+        
+        // Chama nosso novo método no EmailService!
+        emailService.enviarEmailRedefinicaoSenha(usuario.getEmail(), token);
+    } else {
+         // Log para nosso controle, mas o frontend não saberá a diferença
+        System.out.println("LOG: Tentativa de redefinição de senha para e-mail não cadastrado: " + email);
+    }
+}
+
+@Transactional
+public void redefinirSenhaComToken(String token, String novaSenha) {
+    // Usando o método que você já criou no repositório!
+    Optional<Usuario> usuarioOpt = usuarioRepository.findByResetPasswordToken(token);
+
+    if (usuarioOpt.isEmpty()) {
+        throw new RuntimeException("Token de redefinição inválido ou não encontrado!");
+    }
+
+    Usuario usuario = usuarioOpt.get();
+
+    // Verifica se o token expirou
+    if (usuario.getResetTokenExpiryDate().isBefore(LocalDateTime.now())) {
+        throw new RuntimeException("Token de redefinição expirado! Por favor, solicite um novo.");
+    }
+
+    // Hasheia a nova senha com o BCrypt que você já usa!
+    String senhaHash = BCrypt.hashpw(novaSenha, BCrypt.gensalt());
+    usuario.setSenha(senhaHash);
+    
+    // Limpa o token para que ele não possa ser usado novamente
+    usuario.setResetSenhaToken(null);
+    usuario.setResetTokenExpiryDate(null);
+
+    usuarioRepository.save(usuario);
+    System.out.println("LOG: Senha redefinida com sucesso para o usuário: " + usuario.getEmail());
+}
+
+@Transactional
+public String gerarTokenLembrarMe(Usuario usuario) {
+    String tokenValue = UUID.randomUUID().toString() + "-" + System.currentTimeMillis();
+
+    LembrarToken novoToken = new LembrarToken();
+    novoToken.setToken(tokenValue);
+    novoToken.setUsuario(usuario);
+    novoToken.setDataExpiracao(LocalDateTime.now().plusDays(30)); // Token válido por 30 dias
+
+    lembrarTokenRepository.save(novoToken);
+    return tokenValue;
+}
+
+// Adicione este método dentro do UsuarioService
+public Usuario loginComTokenLembrarMe(String token) {
+    Optional<LembrarToken> tokenOpt = lembrarTokenRepository.findByToken(token);
+
+    if (tokenOpt.isPresent()) {
+        LembrarToken lembrarToken = tokenOpt.get();
+        if (lembrarToken.getDataExpiracao().isAfter(LocalDateTime.now())) {
+            // Token válido e não expirado! Retorna o usuário.
+            return lembrarToken.getUsuario();
+        } else {
+            // Token expirou, vamos deletar ele do banco
+            lembrarTokenRepository.delete(lembrarToken);
+        }
+    }
+    return null; // Token não encontrado ou expirado
+}
 
 }

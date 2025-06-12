@@ -50,4 +50,39 @@ public class EmailService {
              throw new EmailNaoConfirmadoException("Não foi possível enviar o email de confirmação.");
         }
     }
+
+    public void enviarEmailRedefinicaoSenha(String destinatario, String token) {
+    try {
+        SimpleMailMessage mensagem = new SimpleMailMessage();
+        mensagem.setFrom(fromEmail); // Você já tem essa variável na classe
+        mensagem.setTo(destinatario);
+        mensagem.setSubject("Projeto +Limpo - Instruções para Redefinir sua Senha");
+
+        // Monta a URL que o usuário vai usar. MUITO IMPORTANTE!
+        // Altere a parte "http://127.0.0.1:5500" se o seu frontend rodar em outra porta/endereço
+        String urlRedefinicao = "http://127.0.0.1:5500/redefinir-senha.html?token=" + token;
+
+        String textoMensagem = String.format(
+            "Olá,\n\n" +
+            "Recebemos uma solicitação para redefinir a senha da sua conta no Projeto +Limpo.\n\n" +
+            "Clique no link abaixo ou copie e cole no seu navegador para criar uma nova senha:\n\n" +
+            "%s\n\n" + // Placeholder para a URL
+            "Este link irá expirar em 1 hora.\n\n" +
+            "Se você não solicitou essa alteração, pode ignorar este e-mail com segurança.\n\n" +
+            "Atenciosamente,\n" +
+            "Equipe +Limpo",
+            urlRedefinicao
+        );
+
+        mensagem.setText(textoMensagem);
+        mailSender.send(mensagem);
+        System.out.println("LOG: Email de redefinição de senha enviado para: " + destinatario);
+
+    } catch (Exception e) {
+        System.err.println("Erro ao enviar email de redefinição para " + destinatario + ": " + e.getMessage());
+        e.printStackTrace();
+        // Você pode querer criar uma exceção específica pra isso depois, mas por enquanto tá ótimo.
+        throw new RuntimeException("Não foi possível enviar o email de redefinição de senha.");
+    }
+}
 }

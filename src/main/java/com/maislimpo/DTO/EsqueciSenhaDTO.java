@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EsquecemaiiSenhaDTO {
+public class EsqueciSenhaDTO {
 
     private String email;
 }

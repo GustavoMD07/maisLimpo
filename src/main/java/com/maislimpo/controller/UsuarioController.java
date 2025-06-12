@@ -1,11 +1,17 @@
 package com.maislimpo.controller;
 
+import com.maislimpo.DTO.EsqueciSenhaDTO;
+import com.maislimpo.DTO.RedefinirSenhaDTO;
 import com.maislimpo.DTO.UsuarioDTO;
 import com.maislimpo.entity.Usuario;
 import com.maislimpo.exception.EmailNaoConfirmadoException;
 import com.maislimpo.service.UsuarioService;
-import jakarta.validation.Valid; // Importante
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import java.time.Duration;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.HttpHeaders;
+import java.time.Duration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +24,41 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     // --- ENDPOINT DE LOGIN (O que já existia) ---
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UsuarioDTO usuario) {
-        try {
-            Usuario usuarioLogado = usuarioService.verificarCredenciais(usuario.getEmail(), usuario.getSenha());
+   @PostMapping("/login")
+public ResponseEntity<?> login(@RequestBody UsuarioDTO usuarioDTO) { // Mudei o nome do parâmetro pra clareza
+    try {
+        Usuario usuarioLogado = usuarioService.verificarCredenciais(usuarioDTO.getEmail(), usuarioDTO.getSenha());
 
-            if(usuarioLogado != null) {
-                // Em vez de retornar o objeto inteiro com a senha hasheada,
-                // é uma boa prática não expor isso. Mas por enquanto, tudo bem.
-                return ResponseEntity.ok(usuarioLogado);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
+        if (usuarioLogado != null) {
+            // LOGIN DEU CERTO!
+            if (usuarioDTO.isLembrar()) {
+                // O usuário marcou "Lembrar de mim"!
+                String token = usuarioService.gerarTokenLembrarMe(usuarioLogado);
+
+                // Criando o cookie seguro!
+                ResponseCookie cookie = ResponseCookie.from("lembrar-me-token", token)
+                    .httpOnly(true)       // Essencial! Impede acesso via JS.
+                    .secure(false)        // Em produção, mude para 'true' se usar HTTPS
+                    .path("/")            // O cookie estará disponível em todo o site
+                    .maxAge(Duration.ofDays(30)) // Duração do cookie
+                    .build();
+
+                // Retorna uma resposta OK, e no header vai o comando pra setar o cookie
+                return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body("Login bem-sucedido!");
             }
-        } catch(EmailNaoConfirmadoException e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar login.");
+
+            // Login normal sem "Lembrar de mim"
+            return ResponseEntity.ok("Login bem-sucedido!");
+
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
         }
+    } catch (EmailNaoConfirmadoException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar login.");
     }
+}
 
     // --- ENDPOINT DE CADASTRO (O novo, no lugar certo!) ---
     @PostMapping("/cadastro")
@@ -75,5 +98,49 @@ public ResponseEntity<?> confirmarToken(@RequestBody String token) {
     } else {
         return ResponseEntity.badRequest().body("Token inválido, expirado ou já utilizado.");
     }
+}
+
+@PostMapping("/esqueci-senha")
+public ResponseEntity<String> solicitarRedefinicaoSenha(@RequestBody EsqueciSenhaDTO dto) {
+    // Usamos o try-catch aqui pra sempre retornar uma resposta OK, por segurança
+    try {
+        usuarioService.processarPedidoRedefinicao(dto.getEmail());
+    } catch (Exception e) {
+        // Loga o erro no backend, mas não expõe para o usuário
+        System.err.println("Erro ao processar pedido de redefinição: " + e.getMessage());
+    }
+    return ResponseEntity.ok("Se o e-mail estiver cadastrado, um link para redefinição de senha foi enviado.");
+}
+
+@PostMapping("/redefinir-senha")
+public ResponseEntity<String> redefinirSenha(@RequestParam String token, @RequestBody RedefinirSenhaDTO dto) {
+    try {
+        // Validações básicas da senha antes de mandar pro service
+        if (dto.getNovaSenha() == null || dto.getNovaSenha().length() < 6) {
+            return ResponseEntity.badRequest().body("A senha deve ter no mínimo 6 caracteres.");
+        }
+        usuarioService.redefinirSenhaComToken(token, dto.getNovaSenha());
+        return ResponseEntity.ok("Senha redefinida com sucesso! Você já pode fazer o login com a nova senha.");
+    } catch (RuntimeException e) {
+        // Erros como "Token inválido" ou "Token expirado" serão pegos aqui
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
+
+@GetMapping("/login-com-token")
+public ResponseEntity<?> loginComToken(@CookieValue(name = "lembrar-me-token", required = false) String token) {
+    if (token != null) {
+        Usuario usuario = usuarioService.loginComTokenLembrarMe(token);
+        if (usuario != null) {
+            // Token válido! Retornamos os dados do usuário (sem a senha!)
+            // Isso é útil pro frontend saber quem está logado.
+            UsuarioDTO usuarioInfo = new UsuarioDTO();
+            usuarioInfo.setEmail(usuario.getEmail());
+            // Adicione outros dados que o frontend precise saber
+            return ResponseEntity.ok(usuarioInfo);
+        }
+    }
+    // Se não tem token ou o token é inválido
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Nenhuma sessão ativa.");
 }
 }

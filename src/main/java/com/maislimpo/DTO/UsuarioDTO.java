@@ -23,6 +23,8 @@ public class UsuarioDTO {
     })
     private String senha;
 
+    private boolean lembrar;
+
     // Se quisermos validar a confirmação de senha no backend,
     // precisaríamos adicionar um campo aqui e criar uma anotação customizada
     // para comparar os dois. Mas essa verificação é mais simples e crucial no frontend.
