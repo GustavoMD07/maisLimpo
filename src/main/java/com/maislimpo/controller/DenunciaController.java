@@ -10,33 +10,32 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/denuncias") 
 @AllArgsConstructor
-@CrossOrigin(origins = "http://127.0.0.1:3000") // Permite requisições de qualquer origem (CORS)
+@CrossOrigin(origins = "http://127.0.0.1:3000")
 public class DenunciaController {
 
     private final DenunciaService denunciaService;
     private final UsuarioService usuarioService; 
-    public static record DenunciaRequest(String textoDenuncia, String nomePraia) {}
+    
+    public static record DenunciaRequest(String textoDenuncia, String nomePraia, Long usuarioId) {}
 
     @PostMapping
     public ResponseEntity<String> registrarDenuncia(@RequestBody DenunciaRequest request) {
         try {
-            // ================== ATENÇÃO: JEITINHO TEMPORÁRIO ==================
-            // Como ainda não temos o login seguro, não sabemos QUEM está enviando a denúncia.
-            // Para fazer funcionar, vamos pegar um usuário fixo (ex: o usuário de ID 1).
-            // QUANDO a gente implementar o Spring Security, a gente vai pegar o usuário logado de verdade.
-            Usuario usuarioFixo = usuarioService.buscarUsuarioPorId(1L);
-            // ====================================================================
+            if (request.usuarioId() == null) {
+                return ResponseEntity.badRequest().body("Erro: ID do usuário não foi enviado na requisição.");
+            }
+            Usuario usuario = usuarioService.buscarUsuarioPorId(request.usuarioId());
 
-            if (usuarioFixo == null) {
-                 return ResponseEntity.status(500).body("Erro: Usuário fixo para denúncia não encontrado no sistema.");
+            if (usuario == null) {
+                 return ResponseEntity.status(404).body("Erro: Usuário com ID " + request.usuarioId() + " não encontrado no sistema.");
             }
 
-            denunciaService.registrarNovaDenuncia(usuarioFixo, request.nomePraia(), request.textoDenuncia());
+            // O resto do código continua como estava
+            denunciaService.registrarNovaDenuncia(usuario, request.nomePraia(), request.textoDenuncia());
 
             return ResponseEntity.ok("Denúncia registrada com sucesso! Obrigado por sua colaboração!");
 
         } catch (Exception e) {
-
             return ResponseEntity.badRequest().body("Erro ao registrar denúncia: " + e.getMessage());
         }
     }

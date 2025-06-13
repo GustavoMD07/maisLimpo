@@ -1,22 +1,37 @@
+// Conteúdo atualizado de /static/js/auth.js
+
 (async function() {
     try {
         const response = await fetch('http://localhost:8080/usuario/login-com-token', {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: { 'Content-Type': 'application/json' }
         });
 
         if (!response.ok) {
-            // Se a resposta não for OK (ex: 401 Unauthorized), chuta o usuário pro login
             console.log('Sessão não encontrada, redirecionando para o login...');
             window.location.href = '/index.html';
         } else {
-            // O usuário está logado! Podemos até pegar os dados dele se quisermos
             const usuario = await response.json();
             console.log(`Bem-vindo de volta, ${usuario.email}!`);
-            // Podemos guardar o ID do usuário no sessionStorage pra usar depois, por exemplo
-            sessionStorage.setItem('usuarioId', usuario.id); // Supondo que o backend retorne o ID
+
+            sessionStorage.setItem('usuarioId', usuario.id); // Salva o ID do usuário para usarmos depois!
+            
+            // ===== A MÁGICA ACONTECE AQUI =====
+            // 1. Atualiza a saudação na página
+            const saudacaoElement = document.getElementById('saudacao-usuario');
+            if (saudacaoElement) {
+                saudacaoElement.textContent = `Olá, ${usuario.email}!`;
+            }
+
+            // 2. Adiciona a funcionalidade ao botão de logout
+            const logoutButton = document.getElementById('botao-logout');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', async () => {
+                    // Simplesmente redireciona para um endpoint de logout que vamos criar
+                    window.location.href = '/usuario/logout';
+                });
+            }
+            // =====================================
         }
     } catch (error) {
         console.error('Erro na verificação de autenticação, redirecionando...', error);

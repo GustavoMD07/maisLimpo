@@ -1,4 +1,3 @@
-/* Esse js serve de verdade pros botões de denúncia */
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
@@ -8,7 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault(); // Impede o envio padrão do formulário, que recarrega a página
 
-        // Pega os dados da tela
+        const usuarioId = sessionStorage.getItem('usuarioId');
+
+          if (!usuarioId) {
+            mensagemSucesso.textContent = 'Erro: Usuário não identificado. Faça o login novamente.';
+            mensagemSucesso.style.color = 'red';
+            mensagemSucesso.style.display = 'block';
+            return;
+        }
+
+        //pega os dados da tela, pra poder mandar pro backend tbm
         const descricao = document.getElementById("descricao").value;
         const nomePraia = document.getElementById("praia-nome").textContent;
         const btnEnviar = document.getElementById("btn-enviar");
@@ -21,7 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // Monta o objeto para enviar ao backend
             const dadosParaEnviar = {
                 textoDenuncia: descricao,
-                nomePraia: nomePraia
+                nomePraia: nomePraia,
+                usuarioId: parseInt(usuarioId)
             };
 
             // Faz a chamada para a nossa API REST
@@ -38,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 // Deu tudo certo!
                 mensagemSucesso.textContent = textoResposta;
-                mensagemSucesso.style.color = 'green';
+                mensagemSucesso.style.color = '#00695c';
                 mensagemSucesso.style.display = 'block';
                 form.reset(); // Limpa o formulário
                 nomeArquivoSpan.textContent = "Nenhum arquivo selecionado";

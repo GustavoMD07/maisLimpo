@@ -1,11 +1,20 @@
 package com.maislimpo.entity;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "lembrar_tokens")
@@ -16,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class LembrarToken {
 
     @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -29,35 +38,4 @@ public class LembrarToken {
     @Column(name = "data_expiracao", nullable = false)
     private LocalDateTime dataExpiracao;
 
-    // public void setDataExpiracao(LocalDateTime plusDays) {
-    //     throw new UnsupportedOperationException("Not supported yet.");
-    // }
-
-    // public void setUsuario(Usuario usuario) {
-    //     throw new UnsupportedOperationException("Not supported yet.");
-    // }
-
-    // public void setToken(String tokenValue) {
-    //     throw new UnsupportedOperationException("Not supported yet.");
-    // } //VSCODE bugando...
-
-    public void setDataExpiracao(LocalDateTime plusDays) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Usuario getUsuario() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void setUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Object getDataExpiracao() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void setToken(String tokenValue) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

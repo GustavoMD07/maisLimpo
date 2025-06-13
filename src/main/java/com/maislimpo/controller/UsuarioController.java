@@ -1,23 +1,31 @@
 package com.maislimpo.controller;
 
+import java.time.Duration;
+import java.util.Map;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.maislimpo.DTO.EsqueciSenhaDTO;
 import com.maislimpo.DTO.RedefinirSenhaDTO;
 import com.maislimpo.DTO.UsuarioDTO;
 import com.maislimpo.entity.Usuario;
-import com.maislimpo.exception.EmailNaoConfirmadoException;
 import com.maislimpo.exception.TokenExpiradoException;
 import com.maislimpo.exception.TokenInvalidoException;
 import com.maislimpo.service.UsuarioService;
+
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import java.time.Duration;
-import java.util.Map;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.HttpHeaders;
-import java.time.Duration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuario") 
@@ -29,8 +37,31 @@ public class UsuarioController {
 
 @PostMapping("/login")
 public ResponseEntity<?> login(@RequestBody UsuarioDTO usuario) {
-
+    // 1. A verificação de credenciais continua a mesma
     Usuario usuarioLogado = usuarioService.verificarCredenciais(usuario.getEmail(), usuario.getSenha());
+
+    // 2. AGORA A GENTE VERIFICA A OPÇÃO "LEMBRAR"
+    if (usuario.isLembrar()) {
+        // Se a opção estiver marcada, a gente gera o token
+        String tokenLembrarMe = usuarioService.gerarTokenLembrarMe(usuarioLogado);
+
+        // 3. E cria um Cookie seguro para enviar ao navegador
+        ResponseCookie cookie = ResponseCookie.from("lembrar-me-token", tokenLembrarMe)
+                .httpOnly(true)       // O cookie não pode ser acessado por JavaScript no frontend (mais seguro)
+                .secure(false)        // Em produção, mude para 'true' se usar HTTPS
+                .path("/")            // O cookie estará disponível em todo o site
+                .maxAge(Duration.ofDays(60)) //lembra por 60 dias
+                .build();
+        
+        System.out.println("LOG: Cookie 'lembrar-me' gerado para o usuário: " + usuario.getEmail());
+
+        // 4. Retorna a resposta de sucesso COM o cookie no cabeçalho
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(usuarioLogado); // Manda o corpo da resposta normalmente
+    }
+
+    // 5. Se "lembrar" não estiver marcado, retorna a resposta simples de antes
     return ResponseEntity.ok(usuarioLogado);
 }
 
@@ -124,4 +155,24 @@ public ResponseEntity<?> loginComToken(@CookieValue(name = "lembrar-me-token", r
         }
         
     }
+
+    @GetMapping("/logout") // Pode ser GET porque não envia corpo, só uma ação
+public ResponseEntity<Void> logout() {
+    // Cria um cookie com o mesmo nome do cookie de login, mas com idade máxima de 0
+    // Isso instrui o navegador a deletá-lo imediatamente.
+    ResponseCookie cookie = ResponseCookie.from("lembrar-me-token", "") // valor pode ser vazio
+            .httpOnly(true)
+            .secure(false) // Deve corresponder à configuração do cookie de login
+            .path("/")
+            .maxAge(0) // A MÁGICA ESTÁ AQUI!
+            .build();
+
+    System.out.println("LOG: Usuário fez logout. Cookie 'lembrar-me' invalidado.");
+
+    // Redireciona o usuário de volta para a página de login após o logout
+    return ResponseEntity.status(HttpStatus.FOUND)
+            .header(HttpHeaders.SET_COOKIE, cookie.toString())
+            .header(HttpHeaders.LOCATION, "/index.html") // Redirecionamento
+            .build();
+}
 }

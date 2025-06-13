@@ -18,7 +18,7 @@ document.getElementById('form-esqueci-senha').addEventListener('submit', async f
         const textoResposta = await response.text();
 
         mensagemDiv.textContent = textoResposta;
-        mensagemDiv.style.color = 'lightgreen';
+        mensagemDiv.style.color = '#00695c';
         document.getElementById('email').disabled = true;
         botaoSubmit.textContent = 'Link Enviado!';
         
