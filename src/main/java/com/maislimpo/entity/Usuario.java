@@ -43,9 +43,7 @@ public class Usuario {
 	@Column(name = "reset_senha_token")
 	private String resetSenhaToken;
 
-	@Column(name = "reset_token_expiry_date")
-	private LocalDateTime resetTokenExpiryDate;
-
-
+	@Column(name = "reset_expiracao_token")
+	private LocalDateTime resetExpiracaoToken;
 
 }

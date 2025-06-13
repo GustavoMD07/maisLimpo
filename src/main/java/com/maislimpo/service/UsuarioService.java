@@ -133,7 +133,7 @@ public void processarPedidoRedefinicao(String email) {
 
         String token = UUID.randomUUID().toString();
         usuario.setResetSenhaToken(token); // Usando o campo que você já criou!
-        usuario.setResetTokenExpiryDate(LocalDateTime.now().plusHours(1)); // Expira em 1 hora
+        usuario.setResetExpiracaoToken(LocalDateTime.now().plusHours(1)); // Expira em 1 hora
 
         usuarioRepository.save(usuario);
         
@@ -157,7 +157,7 @@ public void redefinirSenhaComToken(String token, String novaSenha) {
     Usuario usuario = usuarioOpt.get();
 
     // Verifica se o token expirou
-    if (usuario.getResetTokenExpiryDate().isBefore(LocalDateTime.now())) {
+    if (usuario.getResetExpiracaoToken().isBefore(LocalDateTime.now())) {
         throw new RuntimeException("Token de redefinição expirado! Por favor, solicite um novo.");
     }
 
@@ -167,7 +167,7 @@ public void redefinirSenhaComToken(String token, String novaSenha) {
     
     // Limpa o token para que ele não possa ser usado novamente
     usuario.setResetSenhaToken(null);
-    usuario.setResetTokenExpiryDate(null);
+    usuario.setResetExpiracaoToken(null);
 
     usuarioRepository.save(usuario);
     System.out.println("LOG: Senha redefinida com sucesso para o usuário: " + usuario.getEmail());
@@ -209,7 +209,7 @@ public void validarTokenSenha(String token) {
 		 -> new TokenInvalidoException("Token de redefinição inválido ou não encontrado."));;
         
         // Verifica se o token expirou
-    	if (usuario.getResetTokenExpiryDate().isBefore(LocalDateTime.now())) {
+    	if (usuario.getResetExpiracaoToken().isBefore(LocalDateTime.now())) {
         throw new TokenExpiradoException("Token de redefinição expirado! Por favor, solicite um novo.");
     }
     // Se não lançou nenhuma exceção, o método termina e a validação foi um sucesso.
