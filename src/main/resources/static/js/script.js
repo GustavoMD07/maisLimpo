@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 messageDiv.textContent = "Login bem-sucedido! Redirecionando...";
                 messageDiv.className = 'mensagem-sucesso'; 
                 setTimeout(() => {
-                    window.location.href = "/principal.html";
+                    window.location.href = "/hub.html";
                 }, 1000); 
             } else {
                 const errorData = await response.json();

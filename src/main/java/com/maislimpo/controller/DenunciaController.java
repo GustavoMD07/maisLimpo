@@ -16,22 +16,24 @@ public class DenunciaController {
     private final DenunciaService denunciaService;
     private final UsuarioService usuarioService; 
     
+    // 1. ATUALIZAMOS O "PACOTE" DE DADOS PARA INCLUIR O ID DO USUÁRIO
     public static record DenunciaRequest(String textoDenuncia, String nomePraia, Long usuarioId) {}
 
     @PostMapping
     public ResponseEntity<String> registrarDenuncia(@RequestBody DenunciaRequest request) {
         try {
+            // 2. ADEUS, "JEITINHO"! AGORA PEGAMOS O ID QUE VEIO DO FRONTEND
             if (request.usuarioId() == null) {
                 return ResponseEntity.badRequest().body("Erro: ID do usuário não foi enviado na requisição.");
             }
-            Usuario usuario = usuarioService.buscarUsuarioPorId(request.usuarioId());
+            Usuario usuarioAutor = usuarioService.buscarUsuarioPorId(request.usuarioId());
 
-            if (usuario == null) {
+            // A verificação de usuário nulo já existe no seu service, mas é bom ter aqui também
+            if (usuarioAutor == null) {
                  return ResponseEntity.status(404).body("Erro: Usuário com ID " + request.usuarioId() + " não encontrado no sistema.");
             }
 
-            // O resto do código continua como estava
-            denunciaService.registrarNovaDenuncia(usuario, request.nomePraia(), request.textoDenuncia());
+            denunciaService.registrarNovaDenuncia(usuarioAutor, request.nomePraia(), request.textoDenuncia());
 
             return ResponseEntity.ok("Denúncia registrada com sucesso! Obrigado por sua colaboração!");
 

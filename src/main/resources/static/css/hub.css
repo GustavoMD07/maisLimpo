@@ -1,0 +1,97 @@
+.dashboard-container {
+    max-width: 600px;
+    text-align: center;
+}
+
+.saudacao {
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    color: #f0f0f0;
+    font-weight: 600;
+}
+
+.opcoes-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.botao-opcao {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    width: 100%; /* Garante que o botão ocupe o espaço */
+    font-size: 16px; /* Ajuste de fonte */
+}
+
+.botao-opcao:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: #00796b; /* A COR CIANO PADRÃO! */
+    color: #fff; /* Texto branco pra contrastar */
+}
+
+.botao-opcao i {
+    font-size: 2.5em;
+    color: #00796b;
+    transition: transform 0.3s ease;
+}
+
+.botao-opcao:hover i {
+    color: #fff;
+}
+
+.botao-opcao span {
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.botao-opcao small {
+    display: block;
+    color: #666;
+    font-weight: 400;
+    font-size: 0.9em;
+}
+
+.botao-opcao:hover small {
+    color: #ffffff;
+}
+
+.mensagem-erro-dashboard {
+    color: #ffcdd2;
+    background-color: rgba(211, 47, 47, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: 600;
+    display: none; /* Começa escondido */
+}
+
+/* ===== ESTILO NOVO E BONITÃO PARA O BOTÃO DE LOGOUT ===== */
+.botao-logout-estilizado {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 25px;
+    background-color: rgba(211, 47, 47, 0.8); /* Vermelho pra indicar ação de sair */
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: all 0.3s ease;
+}
+
+.botao-logout-estilizado:hover {
+    background-color: rgba(190, 40, 40, 1);
+    transform: scale(1.05);
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub + Limpo</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hub.css"> </head>
+    <body class="pagina-login">
+    <div class="logo">
+        <img src="css/images/LogoMaisLimpo.png" alt="Logo do Projeto +Limpo">
+    </div>
+
+     <main class="container dashboard-container">
+        <h1>O que você deseja fazer?</h1>
+        <p id="saudacao-usuario" class="saudacao">Carregando...</p>
+         <div class="opcoes-wrapper">
+            <a href="principal.html" class="botao-opcao">
+                <i class='bx bxs-map-pin'></i>
+                <span>Fazer uma Denúncia</span>
+                <small>Aponte no mapa os locais com lixo.</small>
+            </a>
+             <button id="btn-ver-denuncias" class="botao-opcao">
+                <i class='bx bxs-report'></i>
+                <span>Visualizar Denúncias</span>
+                <small>Acesse o painel com todas as denúncias.</small>
+            </button>
+        </div>
+        <div id="mensagem-erro" class="mensagem-erro-dashboard"></div>
+        <a href="/usuario/logout" class="botao-logout-estilizado">Voltar para login</a>
+    </main>
+
+    <script src="js/hub.js" defer></script>
+    
+</body>
+</html>

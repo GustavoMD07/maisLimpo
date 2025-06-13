@@ -44,7 +44,7 @@ public class EmailService {
             mailSender.send(mensagem);
             System.out.println("LOG: Email de confirmação (com token para copiar) enviado para: " + destinatario);
 
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.err.println("Erro ao enviar email de confirmação para " + destinatario + ": " + e.getMessage());
             e.printStackTrace();
              throw new EmailNaoConfirmadoException("Não foi possível enviar o email de confirmação.");

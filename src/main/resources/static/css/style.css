@@ -69,7 +69,7 @@ body {
 }
 
 .login:hover { /* Efeito hover no botão */
-    background-color: transparent; /* Fundo transparente */
+    background-color: #00695c; /* Fundo transparente */
     border: 2px solid rgba(255, 255, 255, 0.2); /* Borda branca clara */
     color: #fff; /* Texto branco */
     transition: 0.5s; /* Animação suave */
@@ -518,5 +518,21 @@ body {
   100% {
     transform: rotate(45deg) scale(1); /* Termina no tamanho normal */
   }
+}
+
+/* ===== ESTILOS PARA O TEXTO DO CHECKBOX "LEMBRAR SENHA" ===== */
+
+/* 1. Estilo base para o texto do nosso checkbox customizado */
+.checkbox-label-text {
+    color: #fff; /* Cor padrão branca */
+    font-weight: 400; /* Peso de fonte normal */
+    transition: all 0.3s ease; /* A ANIMAÇÃO SUAVE! */
+}
+
+/* 2. O ESTADO MÁGICO: Quando a checkbox (input) estiver marcada... */
+.checkbox-container input:checked ~ .checkbox-label-text {
+    color: #40e0d0; /* O ciano vibrante que a gente curte! */
+    font-weight: 700; /* Um negrito mais forte pra dar destaque */
+    transform: scale(1.03); /* Aumenta um tiquinho o texto pra dar mais vida */
 }
 

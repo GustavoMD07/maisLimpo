@@ -134,7 +134,9 @@ public ResponseEntity<?> loginComToken(@CookieValue(name = "lembrar-me-token", r
             // Token válido! Retornamos os dados do usuário (sem a senha!)
             // Isso é útil pro frontend saber quem está logado.
             UsuarioDTO usuarioInfo = new UsuarioDTO();
+            usuarioInfo.setId(usuario.getId());
             usuarioInfo.setEmail(usuario.getEmail());
+            usuarioInfo.setTipoUsuario(usuario.getTipoUsuario());
             // Adicione outros dados que o frontend precise saber
             return ResponseEntity.ok(usuarioInfo);
         }
@@ -156,7 +158,7 @@ public ResponseEntity<?> loginComToken(@CookieValue(name = "lembrar-me-token", r
         
     }
 
-    @GetMapping("/logout") // Pode ser GET porque não envia corpo, só uma ação
+    @GetMapping("/logout") 
 public ResponseEntity<Void> logout() {
     // Cria um cookie com o mesmo nome do cookie de login, mas com idade máxima de 0
     // Isso instrui o navegador a deletá-lo imediatamente.

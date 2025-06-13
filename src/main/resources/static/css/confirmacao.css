@@ -44,12 +44,14 @@
     border-radius: 40px;
     border: 2px solid #cccccc;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .botao-voltar-login:hover {
     background-color: #00695c;
     color: white;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 a.botao-voltar-login { /* esse é mais específico, só pro <a> */

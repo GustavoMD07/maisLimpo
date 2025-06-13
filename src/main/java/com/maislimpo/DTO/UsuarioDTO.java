@@ -10,6 +10,10 @@ import jakarta.validation.constraints.Pattern;
 @Setter
 public class UsuarioDTO {
 
+    private Long id;
+
+    private String tipoUsuario;
+
     @NotBlank(message = "O e-mail não pode estar em branco.")
     @Email(message = "Formato de e-mail inválido.")
     private String email;
