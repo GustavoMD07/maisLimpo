@@ -5,7 +5,6 @@ import lombok.Setter;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -17,14 +16,10 @@ public class UsuarioDTO {
 
     @NotBlank(message = "A senha não pode estar em branco.")
     @Pattern(
-    regexp = "^(?=.*[a-z])(?=.*[A-Z]).{6,}$",
-    message = "A senha deve ter no mínimo 6 caracteres, com pelo menos uma letra maiúscula e uma minúscula."
-)
+    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*//d).{6,}$",
+    message = "A senha deve ter no mínimo 6 caracteres, com pelo menos um número, uma letra maiúscula e uma minúscula.")
     private String senha;
 
     private boolean lembrar;
 
-    // Se quisermos validar a confirmação de senha no backend,
-    // precisaríamos adicionar um campo aqui e criar uma anotação customizada
-    // para comparar os dois. Mas essa verificação é mais simples e crucial no frontend.
 }

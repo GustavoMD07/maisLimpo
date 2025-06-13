@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(dadosParaEnviar)
             });
 
-            const responseBody = await response.json();
+            const responseBody = await response.text();
 
             if (response.ok) {
                 // SUCESSO! A MÁGICA DO REDIRECIONAMENTO ACONTECE AQUI!
