@@ -10,30 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const tipoUsuarioSelect = document.getElementById('tipoUsuario');
     const messageDiv = document.getElementById('messageDiv');
     const btnCadastrar = form.querySelector('.login');
-    let messageTimer;
 
-    
-
-    // ===== NOSSA NOVA FUNÇÃO MÁGICA =====
-    function exibirMensagem(texto, tipo, duracao = 4000) {
-        clearTimeout(messageTimer);
-        messageDiv.textContent = texto;
-        messageDiv.className = `mensagem-geral ${tipo} visivel`;
-        if (duracao) {
-            messageTimer = setTimeout(() => {
-                messageDiv.classList.remove('visivel');
-            }, duracao);
-        }
-    }
-
-    // Limpa a mensagem de erro assim que o usuário começa a digitar
-    [senhaInput, confirmaSenhaInput, document.getElementById('email')].forEach(input => {
-        input.addEventListener('input', () => messageDiv.classList.remove('visivel'));
+    // Bloco para limpar a mensagem de erro assim que o usuário começa a digitar
+    const camposParaMonitorar = [emailInput, senhaInput, confirmaSenhaInput];
+    camposParaMonitorar.forEach(input => {
+        input.addEventListener('input', () => {
+            if (messageDiv.textContent !== '') {
+                messageDiv.textContent = '';
+            }
+        });
     });
 
     // Evento principal que acontece ao clicar em "Cadastrar"
     form.addEventListener('submit', async (event) => {
         event.preventDefault(); // Impede o recarregamento da página
+
+        messageDiv.textContent = ''; 
 
         const email = emailInput.value.trim();
         const senha = senhaInput.value.trim();

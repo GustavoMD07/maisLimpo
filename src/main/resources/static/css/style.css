@@ -540,39 +540,38 @@ body {
 /* ===== NOSSO NOVO SISTEMA DE MENSAGENS PADRÃO ===== */
 /* ================================================= */
 
-/* A "caixinha" base para todas as mensagens */
-.mensagem-geral {
-    display: none; /* Começa escondida por padrão */
+
+/* .mensagem-geral {
+    display: none; 
     width: 100%;
     padding: 12px;
     margin: 15px 0;
-    border-radius: 8px; /* Bordas arredondadas, igual a do hub */
+    border-radius: 8px; 
     font-weight: 600;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    /* Animação suave pra quando aparecer e sumir */
     transition: opacity 0.4s ease, transform 0.4s ease;
     opacity: 0;
     transform: translateY(-10px);
 }
 
-/* A classe que faz a mágica acontecer (quando o JS adicionar) */
+
 .mensagem-geral.visivel {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
 
-/* O estilo para mensagens de SUCESSO! */
+
 .mensagem-geral.sucesso {
-    background-color: rgba(0, 150, 136, 0.85); /* Um verde estiloso */
+    background-color: rgba(0, 150, 136, 0.85); 
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* O estilo para mensagens de ERRO! */
+
 .mensagem-geral.erro {
-    background-color: rgba(211, 47, 47, 0.85); /* O vermelho que você curtiu */
+    background-color: rgba(211, 47, 47, 0.85); 
     color: #ffcdd2;
     border: 1px solid rgba(255, 255, 255, 0.3);
-}
+} */
