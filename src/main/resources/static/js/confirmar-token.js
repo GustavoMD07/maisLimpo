@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageDiv = document.getElementById('message-div');
     const submitButton = form.querySelector('button');
 
-    // Pega o parâmetro 'action' da URL para saber o que fazer
+    //pega o parâmetro 'action' da URL para saber o que fazer
     const params = new URLSearchParams(window.location.search);
     const action = params.get('action'); 
 

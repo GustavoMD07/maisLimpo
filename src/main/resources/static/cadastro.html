@@ -3,11 +3,7 @@
 <head>
   <meta charset="UTF-8" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-  
-
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  
-
   <link rel="stylesheet" href="css/style.css" />
 
   <title>Cadastro Projeto +Limpo</title> 
@@ -62,22 +58,18 @@
 <!-- Campo de e-mail com label flutuante -->
 <div class="input-box">
   <i class="bx bxs-user"></i>
-  <input type="email" id="email" name="email" required />
-  <label for="email">E-mail</label>
+  <input type="email" id="email" name="email" placeholder = "Email" required />
 </div>
 
 <!-- Campo de senha com label flutuante -->
 <div class="input-box">
-  <i class="bx bxs-lock-alt"></i>
-  <input type="password" id="senha" name="senha" required />
-  <label for="senha">Senha</label>
+  <input type="password" id="senha" name="senha" placeholder = "Senha" required />
+   <i class="bx bx-show password-toggle-icon"></i>
 </div>
 
-<!-- Campo para confirmar senha com label flutuante -->
 <div class="input-box">
   <i class="bx bxs-lock-alt"></i>
-  <input type="password" id="confirmaSenha" name="confirmaSenha" required />
-  <label for="confirmaSenha">Confirmar senha</label>
+  <input type="password" id="confirmaSenha" name="confirmaSenha" placeholder = "Confirmar senha" required />
 </div>
 
 <!-- Campo select com rótulo flutuante -->
@@ -116,5 +108,6 @@
     }
   </script>
   <script src="js/cadastro.js"></script> 
+  <script src="js/toggle-password.js" defer></script>
 </body>
 </html>

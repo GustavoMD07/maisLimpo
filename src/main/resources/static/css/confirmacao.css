@@ -11,13 +11,13 @@
     color: rgb(22, 19, 19);
 }
 
-.logo-confirmacao img {
+.logo-confirmacao img { /* logo  */
     max-width: 200px;
     margin-bottom: 20px;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
 }
 
-.confirmacao-container h1 {
+.confirmacao-container h1 { /* título */
     font-size: 36px;
     margin-bottom: 15px;
 }
@@ -30,7 +30,7 @@
 .confirmacao-container .instrucao {
     font-weight: 600;
     margin-top: 20px;
-    color: rgba(22, 22, 22, 0.979); /* Um verde bem clarinho pra destacar */
+    color: rgba(22, 22, 22, 0.979);
 }
 
 .botao-voltar-login {
@@ -42,6 +42,7 @@
     font-weight: 600;
     text-decoration: none;
     border-radius: 40px;
+    border: 2px solid #cccccc;
     transition: all 0.3s ease;
 }
 
@@ -49,4 +50,9 @@
     background-color: #00695c;
     color: white;
     transform: scale(1.05);
+}
+
+a.botao-voltar-login { /* esse é mais específico, só pro <a> */
+    padding: 8px 20px;
+    font-size: 15px;
 }

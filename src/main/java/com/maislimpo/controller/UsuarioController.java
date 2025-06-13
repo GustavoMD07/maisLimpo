@@ -5,12 +5,13 @@ import com.maislimpo.DTO.RedefinirSenhaDTO;
 import com.maislimpo.DTO.UsuarioDTO;
 import com.maislimpo.entity.Usuario;
 import com.maislimpo.exception.EmailNaoConfirmadoException;
+import com.maislimpo.exception.TokenExpiradoException;
+import com.maislimpo.exception.TokenInvalidoException;
 import com.maislimpo.service.UsuarioService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import java.time.Duration;
 import java.util.Map;
-
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.HttpHeaders;
 import java.time.Duration;
@@ -56,20 +57,15 @@ public ResponseEntity<?> login(@RequestBody UsuarioDTO usuario) {
     }
 
     @PostMapping("/confirmar-token")
-public ResponseEntity<?> confirmarToken(@RequestBody String token) {
-    // O token chega como uma string simples, ex: "meu-token-aqui"
-    
-    // Removemos possíveis aspas que o JSON pode adicionar
-    String tokenLimpo = token.replace("\"", "");
-
-    // A gente já tem a lógica de validação no service!
-    boolean sucesso = usuarioService.confirmarEmail(tokenLimpo);
-
-    if (sucesso) {
-        return ResponseEntity.ok("E-mail confirmado com sucesso! Você já pode fazer o login.");
-    } else {
-        return ResponseEntity.badRequest().body("Token inválido, expirado ou já utilizado.");
+    public ResponseEntity<?> confirmarToken(@RequestBody String token) {
+    try {
+        String tokenLimpo = token.replace("\"", "");
+        usuarioService.confirmarEmail(tokenLimpo);
+        return ResponseEntity.ok("E-mail confirmado com sucesso! Você já pode fazer login.");
+    } catch ( TokenExpiradoException | TokenInvalidoException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
+
 }
 
 @PostMapping("/esqueci-senha")
@@ -118,13 +114,14 @@ public ResponseEntity<?> loginComToken(@CookieValue(name = "lembrar-me-token", r
 
     @PostMapping("/validar-token-senha")
     public ResponseEntity<String> validarTokenSenha(@RequestBody Map<String, String> payload) {
-        String token = payload.get("token");
-        boolean isTokenValid = usuarioService.isResetTokenValid(token);
-
-        if (isTokenValid) {
-            return ResponseEntity.ok("Token validado com sucesso.");
-        } else {
-            return ResponseEntity.badRequest().body("Token inválido ou expirado.");
+        try {
+            String token = payload.get("token");
+            usuarioService.validarTokenSenha(token);
+            return ResponseEntity.ok("Token de redefinição de senha válido.");
+        } catch (Exception e) {
+             // Captura nossas exceções e retorna a mensagem delas!
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
+        
     }
 }

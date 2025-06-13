@@ -25,8 +25,9 @@ body {
 }
 
 
-.container .input-box input,
- .form-cadastro .input-box input { 
+/* .form-cadastro .input-box input */
+
+.input-box input { 
     width: 100%;
     height: 100%;
     background-color: #ffffff !important; 
@@ -49,6 +50,8 @@ body {
     top: 50%; 
     transform: translateY(-50%); 
     font-size: 20px; 
+     color: #333; 
+    cursor: pointer; /* Adiciona a "mãozinha" pra indicar que é clicável */
 }
 
 .login { 
@@ -93,7 +96,7 @@ body {
     color: white; 
     z-index: 1;
 }
-/* O container do input continua o mesmo, só pra organizar */
+
 .input-box {
     width: 100%;
     margin-top: 20px; /* Aumenta o espaço entre os campos */
@@ -145,7 +148,7 @@ body {
     margin-top: 80px;
 }
 
-.container h1 { /* Título do formulário */
+.container h1 { 
     font-size: 36px;
     text-align: center;
 }
@@ -163,13 +166,13 @@ body {
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
 }
 
-.remember-forgot { /* Linha com checkbox e link */
+.remember-forgot { /* linha com checkbox e link */
     display: flex;
     justify-content: space-between;
     margin: -15px 0 15px;
 }
 
-.remember-forgot label input { /* Checkbox */
+.remember-forgot label input { /* checkbox */
     accent-color: #fff;
     margin-right: 5px;
 }
@@ -177,10 +180,16 @@ body {
 .remember-forgot a { /* Link "esqueci minha senha" */
     text-decoration: none;
     color: #fff;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .remember-forgot a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #00695c; /* cor +/- padrão, tentar manter*/
+    transform: translateY(-2px);
+    font-weight: bold;
+    transition: 0.6s
 }
 
 .register-link { /* Link para página de cadastro */
@@ -222,11 +231,12 @@ body {
 
 /* Container principal da tela de cadastro */
 .cadastro-container {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   gap: 50px;
-  padding: 40px;
+  padding: 30px 40px;
   flex-wrap: wrap;
 }
 
@@ -432,5 +442,82 @@ body {
 .mensagem-sucesso {
    color: lightgreen; 
    font-weight: 600; 
+}
+
+/* 1. O container da nossa checkbox */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none; /* Impede a seleção de texto */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  gap: 8px; /* Espaço entre a caixinha e o texto "Lembrar senha" */
+}
+
+/* 2. Esconde a checkbox padrão do navegador */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* 3. Cria a nossa caixinha (o "checkmark") */
+.checkmark {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background-color: rgba(255, 255, 255, 0.5); /* Fundo branco semi-transparente */
+  border-radius: 5px;
+  border: 1px solid #fff;
+  transition: background-color 0.3s ease; /* A ANIMAÇÃO da cor! */
+}
+
+/* 4. Muda a cor da nossa caixinha quando o input (escondido) for marcado */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #40e0d0; /* A cor ciano que você curte! */
+  border-color: #40e0d0;
+}
+
+/* 5. Cria o símbolo "V" de "check" (escondido por padrão) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none; /* Começa escondido */
+}
+
+/* 6. Mostra o "V" quando a checkbox for marcada */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* 7. Estiliza o "V" para parecer um check de verdade */
+.checkbox-container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  /* A ANIMAÇÃO de rotação que dá o charme! */
+  transform: rotate(45deg) scale(0); /* Começa com escala 0 */
+  animation: pop 0.4s ease-out forwards; /* Animação 'pop' */
+}
+
+/* Define a animação 'pop' */
+@keyframes pop {
+  0% {
+    transform: rotate(45deg) scale(0);
+  }
+  70% {
+    transform: rotate(45deg) scale(1.2); /* Dá um 'overshoot' pra ficar mais legal */
+  }
+  100% {
+    transform: rotate(45deg) scale(1); /* Termina no tamanho normal */
+  }
 }
 

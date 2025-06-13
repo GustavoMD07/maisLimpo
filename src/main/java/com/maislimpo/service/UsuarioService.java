@@ -5,12 +5,12 @@ import java.util.Optional;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.maislimpo.entity.LembrarToken;
 import com.maislimpo.entity.Usuario;
 import com.maislimpo.exception.EmailNaoConfirmadoException;
 import com.maislimpo.exception.SenhaInvalidaException;
 import com.maislimpo.exception.TokenExpiradoException;
+import com.maislimpo.exception.TokenInvalidoException;
 import com.maislimpo.exception.UsuarioNaoEncontradoException;
 import com.maislimpo.repository.UsuarioRepository;
 import com.maislimpo.repository.LembrarTokenRepository;
@@ -68,45 +68,26 @@ public class UsuarioService {
 		return usuarioSalvo;
 	}
 
-	@Transactional
-	public boolean confirmarEmail(String token) {
-		Optional<Usuario> usuarioOpt = usuarioRepository.findByTokenConfirmacao(token);
+	// O método agora não retorna mais boolean
+@Transactional
+public void confirmarEmail(String token) {
+    // Busca o usuário pelo token
+    Usuario usuario = usuarioRepository.findByTokenConfirmacao(token)
+        .orElseThrow(() -> new TokenInvalidoException("Token de confirmação inválido ou não encontrado."));
 
-		if (usuarioOpt.isPresent()) {
-			Usuario usuario = usuarioOpt.get();
-			if (usuario.getDataExpiracaoToken() != null
-					&& usuario.getDataExpiracaoToken().isBefore(LocalDateTime.now())) {
-				
-				System.out.println("Tentativa de confirmação com token expirado: " + token);
-				String novoToken = UUID.randomUUID().toString();
-				usuario.setTokenConfirmacao(novoToken);
-				usuario.setDataExpiracaoToken(LocalDateTime.now().plusHours(24)); //mais 24h
-				
-				usuarioRepository.save(usuario);
-	           
-	            try {
-	                emailService.enviarEmailConfirmacaoCadastro(usuario.getEmail(), usuario.getEmail(), novoToken);
-	                System.out.println("LOG: Novo email de confirmação enviado para " + usuario.getEmail() + " com token: " + novoToken);
-	            } catch (Exception e) {
-	                System.err.println("ERRO CRÍTICO: Falha ao reenviar email de confirmação para " + usuario.getEmail() + " após expiração do token. Erro: " + e.getMessage());
-	            }
-	            
-	            throw new TokenExpiradoException(
-	                "Seu token de confirmação expirou. Um novo token foi gerado e um novo e-mail de confirmação foi enviado para " +
-	                usuario.getEmail() + ". Por favor, verifique sua caixa de entrada (e spam!) e utilize o novo token."
-	            );
-	        }
+    // Verifica se o token expirou
+    if (usuario.getDataExpiracaoToken() != null && usuario.getDataExpiracaoToken().isBefore(LocalDateTime.now())) {
+        // Lança a exceção de token expirado, que já existe!
+        throw new TokenExpiradoException("Seu token de confirmação expirou. Por favor, solicite um novo.");
+    }
 
-	        usuario.setEmailConfirmado(true);
-	        usuario.setTokenConfirmacao(null); 
-	        usuario.setDataExpiracaoToken(null); 
-	        usuarioRepository.save(usuario);
-	        System.out.println("LOG: Email confirmado com sucesso para o usuário " + usuario.getEmail() + " com token: " + token);
-	        return true;
-	    }
-	    System.err.println("Tentativa de confirmação com token inválido ou não encontrado: " + token);
-	    return false; 
-	}
+    // Se passou pelas verificações, o token é válido. Confirma o e-mail.
+    usuario.setEmailConfirmado(true);
+    usuario.setTokenConfirmacao(null); 
+    usuario.setDataExpiracaoToken(null); 
+    usuarioRepository.save(usuario);
+    System.out.println("LOG: Email confirmado com sucesso para o usuário " + usuario.getEmail());
+}
 
 	public Usuario verificarCredenciais(String email, String senha) throws EmailNaoConfirmadoException {
     Usuario usuario = usuarioRepository.findByEmail(email)
@@ -222,17 +203,16 @@ public Usuario loginComTokenLembrarMe(String token) {
     return null; // Token não encontrado ou expirado
 }
 
-public boolean isResetTokenValid(String token) {
+public void validarTokenSenha(String token) {
         // Busca o usuário pelo token de redefinição
-        Optional<Usuario> usuarioOpt = usuarioRepository.findByResetSenhaToken(token);
+        Usuario usuario = usuarioRepository.findByResetSenhaToken(token).orElseThrow(()
+		 -> new TokenInvalidoException("Token de redefinição inválido ou não encontrado."));;
         
-        if (usuarioOpt.isPresent()) {
-            Usuario usuario = usuarioOpt.get();
-            // Retorna true APENAS se o token existe E a data de expiração ainda não passou
-            return usuario.getResetTokenExpiryDate().isAfter(LocalDateTime.now());
-        }
-        // Se não encontrou usuário com esse token, retorna falso
-        return false;
+        // Verifica se o token expirou
+    	if (usuario.getResetTokenExpiryDate().isBefore(LocalDateTime.now())) {
+        throw new TokenExpiradoException("Token de redefinição expirado! Por favor, solicite um novo.");
+    }
+    // Se não lançou nenhuma exceção, o método termina e a validação foi um sucesso.
     }
 
 }

@@ -21,13 +21,14 @@
                 <input id = "emailInput" placeholder="Email" type="email" required>
             </div>
             <div class="input-box">
-                <i class="bx bxs-lock-alt"></i>
                 <input id = "passwordInput" placeholder="Senha" type="password" required>
+                <i class="bx bx-show password-toggle-icon"></i>
             </div>
 
             <div class="remember-forgot">
-                <label>
+                <label class = "checkbox-container">
                     <input type="checkbox">
+                    <span class ="checkmark"></span>
                     Lembrar senha
                 </label>
                 <a href="esqueci-senha.html">Esqueci minha senha</a>
@@ -41,5 +42,6 @@
         </form>
     </main>
     <script src = "/js/script.js" defer></script>
+    <script src="js/toggle-password.js" defer></script>
 </body>
 </html>
