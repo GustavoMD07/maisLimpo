@@ -1,45 +1,49 @@
-// Espera o HTML carregar completamente
+console.log("LOG 1: Script cadastro.js foi lido pelo navegador.");
+
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Pega os elementos do formulário
+    console.log("LOG 2: DOM totalmente carregado. O script vai começar a rodar.");
+
     const form = document.querySelector('.form-cadastro');
+    if (!form) {
+        console.error("ERRO CRÍTICO: Não encontrei o formulário com a classe '.form-cadastro'. Verifique o HTML.");
+        return;
+    }
+    console.log("LOG 3: Formulário encontrado com sucesso.", form);
+
     const emailInput = document.getElementById('email');
     const senhaInput = document.getElementById('senha');
     const confirmaSenhaInput = document.getElementById('confirmaSenha');
     const tipoUsuarioSelect = document.getElementById('tipoUsuario');
-    
-    // Cria um lugar para mostrar mensagens de erro
-    const messageDiv = document.createElement('div');
-    messageDiv.id = 'error-message';
-    messageDiv.className = 'mensagem-erro';
-    form.insertBefore(messageDiv, form.querySelector('.login')); // Insere a div de erro antes do botão
+    const messageDiv = document.getElementById('messageDiv'); // Pegando a div que criei no HTML
+    const btnCadastrar = form.querySelector('.login-button');
+
+    if (!emailInput || !senhaInput || !confirmaSenhaInput || !tipoUsuarioSelect || !messageDiv || !btnCadastrar) {
+        console.error("ERRO CRÍTICO: Um ou mais elementos do formulário não foram encontrados. Verifique os IDs no HTML.");
+        return;
+    }
+    console.log("LOG 4: Todos os elementos do formulário foram encontrados.");
 
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Impede o envio padrão do formulário
-        messageDiv.textContent = ''; // Limpa erros antigos
-
-        // --- VALIDAÇÕES DO FRONTEND ---
-        const email = emailInput.value;
-        const senha = senhaInput.value;
-        const confirmaSenha = confirmaSenhaInput.value;
+        console.log("LOG 5: Botão de CADASTRO clicado! O evento 'submit' foi disparado.");
+        event.preventDefault();
+        console.log("LOG 6: Ação padrão do formulário (recarregar a página) foi PREVENIDA.");
         
+        messageDiv.textContent = '';
+        messageDiv.style.color = '#D32F2F'; // Cor de erro padrão
+
+        const email = emailInput.value.trim();
+        const senha = senhaInput.value.trim();
+        const confirmaSenha = confirmaSenhaInput.value.trim();
+        
+        console.log("LOG 7: Verificando senhas. Senha 1: '" + senha + "', Senha 2: '" + confirmaSenha + "'");
+
         if (senha !== confirmaSenha) {
+            console.log("LOG 8: As senhas NÃO coincidem. Exibindo erro e parando.");
             messageDiv.textContent = 'As senhas não coincidem!';
             return;
         }
 
-        if (senha.length < 6) {
-            messageDiv.textContent = 'A senha deve ter no mínimo 6 caracteres.';
-            return;
-        }
-
-        if (!/[a-z]/.test(senha) || !/[A-Z]/.test(senha)) {
-            messageDiv.textContent = 'A senha deve conter letras maiúsculas e minúsculas.';
-            return;
-        }
-
-        // --- ENVIO PARA O BACKEND ---
-        const btnCadastrar = form.querySelector('.login');
+        console.log("LOG 9: Senhas OK. Enviando requisição para o backend...");
         btnCadastrar.disabled = true;
         btnCadastrar.textContent = 'Enviando...';
 
@@ -52,28 +56,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const response = await fetch('http://localhost:8080/usuario/cadastro', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dadosParaEnviar)
             });
 
-            const responseBody = await response.text();
+            const responseBodyAsText = await response.text();
+            console.log("LOG 10: Resposta recebida do backend. Status:", response.status, "Corpo:", responseBodyAsText);
 
             if (response.ok) {
-                // SUCESSO! A MÁGICA DO REDIRECIONAMENTO ACONTECE AQUI!
+                console.log("LOG 11: Sucesso! Redirecionando para a confirmação.");
                 window.location.href = 'confirmacao-pendente.html';
             } else {
-                // Mostra o erro que veio do backend (ex: email já existe)
-                const errorMessages = Object.values(errorData).join(" ");
-                messageDiv.textContent = errorMessages;
+                console.log("LOG 12: Erro retornado pelo backend. Exibindo mensagem.");
+                messageDiv.textContent = responseBodyAsText;
             }
 
         } catch (error) {
-            console.error('Erro de conexão:', error);
-            messageDiv.textContent = 'Não foi possível conectar ao servidor. Tente mais tarde.';
+            console.error("LOG 13: ERRO DE CONEXÃO! O 'fetch' falhou.", error);
+            messageDiv.textContent = 'ERRO DE REDE: Não foi possível conectar ao servidor. Verifique se o backend está rodando.';
         } finally {
-            // Reabilita o botão aconteça o que acontecer
+            console.log("LOG 14: Bloco 'finally' executado. Reabilitando o botão.");
             btnCadastrar.disabled = false;
             btnCadastrar.textContent = 'Cadastrar';
         }
