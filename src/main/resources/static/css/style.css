@@ -531,8 +531,48 @@ body {
 
 /* 2. O ESTADO MÁGICO: Quando a checkbox (input) estiver marcada... */
 .checkbox-container input:checked ~ .checkbox-label-text {
-    color: #40e0d0; /* O ciano vibrante que a gente curte! */
-    font-weight: 700; /* Um negrito mais forte pra dar destaque */
-    transform: scale(1.03); /* Aumenta um tiquinho o texto pra dar mais vida */
+    color: #00695c; /* 40e0d0 */ 
+    font-weight: 700; /* negrito */
+    transform: scale(1.03); 
 }
 
+/* ================================================= */
+/* ===== NOSSO NOVO SISTEMA DE MENSAGENS PADRÃO ===== */
+/* ================================================= */
+
+/* A "caixinha" base para todas as mensagens */
+.mensagem-geral {
+    display: none; /* Começa escondida por padrão */
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 8px; /* Bordas arredondadas, igual a do hub */
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Animação suave pra quando aparecer e sumir */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+/* A classe que faz a mágica acontecer (quando o JS adicionar) */
+.mensagem-geral.visivel {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* O estilo para mensagens de SUCESSO! */
+.mensagem-geral.sucesso {
+    background-color: rgba(0, 150, 136, 0.85); /* Um verde estiloso */
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* O estilo para mensagens de ERRO! */
+.mensagem-geral.erro {
+    background-color: rgba(211, 47, 47, 0.85); /* O vermelho que você curtiu */
+    color: #ffcdd2;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}

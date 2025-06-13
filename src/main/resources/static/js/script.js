@@ -5,6 +5,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
     const emailInput = document.getElementById("emailInput");
     const lembrarCheckbox = document.querySelector(".remember-forgot input[type='checkbox']");
+    const messageDiv = document.getElementById("message");
+    let messageTimer; // Variável para controlar o timer
+
+     // ===== NOSSA NOVA FUNÇÃO MÁGICA =====
+    function exibirMensagem(texto, tipo, duracao = 4000) {
+        clearTimeout(messageTimer); // Limpa timer anterior se houver
+        messageDiv.textContent = texto;
+        // Aplica a classe base e a classe de tipo (erro/sucesso)
+        messageDiv.className = `mensagem-geral ${tipo} visivel`;
+
+        // Se a duração for informada, a mensagem some depois
+        if (duracao) {
+            messageTimer = setTimeout(() => {
+                messageDiv.classList.remove('visivel');
+            }, duracao);
+        }
+    }
 
     // =================================================================
     // PARTE 1: LER O EMAIL SALVO QUANDO A PÁGINA CARREGA
