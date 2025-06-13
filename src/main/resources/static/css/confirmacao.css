@@ -56,3 +56,39 @@ a.botao-voltar-login { /* esse é mais específico, só pro <a> */
     padding: 8px 20px;
     font-size: 15px;
 }
+
+/* ======================================= */
+/* ESTILO DEDICADO PARA O BOTÃO CONFIRMAR  */
+/* ======================================= */
+
+.botao-confirmar {
+  /* Estilos base para o botão parecer com os outros */
+  display: inline-block;
+  margin-top: 30px;
+  padding: 12px 30px;
+  background-color: #fff;
+  color: #111111;
+  font-weight: 600;
+  border-radius: 40px;
+  border: 2px solid #cccccc;
+  cursor: pointer; /* Garante a "mãozinha" de clique */
+  font-family: "Poppins", sans-serif; /* Garante a mesma fonte do projeto */
+  font-size: 15px; /* Garante o mesmo tamanho */
+  transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse por cima */
+.botao-confirmar:hover {
+  background-color: #00695c;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* ESTA É A MÁGICA: Estilo para QUANDO o botão estiver desabilitado */
+.botao-confirmar:disabled {
+  background-color: #e0e0e0; /* Um cinza claro */
+  color: #a0a0a0;           /* Um cinza mais escuro para o texto */
+  cursor: not-allowed;      /* Mostra o cursor de "proibido" */
+  transform: none;          /* Remove qualquer efeito de escala */
+  border-color: #d0d0d0;
+}

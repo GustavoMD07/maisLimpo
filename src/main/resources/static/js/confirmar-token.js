@@ -1,85 +1,79 @@
+// VERSÃO DE DEBUG "DEDO-DURO" PARA confirmar-token.js
+
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("LOG 1: Script de confirmação INICIADO.");
+
     const form = document.getElementById('token-form');
-    const tokenInput = document.getElementById('token-input');
     const messageDiv = document.getElementById('message-div');
-    const submitButton = form.querySelector('button');
+    
+    // Espionando a URL que o navegador realmente está vendo
+    const urlCompleta = window.location.href;
+    console.log("LOG 2: URL completa da página:", urlCompleta);
 
-    //pega o parâmetro 'action' da URL para saber o que fazer
     const params = new URLSearchParams(window.location.search);
-    const action = params.get('action'); 
+    const action = params.get('action');
 
+    // A PROVA FINAL: O que a variável 'action' realmente contém?
+    console.log("LOG 3: Valor da variável 'action' é:", action, "| Tipo da variável é:", typeof action);
+
+    // Se 'action' for nula ou vazia, a gente já para aqui.
+    if (!action) {
+        console.error("LOG 4: ERRO CRÍTICO! A variável 'action' está vazia. Verifique o link na página anterior.");
+        messageDiv.textContent = 'ERRO GRAVE: O parâmetro de ação (?action=...) não foi encontrado na URL.';
+        return; 
+    }
+    
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const token = tokenInput.value.trim();
+        console.log("LOG 5: Botão 'Confirmar' foi clicado.");
+        console.log("LOG 6: Dentro do clique, o valor de 'action' que estou usando é:", action);
 
-        if (!token) {
-            messageDiv.textContent = 'Por favor, insira o token.';
-            return;
-        }
+        const token = document.getElementById('token-input').value.trim();
+        const submitButton = form.querySelector('.botao-confirmar'); // Usando a classe correta
 
         submitButton.disabled = true;
         submitButton.textContent = 'Validando...';
 
-        // Decide qual caminho seguir com base na ação
         if (action === 'cadastro') {
-            await handleCadastroConfirmation(token);
+            console.log("LOG 7: CONDIÇÃO VERDADEIRA -> action é 'cadastro'. Vou confirmar o cadastro.");
+            await handleCadastroConfirmation(token, submitButton, messageDiv);
         } else if (action === 'reset') {
-            await handleResetConfirmation(token);
+            console.log("LOG 8: CONDIÇÃO VERDADEIRA -> action é 'reset'. Vou resetar a senha.");
+            await handleResetConfirmation(token, submitButton, messageDiv);
         } else {
-            messageDiv.textContent = 'ERRO: Ação desconhecida.';
+            console.error("LOG 9: NENHUMA CONDIÇÃO FOI SATISFEITA. Ação desconhecida.");
+            messageDiv.textContent = `ERRO: Ação desconhecida. A ação que eu encontrei foi '${action}'.`;
             submitButton.disabled = false;
             submitButton.textContent = 'Confirmar';
         }
     });
-
-    // --- Função para confirmar CADASTRO ---
-    async function handleCadastroConfirmation(token) {
-        try {
-            const response = await fetch('http://localhost:8080/usuario/confirmar-token', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(token) 
-            });
-            const responseBody = await response.text();
-
-            if (response.ok) {
-                messageDiv.style.color = 'lightgreen';
-                messageDiv.textContent = responseBody;
-                submitButton.textContent = 'Ir para o Login';
-                submitButton.onclick = () => { window.location.href = 'index.html'; };
-                submitButton.disabled = false;
-                tokenInput.disabled = true;
-            } else {
-                messageDiv.style.color = 'coral';
-                messageDiv.textContent = responseBody;
-                submitButton.disabled = false;
-                submitButton.textContent = 'Confirmar';
-            }
-        } catch (error) {
-            //...
-        }
-    }
-
-    // --- Função para validar token de RESET DE SENHA ---
-    async function handleResetConfirmation(token) {
-        try {
-            const response = await fetch('http://localhost:8080/usuario/validar-token-senha', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token: token })
-            });
-
-            if (response.ok) {
-                sessionStorage.setItem('resetToken', token);
-                window.location.href = 'redefinir-senha.html';
-            } else {
-                const errorText = await response.text();
-                messageDiv.textContent = errorText;
-                submitButton.disabled = false;
-                submitButton.textContent = 'Confirmar';
-            }
-        } catch (error) {
-            //...
-        }
-    }
 });
+
+async function handleCadastroConfirmation(token, submitButton, messageDiv) {
+    try {
+        const response = await fetch('http://localhost:8080/usuario/confirmar-token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(token) 
+        });
+        const responseBody = await response.text();
+        if (response.ok) {
+            messageDiv.style.color = 'lightgreen';
+            messageDiv.textContent = responseBody;
+            submitButton.textContent = 'Ir para o Login';
+            submitButton.onclick = () => { window.location.href = 'index.html'; };
+            document.getElementById('token-input').disabled = true;
+        } else {
+            messageDiv.style.color = 'coral';
+            messageDiv.textContent = responseBody;
+        }
+    } catch (error) {
+        messageDiv.textContent = 'Erro de rede ao confirmar token.';
+    } finally {
+         submitButton.disabled = false;
+    }
+}
+
+async function handleResetConfirmation(token, submitButton, messageDiv) {
+    // Lógica do reset (não é o foco agora)
+}

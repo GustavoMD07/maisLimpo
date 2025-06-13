@@ -16,7 +16,7 @@ public class UsuarioDTO {
 
     @NotBlank(message = "A senha não pode estar em branco.")
     @Pattern(
-    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*//d).{6,}$",
+    regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{6,}$",
     message = "A senha deve ter no mínimo 6 caracteres, com pelo menos um número, uma letra maiúscula e uma minúscula.")
     private String senha;
 

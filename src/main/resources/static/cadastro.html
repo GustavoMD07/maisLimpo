@@ -54,6 +54,7 @@
     <!-- Formulário de cadastro -->
     <form action="index.html" method="POST" class="form-cadastro">
       <h1>Cadastro</h1> <!-- Título do formulário -->
+      <div id="messageDiv" class="mensagem-erro" style="text-align: center; font-weight: 600; margin-bottom: 10px;"></div>
 
 <!-- Campo de e-mail com label flutuante -->
 <div class="input-box">
@@ -107,7 +108,7 @@
       clickedHeader.parentElement.classList.toggle('active');
     }
   </script>
-  <script src="js/cadastro.js"></script> 
+  <script src="js/cadastro.js" defer></script> 
   <script src="js/toggle-password.js" defer></script>
 </body>
 </html>
