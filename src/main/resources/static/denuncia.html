@@ -27,12 +27,11 @@
         </div>
     </form>
 <div class="voltar">
-  <!-- Link que leva para a página de login (index.html) -->
     <a href="principal.html" class="voltar">⟵ Voltar</a>
   </div>
 
   <script>
-    // Recebe o nome da praia via query string e insere na tela
+    //pra receber o nome da praia automaticamente
     const params = new URLSearchParams(window.location.search);
     const praia = params.get("praia");
     if (praia) {

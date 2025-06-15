@@ -15,7 +15,6 @@
         console.log("LOG 3: Resposta OK. Tentando extrair JSON...");
         const usuario = await response.json();
         
-        // ESTE É O LOG MAIS IMPORTANTE DE TODOS!
         console.log("LOG 4: Objeto 'usuario' recebido do backend:", usuario);
         
         console.log("LOG 5: Guardando dados no sessionStorage...");

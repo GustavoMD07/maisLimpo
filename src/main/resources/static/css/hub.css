@@ -30,15 +30,15 @@
     transition: transform 0.3s ease;
     text-decoration: none;
     font-family: "Poppins", sans-serif;
-    width: 100%; /* Garante que o botão ocupe o espaço */
-    font-size: 16px; /* Ajuste de fonte */
+    width: 100%; 
+    font-size: 16px; 
 }
 
 .botao-opcao:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    background-color: #00796b; /* A COR CIANO PADRÃO! */
-    color: #fff; /* Texto branco pra contrastar */
+    background-color: #00796b; 
+    color: #fff; 
 }
 
 .botao-opcao i {
@@ -74,15 +74,14 @@
     border-radius: 8px;
     margin-top: 20px;
     font-weight: 600;
-    display: none; /* Começa escondido */
+    display: none; 
 }
 
-/* ===== ESTILO NOVO E BONITÃO PARA O BOTÃO DE LOGOUT ===== */
 .botao-logout-estilizado {
     display: inline-block;
     margin-top: 30px;
     padding: 10px 25px;
-    background-color: rgba(211, 47, 47, 0.8); /* Vermelho pra indicar ação de sair */
+    background-color: rgba(211, 47, 47, 0.8); 
     color: #fff;
     font-weight: 600;
     text-decoration: none;

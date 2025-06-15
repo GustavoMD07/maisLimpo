@@ -10,7 +10,6 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    // Captura o erro de "Email não encontrado"
     @ExceptionHandler(UsuarioNaoEncontradoException.class)
     public ResponseEntity<Map<String, String>> handleUsuarioNaoEncontrado(UsuarioNaoEncontradoException ex) {
         Map<String, String> erro = new HashMap<>();
@@ -18,7 +17,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
     }
 
-    // Captura o erro de "Senha inválida"
+   
     @ExceptionHandler(SenhaInvalidaException.class)
     public ResponseEntity<Map<String, String>> handleSenhaInvalida(SenhaInvalidaException ex) {
         Map<String, String> erro = new HashMap<>();
@@ -26,7 +25,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(erro, HttpStatus.UNAUTHORIZED);
     }
 
-    // Captura TODOS os erros de validação do DTO (@Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> erros = new HashMap<>();

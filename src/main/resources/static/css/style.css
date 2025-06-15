@@ -41,17 +41,17 @@ body {
 
 .container .input-box input::placeholder,
 .form-cadastro .input-box input::placeholder { /* estilo do texto placeholder */
-    color: #888888; /* Cinza claro */
+    color: #888888; 
 }
 
-.input-box i { /* Ícone dentro do campo input */
+.input-box i { 
     position: absolute; 
     right: 20px; 
     top: 50%; 
     transform: translateY(-50%); 
     font-size: 20px; 
      color: #333 !important; 
-    cursor: pointer; /* Adiciona a "mãozinha" pra indicar que é clicável */
+    cursor: pointer; 
 }
 
 .login { 
@@ -59,20 +59,20 @@ body {
     height: 50px; 
     background-color: #fff; 
     border: none; 
-    border-radius: 40px; /* Bordas arredondadas */
-    cursor: pointer; /* Cursor de clique */
-    font-size: 16px; /* Fonte média */
-    color: #333; /* Texto escuro */
-    font-weight: 600; /* Negrito */
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1); /* Sombra leve */
-    margin-top: 20px; /* Espaçamento superior */
+    border-radius: 40px; 
+    cursor: pointer; 
+    font-size: 16px;
+    color: #333; 
+    font-weight: 600; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1); 
+    margin-top: 20px; 
 }
 
-.login:hover { /* Efeito hover no botão */
-    background-color: #00695c; /* Fundo transparente */
-    border: 2px solid rgba(255, 255, 255, 0.2); /* Borda branca clara */
-    color: #fff; /* Texto branco */
-    transition: 0.5s; /* Animação suave */
+.login:hover { 
+    background-color: #00695c; 
+    border: 2px solid rgba(255, 255, 255, 0.2); 
+    color: #fff; 
+    transition: 0.5s; 
 }
 
 .input-box label {
@@ -99,20 +99,19 @@ body {
 
 .input-box {
     width: 100%;
-    margin-top: 20px; /* Aumenta o espaço entre os campos */
-    text-align: left; /* Alinha o texto do label à esquerda */
+    margin-top: 20px; 
+    text-align: left; 
 }
 
-/* O NOVO LABEL: simples, fixo e acima do campo */
+
 .input-box label {
-    display: block; /* Faz o label ocupar sua própria linha */
-    color: rgb(94, 93, 93);   /* Cor branca pra contrastar com o fundo */
-    font-weight: 600; /* Um pesinho pra dar destaque */
-    margin-bottom: 8px; /* Espaço entre o label e a caixa de input */
+    display: block; 
+    color: rgb(94, 93, 93);   
+    font-weight: 600; 
+    margin-bottom: 8px; 
     font-size: 16px;
 }
 
-/* O INPUT continua com o estilo que já funcionava */
 .input-box input {
     width: 100%;
     height: 50px;
@@ -125,7 +124,6 @@ body {
     padding: 20px 45px 20px 20px;
 }
 
-/* Estilo do texto do placeholder, pra garantir que fique legível */
 .input-box input::placeholder {
     color: #888888;
 }
@@ -135,8 +133,7 @@ body {
   color: #333;
 }
 
-/* ======= USADO SOMENTE EM index.html ======= */
-.container { /* Container principal do formulário de login */
+.container { 
     width: 420px;
     background-color: transparent;
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -177,7 +174,7 @@ body {
     margin-right: 5px;
 }
 
-.remember-forgot a { /* Link "esqueci minha senha" */
+.remember-forgot a { 
     text-decoration: none;
     color: #fff;
     font-weight: 500;
@@ -192,7 +189,7 @@ body {
     transition: 0.6s
 }
 
-.register-link { /* Link para página de cadastro */
+.register-link { 
     font-size: 14px;
     text-align: center;
     margin: 20px 0 15px;
@@ -208,11 +205,10 @@ body {
     text-decoration: underline;
 }
 
-/* === Estilo exclusivo para index.html (login) === */
 .pagina-login .logo {
   display: flex;
   justify-content: center;
-  margin-bottom: -30px; /* aproxima da div de login */
+  margin-bottom: -30px; 
   position: absolute;
   top: 40px;
   left: 50%;
@@ -227,9 +223,6 @@ body {
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-/* ======= USADO SOMENTE EM cadastro.html ======= */
-
-/* Container principal da tela de cadastro */
 .cadastro-container {
   width: 100%;
   display: flex;
@@ -240,7 +233,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* Painel de abas informativas */
 .info-accordion {
   position: absolute;
   left: 50px;
@@ -254,7 +246,6 @@ body {
   z-index: 10;
 }
 
-/* Item do acordeão */
 .accordion-item {
   background-color: rgb(236, 246, 181);
   border-radius: 10px;
@@ -262,7 +253,6 @@ body {
   transition: max-height 0.3s ease;
 }
 
-/* Cabeçalho do acordeão */
 .accordion-header {
   padding: 15px;
   font-weight: bold;
@@ -280,7 +270,6 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Conteúdo do acordeão */
 .accordion-content {
   max-height: 0;
   overflow: hidden;
@@ -292,7 +281,6 @@ body {
   transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
-/* Quando o item está ativo */
 .accordion-item.active .accordion-content {
   padding: 15px;
   max-height: 1000px;
@@ -302,7 +290,6 @@ body {
   transform: rotate(180deg);
 }
 
-/* Estilo do formulário */
 .form-cadastro {
   background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -315,24 +302,20 @@ body {
   backdrop-filter: blur(15px);
 }
 
-/* Título do formulário */
 .form-cadastro h1 {
   text-align: center;
   color: white;
   font-size: 36px;
 }
 
-/* Link de voltar ao login */
 .register-link p {
   color: white;
 }
 
-/* Ícones brancos dentro dos inputs */
 .input-box i {
   color: white;
 }
 
-/* Estilo do container com label flutuante */
 .select-box {
   position: relative;
   width: 100%;
@@ -359,7 +342,6 @@ body {
     color: #333;
 }
 
-/* Ícone do select */
 .select-box i {
     position: absolute;
     right: 20px;
@@ -392,8 +374,7 @@ body {
     color: #333;
 }
 
-/* ======= USADO SOMENTE EM principal.html ======= */
-.texto-topo { /* Texto acima do mapa */
+.texto-topo { 
     position: absolute;
     top: -70px;
     left: 50%;
@@ -408,12 +389,12 @@ body {
     z-index: 2;
 }
 
-.voltar-login { /* Container do botão de voltar */
+.voltar-login { 
     text-align: center;
     margin-top: 30px;
 }
 
-.voltar-login a { /* Botão de voltar para o login */
+.voltar-login a { 
     display: inline-block;
     padding: 12px 24px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -443,20 +424,18 @@ body {
    font-weight: 600; 
 }
 
-/* 1. O container da nossa checkbox */
 .checkbox-container {
   display: flex;
   align-items: center;
   position: relative;
   cursor: pointer;
-  -webkit-user-select: none; /* Impede a seleção de texto */
+  -webkit-user-select: none; 
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  gap: 8px; /* Espaço entre a caixinha e o texto "Lembrar senha" */
+  gap: 8px; 
 }
 
-/* 2. Esconde a checkbox padrão do navegador */
 .checkbox-container input {
   position: absolute;
   opacity: 0;
@@ -465,36 +444,31 @@ body {
   width: 0;
 }
 
-/* 3. Cria a nossa caixinha (o "checkmark") */
 .checkmark {
   position: relative;
   height: 20px;
   width: 20px;
-  background-color: rgba(255, 255, 255, 0.5); /* Fundo branco semi-transparente */
+  background-color: rgba(255, 255, 255, 0.5); 
   border-radius: 5px;
   border: 1px solid #fff;
-  transition: background-color 0.3s ease; /* A ANIMAÇÃO da cor! */
+  transition: background-color 0.3s ease; 
 }
 
-/* 4. Muda a cor da nossa caixinha quando o input (escondido) for marcado */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #40e0d0; /* A cor ciano que você curte! */
+  background-color: #40e0d0; 
   border-color: #40e0d0;
 }
 
-/* 5. Cria o símbolo "V" de "check" (escondido por padrão) */
 .checkmark:after {
   content: "";
   position: absolute;
-  display: none; /* Começa escondido */
+  display: none; 
 }
 
-/* 6. Mostra o "V" quando a checkbox for marcada */
 .checkbox-container input:checked ~ .checkmark:after {
   display: block;
 }
 
-/* 7. Estiliza o "V" para parecer um check de verdade */
 .checkbox-container .checkmark:after {
   left: 6px;
   top: 2px;
@@ -502,44 +476,33 @@ body {
   height: 10px;
   border: solid white;
   border-width: 0 3px 3px 0;
-  /* A ANIMAÇÃO de rotação que dá o charme! */
-  transform: rotate(45deg) scale(0); /* Começa com escala 0 */
-  animation: pop 0.4s ease-out forwards; /* Animação 'pop' */
+  transform: rotate(45deg) scale(0); 
+  animation: pop 0.4s ease-out forwards; 
 }
 
-/* Define a animação 'pop' */
 @keyframes pop {
   0% {
     transform: rotate(45deg) scale(0);
   }
   70% {
-    transform: rotate(45deg) scale(1.2); /* Dá um 'overshoot' pra ficar mais legal */
+    transform: rotate(45deg) scale(1.2); 
   }
   100% {
-    transform: rotate(45deg) scale(1); /* Termina no tamanho normal */
+    transform: rotate(45deg) scale(1); 
   }
 }
 
-/* ===== ESTILOS PARA O TEXTO DO CHECKBOX "LEMBRAR SENHA" ===== */
-
-/* 1. Estilo base para o texto do nosso checkbox customizado */
 .checkbox-label-text {
-    color: #fff; /* Cor padrão branca */
-    font-weight: 400; /* Peso de fonte normal */
-    transition: all 0.3s ease; /* A ANIMAÇÃO SUAVE! */
+    color: #fff; 
+    font-weight: 400; 
+    transition: all 0.3s ease; 
 }
 
-/* 2. O ESTADO MÁGICO: Quando a checkbox (input) estiver marcada... */
 .checkbox-container input:checked ~ .checkbox-label-text {
     color: #00695c; /* 40e0d0 */ 
     font-weight: 700; /* negrito */
     transform: scale(1.03); 
 }
-
-/* ================================================= */
-/* ===== NOSSO NOVO SISTEMA DE MENSAGENS PADRÃO ===== */
-/* ================================================= */
-
 
 /* .mensagem-geral {
     display: none; 

@@ -11,13 +11,9 @@
 
 <body>
   <main class="cadastro-container"> 
-
-    <!-- Seção de abas informativas em estilo acordeão -->
     <div class="info-accordion">
 
-      <!-- Primeiro item do acordeão -->
       <div class="accordion-item">
-        <!-- Cabeçalho clicável que chama a função toggleAccordion ao ser clicado -->
         <div class="accordion-header" onclick="toggleAccordion(this)">
           Quem somos? 
           <i class="bx bx-chevron-down"></i> 
@@ -39,7 +35,6 @@
         </div>
       </div>
 
-      <!-- Terceiro item do acordeão -->
       <div class="accordion-item">
         <div class="accordion-header" onclick="toggleAccordion(this)">
           Como funciona
@@ -51,18 +46,15 @@
       </div>
     </div>
 
-    <!-- Formulário de cadastro -->
     <form action="index.html" method="POST" class="form-cadastro">
-      <h1>Cadastro</h1> <!-- Título do formulário -->
+      <h1>Cadastro</h1> 
       <div id="messageDiv" class="mensagem-erro" style="text-align: center; font-weight: 600; margin-bottom: 10px;"></div>
 
-<!-- Campo de e-mail com label flutuante -->
 <div class="input-box">
   <i class="bx bxs-user"></i>
   <input type="email" id="email" name="email" placeholder = "Email" required />
 </div>
 
-<!-- Campo de senha com label flutuante -->
 <div class="input-box">
   <input type="password" id="senha" name="senha" placeholder = "Senha" required />
    <i class="bx bx-show password-toggle-icon"></i>
@@ -73,9 +65,8 @@
    <i class="bx bx-show password-toggle-icon"></i>
 </div>
 
-<!-- Campo select com rótulo flutuante -->
 <div class="input-box select-box">
-  <i class="bx bxs-group"></i> <!-- Ícone à direita -->
+  <i class="bx bxs-group"></i> 
   <select id="tipoUsuario" name="tipoUsuario" required>
     <option value="" disabled selected hidden></option> 
     <option value="voluntario">Voluntário</option>
@@ -83,28 +74,21 @@
   </select>
   <label for="tipoUsuario">Tipo de usuário</label>
 </div>
-
-      <!-- Botão para enviar o formulário -->
       <button type="submit" class="login">Cadastrar</button>
 
-      <!-- Link para voltar ao login -->
       <div class="register-link">
         <p>Já tem uma conta? <a href="index.html">Voltar ao Login</a></p>
       </div>
     </form>
   </main>
 
-  <!-- Script para controle do acordeão -->
   <script>
     function toggleAccordion(clickedHeader) {
-      // Para cada item do acordeão
       document.querySelectorAll('.accordion-item').forEach(item => {
-        // Se o cabeçalho desse item não for o clicado, remove a classe 'active' para fechar
         if (item.querySelector('.accordion-header') !== clickedHeader) {
           item.classList.remove('active');
         }
       });
-      // Alterna a classe 'active' do item clicado para abrir/fechar o conteúdo
       clickedHeader.parentElement.classList.toggle('active');
     }
   </script>

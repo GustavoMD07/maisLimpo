@@ -3,7 +3,7 @@ document.getElementById('form-esqueci-senha').addEventListener('submit', async f
 
     const email = document.getElementById('email').value;
     const mensagemDiv = document.getElementById('mensagem');
-    const form = this; // O próprio formulário
+    const form = this; 
     const botaoSubmit = form.querySelector('button');
 
     botaoSubmit.disabled = true;
@@ -22,16 +22,15 @@ document.getElementById('form-esqueci-senha').addEventListener('submit', async f
         document.getElementById('email').disabled = true;
         botaoSubmit.textContent = 'Link Enviado!';
         
-        // ===== MÁGICA AQUI: CRIA E MOSTRA O BOTÃO NOVO =====
         if (!document.getElementById('btn-ir-para-token')) {
             const btnIrParaToken = document.createElement('a');
             btnIrParaToken.id = 'btn-ir-para-token';
-            btnIrParaToken.href = 'confirmar-token.html?action=reset'; // Avisando que a ação é de reset!
+            btnIrParaToken.href = 'confirmar-token.html?action=reset'; 
             btnIrParaToken.className = 'botao-voltar-login';
             btnIrParaToken.textContent = 'Já Tenho o Token';
             btnIrParaToken.style.display = 'block';
             btnIrParaToken.style.marginTop = '20px';
-            form.parentElement.appendChild(btnIrParaToken); // Adiciona o botão ao container
+            form.parentElement.appendChild(btnIrParaToken); 
         }
 
     } catch (error) {

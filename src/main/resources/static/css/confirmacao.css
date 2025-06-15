@@ -11,13 +11,13 @@
     color: rgb(22, 19, 19);
 }
 
-.logo-confirmacao img { /* logo  */
+.logo-confirmacao img { 
     max-width: 200px;
     margin-bottom: 20px;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4));
 }
 
-.confirmacao-container h1 { /* título */
+.confirmacao-container h1 { 
     font-size: 36px;
     margin-bottom: 15px;
 }
@@ -59,12 +59,8 @@ a.botao-voltar-login { /* esse é mais específico, só pro <a> */
     font-size: 15px;
 }
 
-/* ======================================= */
-/* ESTILO DEDICADO PARA O BOTÃO CONFIRMAR  */
-/* ======================================= */
-
 .botao-confirmar {
-  /* Estilos base para o botão parecer com os outros */
+ 
   display: inline-block;
   margin-top: 30px;
   padding: 12px 30px;
@@ -73,24 +69,24 @@ a.botao-voltar-login { /* esse é mais específico, só pro <a> */
   font-weight: 600;
   border-radius: 40px;
   border: 2px solid #cccccc;
-  cursor: pointer; /* Garante a "mãozinha" de clique */
-  font-family: "Poppins", sans-serif; /* Garante a mesma fonte do projeto */
-  font-size: 15px; /* Garante o mesmo tamanho */
+  cursor: pointer; 
+  font-family: "Poppins", sans-serif; 
+  font-size: 15px; 
   transition: all 0.3s ease;
 }
 
-/* Efeito ao passar o mouse por cima */
+
 .botao-confirmar:hover {
   background-color: #00695c;
   color: white;
   transform: scale(1.05);
 }
 
-/* ESTA É A MÁGICA: Estilo para QUANDO o botão estiver desabilitado */
+
 .botao-confirmar:disabled {
-  background-color: #e0e0e0; /* Um cinza claro */
-  color: #a0a0a0;           /* Um cinza mais escuro para o texto */
-  cursor: not-allowed;      /* Mostra o cursor de "proibido" */
-  transform: none;          /* Remove qualquer efeito de escala */
+  background-color: #e0e0e0;
+  color: #a0a0a0;           
+  cursor: not-allowed;      
+  transform: none;          
   border-color: #d0d0d0;
 }

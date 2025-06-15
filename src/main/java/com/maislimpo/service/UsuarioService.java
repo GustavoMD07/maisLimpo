@@ -68,20 +68,16 @@ public class UsuarioService {
 		return usuarioSalvo;
 	}
 
-	// O método agora não retorna mais boolean
 @Transactional
 public void confirmarEmail(String token) {
-    // Busca o usuário pelo token
+
     Usuario usuario = usuarioRepository.findByTokenConfirmacao(token)
         .orElseThrow(() -> new TokenInvalidoException("Token de confirmação inválido ou não encontrado."));
 
-    // Verifica se o token expirou
     if (usuario.getDataExpiracaoToken() != null && usuario.getDataExpiracaoToken().isBefore(LocalDateTime.now())) {
-        // Lança a exceção de token expirado, que já existe!
         throw new TokenExpiradoException("Seu token de confirmação expirou. Por favor, solicite um novo.");
     }
 
-    // Se passou pelas verificações, o token é válido. Confirma o e-mail.
     usuario.setEmailConfirmado(true);
     usuario.setTokenConfirmacao(null); 
     usuario.setDataExpiracaoToken(null); 
@@ -103,7 +99,6 @@ public void confirmarEmail(String token) {
         System.out.println("LOG: Login bem-sucedido para: " + email);
         return usuario; 
     } else {
-        // Se a senha estiver errada, lança a exceção de senha inválida
         System.out.println("LOG: Tentativa de login com senha incorreta para: " + email);
         throw new SenhaInvalidaException("Senha incorreta.");
     }
@@ -127,27 +122,24 @@ public void confirmarEmail(String token) {
 public void processarPedidoRedefinicao(String email) {
     Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
 
-    // Medida de segurança: não informamos se o e-mail existe ou não.
     if (usuarioOpt.isPresent()) {
         Usuario usuario = usuarioOpt.get();
 
         String token = UUID.randomUUID().toString();
-        usuario.setResetSenhaToken(token); // Usando o campo que você já criou!
-        usuario.setResetExpiracaoToken(LocalDateTime.now().plusHours(1)); // Expira em 1 hora
+        usuario.setResetSenhaToken(token); 
+        usuario.setResetExpiracaoToken(LocalDateTime.now().plusHours(1)); //pra redefinir, é 1h de tolerância
 
         usuarioRepository.save(usuario);
         
-        // Chama nosso novo método no EmailService!
         emailService.enviarEmailRedefinicaoSenha(usuario.getEmail(), token);
     } else {
-         // Log para nosso controle, mas o frontend não saberá a diferença
         System.out.println("LOG: Tentativa de redefinição de senha para e-mail não cadastrado: " + email);
     }
 }
 
 @Transactional
 public void redefinirSenhaComToken(String token, String novaSenha) {
-    // Usando o método que você já criou no repositório!
+    
     Optional<Usuario> usuarioOpt = usuarioRepository.findByResetSenhaToken(token);
 
     if (usuarioOpt.isEmpty()) {
@@ -156,16 +148,13 @@ public void redefinirSenhaComToken(String token, String novaSenha) {
 
     Usuario usuario = usuarioOpt.get();
 
-    // Verifica se o token expirou
     if (usuario.getResetExpiracaoToken().isBefore(LocalDateTime.now())) {
         throw new RuntimeException("Token de redefinição expirado! Por favor, solicite um novo.");
     }
 
-    // Hasheia a nova senha com o BCrypt que você já usa!
     String senhaHash = BCrypt.hashpw(novaSenha, BCrypt.gensalt());
     usuario.setSenha(senhaHash);
     
-    // Limpa o token para que ele não possa ser usado novamente
     usuario.setResetSenhaToken(null);
     usuario.setResetExpiracaoToken(null);
 
@@ -180,39 +169,35 @@ public String gerarTokenLembrarMe(Usuario usuario) {
     LembrarToken novoToken = new LembrarToken();
     novoToken.setToken(tokenValue);
     novoToken.setUsuario(usuario);
-    novoToken.setDataExpiracao(LocalDateTime.now().plusDays(30)); // Token válido por 30 dias
+    novoToken.setDataExpiracao(LocalDateTime.now().plusDays(30)); 
 
     lembrarTokenRepository.save(novoToken);
     return tokenValue;
 }
 
-// Adicione este método dentro do UsuarioService
 public Usuario loginComTokenLembrarMe(String token) {
     Optional<LembrarToken> tokenOpt = lembrarTokenRepository.findByToken(token);
 
     if (tokenOpt.isPresent()) {
         LembrarToken lembrarToken = tokenOpt.get();
         if (((LocalDateTime) lembrarToken.getDataExpiracao()).isAfter(LocalDateTime.now())) {
-            // Token válido e não expirado! Retorna o usuário.
+
             return lembrarToken.getUsuario();
         } else {
-            // Token expirou, vamos deletar ele do banco
+
             lembrarTokenRepository.delete(lembrarToken);
         }
     }
-    return null; // Token não encontrado ou expirado
+    return null; 
 }
 
 public void validarTokenSenha(String token) {
-        // Busca o usuário pelo token de redefinição
         Usuario usuario = usuarioRepository.findByResetSenhaToken(token).orElseThrow(()
-		 -> new TokenInvalidoException("Token de redefinição inválido ou não encontrado."));;
-        
-        // Verifica se o token expirou
+		 -> new TokenInvalidoException("Token de redefinição inválido ou não encontrado."));
+
     	if (usuario.getResetExpiracaoToken().isBefore(LocalDateTime.now())) {
         throw new TokenExpiradoException("Token de redefinição expirado! Por favor, solicite um novo.");
     }
-    // Se não lançou nenhuma exceção, o método termina e a validação foi um sucesso.
     }
 
 }

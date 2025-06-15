@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 mensagemDiv.textContent = textoResposta;
                 mensagemDiv.style.color = 'lightgreen';
                 botao.textContent = 'Ir para o Login';
-                // Leva o usuário pro login após o sucesso
                 botao.onclick = () => { window.location.href = 'index.html'; };
                 botao.disabled = false;
             } else {

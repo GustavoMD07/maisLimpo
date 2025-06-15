@@ -2,7 +2,6 @@ package com.maislimpo.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; 
 import com.maislimpo.entity.Denuncia;
@@ -56,7 +55,7 @@ public class DenunciaService {
                  .orElseThrow(() -> new IllegalArgumentException("Denúncia com ID " + id + " não encontrada."));
      }
 
-     public void deletarDenuncia(Long id) {
+     public void deletarDenuncia(Long id) { //ainda não implementado, mas seria apenas para admin's
          if (!denunciaRepository.existsById(id)) {
              throw new IllegalArgumentException("Não é possível deletar: Denúncia com ID " + id + " não encontrada.");
          }

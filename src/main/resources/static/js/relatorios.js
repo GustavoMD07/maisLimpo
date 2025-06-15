@@ -12,14 +12,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         const denuncias = await response.json();
 
         if (denuncias.length === 0) {
-            // Se não houver denúncias, mostra a mensagem
             mensagemSemDenuncias.style.display = 'block';
         } else {
-            // Se houver denúncias, preenche a tabela
             denuncias.forEach(denuncia => {
                 const tr = document.createElement('tr');
 
-                // Formata a data para um formato mais legível (ex: 15/06/2025 17:30)
+                //formata a data pra ficar mais legível e no estilo normal do brasil
                 const dataFormatada = new Date(denuncia.dataHoraDenuncia).toLocaleString('pt-BR', {
                     day: '2-digit',
                     month: '2-digit',

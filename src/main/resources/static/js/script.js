@@ -6,9 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const emailInput = document.getElementById("emailInput");
     const lembrarCheckbox = document.querySelector(".remember-forgot input[type='checkbox']");
 
-    // =================================================================
-    // PARTE 1: LER O EMAIL SALVO QUANDO A PÁGINA CARREGA
-    // =================================================================
     const emailSalvo = localStorage.getItem('emailLembrado');
     if (emailSalvo) {
         emailInput.value = emailSalvo;
@@ -26,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const messageDiv = document.getElementById("message");
 
             messageDiv.textContent = "";
-            messageDiv.className = ""; // limpa a mensagem anterior 
+            messageDiv.className = ""; 
 
         try {
             const response = await fetch("http://localhost:8080/usuario/login", {
@@ -36,9 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) { 
-                // =================================================================
-                // PARTE 2: SALVAR OU REMOVER O EMAIL APÓS O LOGIN
-                // =================================================================
+
                 if (lembrar) {
                     localStorage.setItem('emailLembrado', email);
                     console.log("LOG: E-mail salvo no LocalStorage.");
@@ -46,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.removeItem('emailLembrado');
                     console.log("LOG: E-mail removido do LocalStorage.");
                 }
-                // =================================================================
 
                 messageDiv.textContent = "Login bem-sucedido! Redirecionando...";
                 messageDiv.className = 'mensagem-sucesso'; 

@@ -1,7 +1,6 @@
 package com.maislimpo.DTO;
 
 import lombok.Getter;
-import lombok.Setter;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 

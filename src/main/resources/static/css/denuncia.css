@@ -92,7 +92,6 @@ button:hover {
   background-color: #004d40;
 }
 
-/* Esconde o input original */
 input[type="file"] {
   display: none;
 }
