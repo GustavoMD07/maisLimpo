@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/relatorios.css">
+    <title>Painel de Denúncias +Limpo</title>
+</head>
+<body class = "pagina-login">
+    <main class = "container-relatorios">
+        <h1>Painel de Denúncias</h1>
+        <p> Acesso Restrito a ONGS!. Aqui você pode verificar todas as denúncias feitas pelos usuários</p>
+                <div class="tabela-wrapper">
+            <table id="tabela-denuncias">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Praia</th>
+                        <th>Data</th>
+                        <th>Usuário</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody id="corpo-tabela-denuncias">
+                    </tbody>
+            </table>
+            <p id="mensagem-sem-denuncias" class="mensagem-info" style="display: none;">Nenhuma denúncia encontrada no momento.</p>
+        </div>
+
+        <a href="hub.html" class="botao-voltar">⟵ Voltar para o Hub</a>
+    </main>
+    <script src="js/relatorios.js"></script>
+</body>
+</html>

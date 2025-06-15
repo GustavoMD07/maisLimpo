@@ -1,7 +1,11 @@
 package com.maislimpo.controller;
 
 import com.maislimpo.service.DenunciaService;
-import com.maislimpo.service.UsuarioService; 
+import java.util.List;
+import java.util.stream.Collectors;
+import com.maislimpo.DTO.DenunciaDTO;
+import com.maislimpo.service.UsuarioService;
+import com.maislimpo.entity.Denuncia;
 import com.maislimpo.entity.Usuario; 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +19,17 @@ public class DenunciaController {
 
     private final DenunciaService denunciaService;
     private final UsuarioService usuarioService; 
-    
-    // 1. ATUALIZAMOS O "PACOTE" DE DADOS PARA INCLUIR O ID DO USUÁRIO
     public static record DenunciaRequest(String textoDenuncia, String nomePraia, Long usuarioId) {}
 
     @PostMapping
     public ResponseEntity<String> registrarDenuncia(@RequestBody DenunciaRequest request) {
         try {
-            // 2. ADEUS, "JEITINHO"! AGORA PEGAMOS O ID QUE VEIO DO FRONTEND
+    
             if (request.usuarioId() == null) {
                 return ResponseEntity.badRequest().body("Erro: ID do usuário não foi enviado na requisição.");
             }
             Usuario usuarioAutor = usuarioService.buscarUsuarioPorId(request.usuarioId());
 
-            // A verificação de usuário nulo já existe no seu service, mas é bom ter aqui também
             if (usuarioAutor == null) {
                  return ResponseEntity.status(404).body("Erro: Usuário com ID " + request.usuarioId() + " não encontrado no sistema.");
             }
@@ -41,4 +42,28 @@ public class DenunciaController {
             return ResponseEntity.badRequest().body("Erro ao registrar denúncia: " + e.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity<List<DenunciaDTO>> buscarTodasAsDenuncias() {
+    try {
+
+        List<Denuncia> denuncias = denunciaService.buscarTodasAsDenuncias();
+
+        //stream e map usados pra fazer essa conversão de entity para DTO
+        List<DenunciaDTO> denunciasDTO = denuncias.stream()
+            .map(denuncia -> new DenunciaDTO(
+                denuncia.getId(),
+                denuncia.getTextoDenuncia(),
+                denuncia.getDataHoraDenuncia(),
+                denuncia.getNomePraia(),
+                denuncia.getUsuario().getEmail() 
+            ))
+            .collect(Collectors.toList());
+
+        return ResponseEntity.ok(denunciasDTO);
+
+    } catch (Exception e) {
+        return ResponseEntity.status(500).body(null);
+    }
+}
 }

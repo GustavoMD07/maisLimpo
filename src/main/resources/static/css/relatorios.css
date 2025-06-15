@@ -1,0 +1,67 @@
+.container-relatorios {
+    width: 90%;
+    max-width: 1200px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #333;
+}
+
+h1 {
+    color: #00695c;
+    margin-bottom: 10px;
+}
+
+.tabela-wrapper {
+    margin-top: 30px;
+    overflow-x: auto; /* Para rolagem em telas pequenas */
+}
+
+#tabela-denuncias {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+#tabela-denuncias th, #tabela-denuncias td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#tabela-denuncias th {
+    background-color: #00796b;
+    color: white;
+    font-weight: 600;
+}
+
+#tabela-denuncias tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+#tabela-denuncias tbody tr:hover {
+    background-color: #e0f2f1;
+}
+
+.mensagem-info {
+    font-weight: 500;
+    color: #555;
+    padding: 20px;
+}
+
+.botao-voltar {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 25px;
+    background-color: #00695c;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.botao-voltar:hover {
+    transform: scale(1.05);
+}
