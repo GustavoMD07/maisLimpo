@@ -1,10 +1,10 @@
 package com.maislimpo.DTO;
 
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -14,8 +14,8 @@ public class UsuarioDTO {
 
     private String tipoUsuario;
 
-    @NotBlank(message = "O e-mail não pode estar em branco.")
-    @Email(message = "Formato de e-mail inválido.")
+    @NotBlank(message = "O email não pode estar em branco.")
+    @Email(message = "Formato de email inválido.")
     private String email;
 
     @NotBlank(message = "A senha não pode estar em branco.")

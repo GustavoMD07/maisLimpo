@@ -24,7 +24,8 @@ h1 {
     border-collapse: collapse;
     text-align: left;
 }
-
+ /* estilizando por ID só pra testar */
+ 
 #tabela-denuncias th, #tabela-denuncias td {
     padding: 12px 15px;
     border-bottom: 1px solid #ddd;

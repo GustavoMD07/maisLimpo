@@ -20,10 +20,10 @@
         console.log("LOG 5: Guardando dados no sessionStorage...");
         sessionStorage.setItem('usuarioId', usuario.id);
         sessionStorage.setItem('usuarioEmail', usuario.email);
-        sessionStorage.setItem('tipoUsuario', usuario.tipoUsuario);
+        sessionStorage.setItem('tipoUsuario', usuario.tipoUsuario.toUpperCase());
         console.log("LOG 5.1: Dados guardados. Chamando setupDashboard...");
 
-        setupDashboard(usuario.email, usuario.tipoUsuario);
+        setupDashboard(usuario.email, usuario.tipoUsuario.toUpperCase());
 
     } catch (error) {
         console.error('LOG ERRO: Falha crítica na autenticação ou no processamento do JSON.', error);
@@ -49,7 +49,7 @@ function setupDashboard(email, tipo) {
     if(btnVerDenuncias) {
         console.log("LOG 6.2: Botão de ver denúncias encontrado. Adicionando listener...");
         btnVerDenuncias.addEventListener('click', () => {
-            if (tipo === 'ong') {
+            if (tipo === 'ONG') {
                 window.location.href = 'relatorios.html'; 
             } else {
                 mensagemErro.textContent = 'Acesso negado. Apenas ONGs podem visualizar o painel de denúncias.';
@@ -60,6 +60,5 @@ function setupDashboard(email, tipo) {
             }
         });
     } else {
-        console.error("LOG ERRO: Botão com id 'btn-ver-denuncias' não foi encontrado!");
     }
 }

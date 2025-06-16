@@ -65,7 +65,7 @@ public ResponseEntity<?> login(@RequestBody UsuarioDTO usuario) {
         Usuario usuarioParaSalvar = new Usuario();
         usuarioParaSalvar.setEmail(novoUsuario.getEmail());
         usuarioParaSalvar.setSenha(novoUsuario.getSenha());
-        usuarioParaSalvar.setTipoUsuario(novoUsuario.getTipoUsuario());
+        usuarioParaSalvar.setTipoUsuario(novoUsuario.getTipoUsuario().toUpperCase());
 
         usuarioService.registrarNovoUsuario(usuarioParaSalvar);
 
