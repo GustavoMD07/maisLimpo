@@ -11,3 +11,4 @@ public class MaislimpoApplication {
 		SpringApplication.run(MaislimpoApplication.class, args);		
 	}
 } 
+ 

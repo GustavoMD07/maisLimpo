@@ -8,7 +8,7 @@
     width: 90%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    color: rgb(22, 19, 19);
+    color: #fff;
 }
 
 .logo-confirmacao img { 
@@ -20,6 +20,7 @@
 .confirmacao-container h1 { 
     font-size: 36px;
     margin-bottom: 15px;
+    color: #fff;
 }
 
 .confirmacao-container p {
@@ -30,7 +31,7 @@
 .confirmacao-container .instrucao {
     font-weight: 600;
     margin-top: 20px;
-    color: rgba(22, 22, 22, 0.979);
+    color: #fff; /* cfcfcf*/
 }
 
 .botao-voltar-login {

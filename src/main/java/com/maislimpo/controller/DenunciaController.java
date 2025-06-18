@@ -1,25 +1,37 @@
 package com.maislimpo.controller;
 
-import com.maislimpo.service.DenunciaService;
 import java.util.List;
 import java.util.stream.Collectors;
-import com.maislimpo.DTO.DenunciaDTO;
-import com.maislimpo.service.UsuarioService;
-import com.maislimpo.entity.Denuncia;
-import com.maislimpo.entity.Usuario; 
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.maislimpo.DTO.DenunciaDTO;
+import com.maislimpo.entity.Denuncia;
+import com.maislimpo.entity.Usuario;
+import com.maislimpo.service.DenunciaService;
+import com.maislimpo.service.UsuarioService;
+
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/denuncias") 
 @AllArgsConstructor
 @CrossOrigin(origins = "http://127.0.0.1:3000")
+//CrossOrigin serve pra liberar a colaboração do front + back
+//Same-Origin Policy bloqueia naturalmente, mas o crossOrigin permite
 public class DenunciaController {
 
     private final DenunciaService denunciaService;
     private final UsuarioService usuarioService; 
     public static record DenunciaRequest(String textoDenuncia, String nomePraia, Long usuarioId) {}
+    //atalho de criação de classe, transporta dados do frontend pro backend, um DTO mas sem precisar criar uma classe
+    //pacote de dados
 
     @PostMapping
     public ResponseEntity<String> registrarDenuncia(@RequestBody DenunciaRequest request) {
@@ -46,7 +58,7 @@ public class DenunciaController {
     @GetMapping
     public ResponseEntity<List<DenunciaDTO>> buscarTodasAsDenuncias() {
     try {
-
+        
         List<Denuncia> denuncias = denunciaService.buscarTodasAsDenuncias();
 
         //stream e map usados pra fazer essa conversão de entity para DTO

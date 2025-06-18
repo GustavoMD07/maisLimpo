@@ -3,8 +3,11 @@ package com.maislimpo.service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.maislimpo.entity.LembrarToken;
 import com.maislimpo.entity.Usuario;
 import com.maislimpo.exception.EmailNaoConfirmadoException;
@@ -12,9 +15,9 @@ import com.maislimpo.exception.SenhaInvalidaException;
 import com.maislimpo.exception.TokenExpiradoException;
 import com.maislimpo.exception.TokenInvalidoException;
 import com.maislimpo.exception.UsuarioNaoEncontradoException;
-import com.maislimpo.repository.UsuarioRepository;
 import com.maislimpo.repository.LembrarTokenRepository;
-import org.mindrot.jbcrypt.BCrypt;
+import com.maislimpo.repository.UsuarioRepository;
+
 import lombok.AllArgsConstructor;
 
 @Service
@@ -85,14 +88,14 @@ public void confirmarEmail(String token) {
     System.out.println("LOG: Email confirmado com sucesso para o usuário " + usuario.getEmail());
 }
 
-	public Usuario verificarCredenciais(String email, String senha) throws EmailNaoConfirmadoException {
+public Usuario verificarCredenciais(String email, String senha) throws EmailNaoConfirmadoException {
     Usuario usuario = usuarioRepository.findByEmail(email)
         .orElseThrow(() -> new UsuarioNaoEncontradoException("E-mail não cadastrado no sistema."));
 
     if (!usuario.isEmailConfirmado()) {
         throw new EmailNaoConfirmadoException(
             "Seu e-mail ainda não foi confirmado. Por favor, verifique sua caixa de entrada."
-        );
+        ); 
     }
 
     if (BCrypt.checkpw(senha, usuario.getSenha())) {

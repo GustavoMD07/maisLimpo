@@ -10,6 +10,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    
     @ExceptionHandler(UsuarioNaoEncontradoException.class)
     public ResponseEntity<Map<String, String>> handleUsuarioNaoEncontrado(UsuarioNaoEncontradoException ex) {
         Map<String, String> erro = new HashMap<>();
